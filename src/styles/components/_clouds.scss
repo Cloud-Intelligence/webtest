@@ -1,0 +1,22 @@
+// Cloud components
+.cloud {
+  position: absolute;
+  bottom: 10%;
+
+  &-left {
+    left: -230px;
+    transform: scale(1.5);
+  }
+
+  &-right {
+    right: -600px;
+    transform: scale(3);
+  }
+}
+
+// Mobile responsive adjustments
+@media (max-width: 768px) {
+  .cloud {
+    transform: scale(0.8);
+  }
+}

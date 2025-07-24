@@ -9,40 +9,13 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Draggable.min.js"></script>
 
-    <!-- External CSS -->
-    <link rel="stylesheet" href="styles.css" />
+    <!-- SCSS Styles -->
+    <link rel="stylesheet" href="/src/styles/main.scss" />
   </head>
   <body>
-    <!-- Unlock Screen -->
-    <div id="unlockScreen">
-      <div class="gradient-bg"></div>
-
-      <!-- Clouds -->
-      <img src="cloud1.svg" class="cloud cloud-left" alt="Cloud 1" />
-      <img src="cloud1.svg" class="cloud cloud-left" alt="Cloud 1-2" />
-      <img src="cloud1.svg" class="cloud cloud-left" alt="Cloud 1-3" />
-      <img src="cloud2.svg" class="cloud cloud-left" alt="Cloud 2" />
-      <img src="cloud2.svg" class="cloud cloud-left" alt="Cloud 2-2" />
-      <img src="cloud2.svg" class="cloud cloud-right" alt="Cloud 2-3" />
-      <img src="cloud3.svg" class="cloud cloud-right" alt="Cloud 3" />
-      <img src="cloud3.svg" class="cloud cloud-right" alt="Cloud 3-2" />
-      <img src="cloud3.svg" class="cloud cloud-right" alt="Cloud 3-3" />
-
-      <!-- Slider -->
-      <div class="slider-container">
-        <div class="slider-track"></div>
-        <div class="slider-handle" id="slider">→</div>
-        <div class="slider-text" id="sliderText">UNLOCK YOUR DATA</div>
-      </div>
-    </div>
-
-    <!-- Main Screen -->
-    <div id="mainScreen">
-      <h1 class="logo">CLOUD INTELLIGENCE</h1>
-    </div>
-
-    <!-- External JavaScript -->
-    <script src="script.js"></script>
+    <!-- HTML partials will be loaded here by JavaScript -->
+    
+    <!-- External JavaScript - Vite Entry Point -->
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>
->

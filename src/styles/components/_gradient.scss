@@ -1,0 +1,20 @@
+// Gradient background component
+.gradient-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    0deg,
+    deepskyblue 0%,
+    skyblue 15%,
+    white 25%,
+    lightblue 45%,
+    blue 50%,
+    skyblue 55%,
+    white 65%,
+    $sky-blue 75%,
+    $deep-blue 85%,
+    white 100%
+  );
+  background-size: 300% 300%;
+  background-position: 0% 50%;
+}

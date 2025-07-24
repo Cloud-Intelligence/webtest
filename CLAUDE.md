@@ -2,46 +2,63 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
+## Development Commands
 
-This is a simple static website project for "Cloud Intelligence" featuring an interactive unlock screen with pixel-art styling. The project consists of a single HTML file with embedded CSS and JavaScript.
+**Essential commands for this project:**
+- `npm run dev` - Start Vite development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
 
-## Architecture
+**Dependencies:** The project uses Vite + Sass as dev dependencies, with GSAP loaded from CDN.
 
-**Single-file structure**: The entire application is contained in `index.html` with:
-- Embedded CSS using Google Fonts (Press Start 2P) for retro pixel styling
-- GSAP animation library loaded from CDN for smooth animations and draggable interactions
-- Vanilla JavaScript for unlock screen functionality
+## Architecture Overview
 
-**Key Components**:
-- **Unlock Screen**: Interactive slider-to-unlock interface with animated pixel clouds and gradient background
-- **Main Screen**: Simple logo display after successful unlock
-- **Animation System**: GSAP-powered transitions, dragging, and floating animations
+This is a **Cloud Intelligence unlock screen application** built with a **modular ES6 + Vite + SCSS architecture**. The app displays an animated unlock screen that transitions to a main screen when the slider is dragged to completion.
 
-## Development
+### Core Application Flow
+1. **Initialization:** HTML partials are dynamically loaded via fetch API
+2. **Animation Systems:** GSAP-powered gradient, cloud, and slider animations start
+3. **User Interaction:** Draggable slider with 95% completion threshold
+4. **Unlock Sequence:** Coordinated timeline animation transitions screens
 
-Since this is a static HTML file, development is straightforward:
+### Modular JavaScript Architecture
 
-**Local Development**: Open `index.html` directly in a web browser or serve it with any static file server.
+**Entry Point:** `src/main.js` - Coordinates all module loading and initialization
 
-**No Build Process**: This project has no package.json, build scripts, or dependencies beyond the CDN-loaded GSAP library.
+**Key Modules:**
+- `modules/partials.js` - Loads HTML fragments from `src/partials/` directory
+- `modules/slider.js` - GSAP Draggable slider with completion logic
+- `modules/clouds.js` - Complex 9-cloud animation system with click interactions
+- `modules/gradient.js` - Morphing gradient background (225s cycle, 9 colors)
+- `modules/unlock.js` - Screen transition timeline orchestration
 
-## Code Structure
+**HTML Partials System:** The app dynamically loads `unlock-screen.html` and `main-screen.html` from `src/partials/` using fetch API, avoiding the need for a framework while maintaining modularity.
 
-**Styling**: 
-- Uses CSS custom properties and flexbox for responsive design
-- Pixel-art aesthetic with retro 8-bit styling
-- Mobile-responsive with media queries
+### SCSS Organization
 
-**JavaScript Logic**:
-- GSAP Draggable plugin for slider interaction
-- Timeline-based animations for screen transitions
-- Progress-based unlock mechanism (95% slide threshold)
+**Structure:** `src/styles/main.scss` imports from organized `base/` and `components/` directories
 
-## Key Features
+**Key Features:**
+- Variable-driven design (`base/_variables.scss`)
+- Component-based styling (screens, slider, clouds, gradient)
+- Pixel-art aesthetic with Press Start 2P font
+- Responsive design with modern CSS (clamp, inset)
 
-- Interactive unlock slider with visual feedback
-- Animated pixel clouds with CSS keyframe animations
-- Smooth screen transitions using GSAP timelines
-- Mobile-responsive design
-- Retro gaming aesthetic
+### Animation Systems
+
+**GSAP Integration:** All animations use GSAP with CDN loading. Key systems:
+- **Cloud System:** 9 SVG clouds with scale animations (1-5x), randomized movement, click-to-redirect
+- **Gradient Animation:** Smooth transitions between linear/radial gradients over 225s
+- **Slider Animation:** Draggable with visual feedback, snap-back if incomplete
+- **Unlock Timeline:** Coordinated sequence of cloud exits and screen transitions
+
+**Critical Detail:** Clouds are constrained to bottom 50% of screen and use point-to-point movement logic.
+
+### File Organization Notes
+
+- **Static Assets:** Cloud SVGs and logo.png in `/public/`
+- **Modular CSS:** Each component has its own SCSS file
+- **ES6 Modules:** Clean separation of concerns across animation systems
+- **HTML Partials:** Separate unlock and main screen templates
+
+The codebase prioritizes modularity and maintainability while delivering sophisticated animations and interactions.
