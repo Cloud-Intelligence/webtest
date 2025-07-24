@@ -1,3 +1,5 @@
+@use '../base/variables' as vars;
+
 // Landing page styles
 #mainScreen {
   position: fixed;
@@ -17,8 +19,8 @@
 
 .section-title {
   font-size: clamp(28px, 4vw, 48px);
-  font-family: $pixel-font;
-  color: $primary-blue;
+  font-family: vars.$pixel-font;
+  color: vars.$primary-blue;
   text-align: center;
   margin-bottom: 3rem;
 }
@@ -35,34 +37,34 @@
   display: inline-block;
   
   &.btn-primary {
-    background: $primary-blue;
+    background: vars.$primary-blue;
     color: white;
-    border-color: $primary-blue;
+    border-color: vars.$primary-blue;
     
     &:hover {
-      background: $dark-blue;
-      border-color: $dark-blue;
+      background: vars.$dark-blue;
+      border-color: vars.$dark-blue;
     }
   }
   
   &.btn-secondary {
     background: transparent;
-    color: $primary-blue;
-    border-color: $primary-blue;
+    color: vars.$primary-blue;
+    border-color: vars.$primary-blue;
     
     &:hover {
-      background: $primary-blue;
+      background: vars.$primary-blue;
       color: white;
     }
   }
   
   &.btn-outline {
     background: transparent;
-    color: $primary-blue;
-    border-color: $primary-blue;
+    color: vars.$primary-blue;
+    border-color: vars.$primary-blue;
     
     &:hover {
-      background: $primary-blue;
+      background: vars.$primary-blue;
       color: white;
     }
   }
@@ -80,8 +82,8 @@
 
 .hero-title {
   font-size: clamp(32px, 6vw, 72px);
-  font-family: $pixel-font;
-  color: $primary-blue;
+  font-family: vars.$pixel-font;
+  color: vars.$primary-blue;
   margin-bottom: 1rem;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 }
@@ -133,7 +135,7 @@
 
 .feature-card h3 {
   font-size: 1.5rem;
-  color: $primary-blue;
+  color: vars.$primary-blue;
   margin-bottom: 1rem;
 }
 
@@ -176,7 +178,7 @@
 .about-stats li {
   padding: 0.5rem 0;
   font-size: 1.1rem;
-  color: $primary-blue;
+  color: vars.$primary-blue;
 }
 
 .placeholder-image {
@@ -214,7 +216,7 @@
   border: 2px solid transparent;
   
   &.featured {
-    border-color: $primary-blue;
+    border-color: vars.$primary-blue;
     transform: scale(1.05);
   }
 }
@@ -224,7 +226,7 @@
   top: -10px;
   left: 50%;
   transform: translateX(-50%);
-  background: $primary-blue;
+  background: vars.$primary-blue;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 20px;
@@ -234,7 +236,7 @@
 
 .pricing-card h3 {
   font-size: 1.5rem;
-  color: $primary-blue;
+  color: vars.$primary-blue;
   margin-bottom: 1rem;
 }
 
@@ -250,7 +252,7 @@
 .amount {
   font-size: 3rem;
   font-weight: bold;
-  color: $primary-blue;
+  color: vars.$primary-blue;
 }
 
 .period {
@@ -306,7 +308,7 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: $primary-blue;
+  background: vars.$primary-blue;
   color: white;
   display: flex;
   align-items: center;
@@ -316,7 +318,7 @@
 
 .author-info h4 {
   margin: 0;
-  color: $primary-blue;
+  color: vars.$primary-blue;
 }
 
 .author-info span {
@@ -345,7 +347,7 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: $primary-blue;
+  background: vars.$primary-blue;
   color: white;
   display: flex;
   align-items: center;
@@ -356,7 +358,7 @@
 }
 
 .team-member h3 {
-  color: $primary-blue;
+  color: vars.$primary-blue;
   margin-bottom: 0.5rem;
 }
 
@@ -384,7 +386,7 @@
 }
 
 .contact-info h3 {
-  color: $primary-blue;
+  color: vars.$primary-blue;
   margin-bottom: 1rem;
 }
 
@@ -425,7 +427,7 @@
   
   &:focus {
     outline: none;
-    border-color: $primary-blue;
+    border-color: vars.$primary-blue;
   }
 }
 

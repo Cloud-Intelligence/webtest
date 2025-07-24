@@ -1,14 +1,10 @@
-// Import Google Fonts
-@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap");
-
 // Base styles
-@import './base/variables';
-@import './base/reset';
+@use './base/variables';
+@use './base/reset';
 
 // Components
-@import './components/gradient';
-@import './components/clouds';
-@import './components/slider';
-@import './components/screens';
-@import './components/landing';
+@use './components/gradient';
+@use './components/clouds';
+@use './components/slider';
+@use './components/screens';
+@use './components/landing';

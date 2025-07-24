@@ -1,3 +1,5 @@
+@use './variables' as vars;
+
 // Reset and base styles
 * {
   margin: 0;
@@ -6,7 +8,7 @@
 }
 
 body {
-  font-family: $pixel-font;
+  font-family: vars.$pixel-font;
   background: white;
   overflow: hidden;
   height: 100vh;

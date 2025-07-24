@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import UnlockScreen from '../components/UnlockScreen.astro';
+import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import Testimonials from '../components/Testimonials.astro';
@@ -13,16 +14,30 @@ import Contact from '../components/Contact.astro';
   description="Transform your business with our enterprise-grade cloud intelligence platform. Lightning fast deployment, enterprise security, real-time analytics, and auto-scaling features."
   keywords="cloud intelligence, enterprise cloud, cloud platform, business transformation, cloud computing, data analytics, auto-scaling, cloud security"
 >
+  <!-- NoScript Info Banner -->
+  <noscript>
+    <div class="no-js-message">
+      ⚡ Enable JavaScript for the full interactive experience with animations and enhanced features.
+    </div>
+  </noscript>
+  
   <!-- Unlock Screen Animation -->
   <UnlockScreen />
   
+  <!-- Hidden Navbar (will show after unlock) -->
+  <div id="navbar-container" style="display: none; opacity: 0;">
+    <Navbar />
+  </div>
+  
   <!-- Main Landing Page Content -->
-  <div id="mainScreen">
-    <Hero />
-    <About />
-    <Testimonials />
-    <ClientLogos />
-    <Contact />
+  <div id="mainScreen" style="visibility: hidden; opacity: 0;">
+    <main id="main">
+      <Hero />
+      <About />
+      <Testimonials />
+      <ClientLogos />
+      <Contact />
+    </main>
   </div>
 
 </Layout>

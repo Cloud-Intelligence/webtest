@@ -1,3 +1,5 @@
+@use '../base/variables' as vars;
+
 // Gradient background component
 .gradient-bg {
   position: absolute;
@@ -11,8 +13,8 @@
     blue 50%,
     skyblue 55%,
     white 65%,
-    $sky-blue 75%,
-    $deep-blue 85%,
+    vars.$sky-blue 75%,
+    vars.$deep-blue 85%,
     white 100%
   );
   background-size: 300% 300%;

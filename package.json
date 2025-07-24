@@ -11,6 +11,8 @@
     "astro": "astro"
   },
   "devDependencies": {
+    "@playform/compress": "^0.2.0",
+    "astro-compressor": "^1.0.0",
     "sass": "^1.89.2"
   },
   "dependencies": {

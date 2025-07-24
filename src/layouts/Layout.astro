@@ -21,10 +21,21 @@ import Navbar from '../components/Navbar.astro';
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
   <head>
+    <!-- JavaScript Detection - MUST be first to prevent flash -->
+    <script is:inline>
+      // Immediately remove no-js and add js class to prevent flash
+      (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);
+    </script>
+    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <!-- Performance hints -->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#3366FF" />
     
     <!-- Primary Meta Tags -->
     <title>{title}</title>
@@ -50,13 +61,116 @@ import Navbar from '../components/Navbar.astro';
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/webtest/logo.png" />
     
-    <!-- Fonts -->
+    <!-- Fonts - Optimized Loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Only load critical fonts with used weights -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Manrope:wght@500;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- Preload critical font files -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/manrope/v15/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk59FO_F87jxeN7B.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- Preload critical images -->
+    <link rel="preload" href="/webtest/hero-gradient-2eb61d.png" as="image" type="image/webp">
+    <link rel="preload" href="/webtest/logo.png" as="image" type="image/webp">
+    
+    <!-- DNS prefetch for external resources -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    
+    <!-- Service Worker -->
+    <script is:inline>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/webtest/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+    
+    <!-- Performance Monitoring -->
+    <script type="module">
+      import { initPerformanceTracking } from '/webtest/src/utils/performance.js';
+      
+      // Initialize performance tracking
+      if (typeof window !== 'undefined') {
+        window.addEventListener('load', () => {
+          initPerformanceTracking();
+        });
+      }
+    </script>
+    
+    <!-- Critical CSS (Inlined) -->
+    <style>
+      /* Critical above-the-fold styles */
+      *, *::before, *::after { box-sizing: border-box; }
+      html { line-height: 1.15; -webkit-text-size-adjust: 100%; }
+      body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+      
+      /* JavaScript enabled - show unlock screen */
+      .js #unlockScreen { position: fixed; inset: 0; z-index: 1000; background: white; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+      .js .animated-gradient-bg { position: absolute; inset: 0; width: 100%; height: 100%; background: radial-gradient(circle at 30% 40%, #387BF6 0%, #4B0082 20%, transparent 50%), radial-gradient(circle at 70% 60%, #1e3a8a 0%, #312e81 30%, transparent 60%), radial-gradient(circle at 50% 20%, #87CEEB 0%, #FFFFFF 25%, transparent 45%), linear-gradient(45deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%); background-size: 400% 400%, 350% 350%, 300% 300%, 100% 100%; z-index: 1; }
+      .js .lockscreen-logo { position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); width: 180px; height: auto; z-index: 10; pointer-events: none; }
+      .js .slider-wrapper { position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%); z-index: 2; }
+      .js #mainScreen { visibility: hidden; opacity: 0; }
+      .js #navbar-container { display: none; opacity: 0; }
+      
+      /* JavaScript disabled - hide unlock screen, show content */
+      .no-js #unlockScreen { display: none !important; }
+      .no-js #mainScreen { visibility: visible !important; opacity: 1 !important; }
+      .no-js #navbar-container { display: block !important; opacity: 1 !important; }
+      
+      /* Default fallback (no-js) */
+      #unlockScreen { display: none; }
+      #mainScreen { visibility: visible; opacity: 1; }
+      #navbar-container { display: block; opacity: 1; }
+      
+      /* Skip Links */
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 6px;
+        background: #000;
+        color: #fff;
+        padding: 8px;
+        text-decoration: none;
+        border-radius: 0 0 4px 4px;
+        z-index: 2000;
+        font-size: 14px;
+        font-weight: 600;
+        transition: top 0.3s;
+      }
+      
+      .skip-link:focus {
+        top: 0;
+      }
+    </style>
     
     
-    <!-- SCSS Styles -->
+    <!-- NoScript fallback message -->
+    <noscript>
+      <style>
+        .no-js-message {
+          background: #f0f9ff;
+          border: 1px solid #3b82f6;
+          color: #1e40af;
+          padding: 12px 16px;
+          margin: 16px;
+          border-radius: 8px;
+          font-size: 14px;
+          text-align: center;
+        }
+      </style>
+    </noscript>
+    
+    <!-- Non-critical CSS (Async loaded) -->
+    <link rel="preload" href="/webtest/assets/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/webtest/assets/main.css"></noscript>
     
     <!-- Structured Data -->
     <script type="application/ld+json" is:inline>
@@ -86,6 +200,10 @@ import Navbar from '../components/Navbar.astro';
     </script>
   </head>
   <body>
+    <!-- Skip Links -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <a href="#navbar-container" class="skip-link">Skip to navigation</a>
+    
     {showNavbar && <Navbar />}
     <slot />
   </body>

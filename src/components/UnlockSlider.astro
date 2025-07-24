@@ -2,10 +2,10 @@
 // UnlockSlider component - A draggable slider with GSAP
 ---
 
-<div class="slider-container">
-  <div class="slider-track"></div>
-  <div class="slider-handle" data-slider-handle></div>
-  <div class="slider-text">Swipe to Unlock your Data</div>
+<div class="slider-container" role="slider" aria-label="Swipe to unlock" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="Locked, swipe to unlock" tabindex="0">
+  <div class="slider-track" aria-hidden="true"></div>
+  <div class="slider-handle" data-slider-handle role="button" aria-label="Drag to unlock" tabindex="-1"></div>
+  <div class="slider-text" aria-live="polite" id="slider-text">Swipe to Unlock your Data</div>
 </div>
 
 <script>
@@ -41,7 +41,13 @@
       bounds: { minX: 0, maxX: maxX },
       onDrag: function() {
         const progress = this.x / maxX;
+        const progressPercent = Math.round(progress * 100);
+        
         sliderText.style.opacity = (1 - progress).toString();
+        
+        // Update ARIA attributes
+        sliderContainer.setAttribute('aria-valuenow', progressPercent.toString());
+        sliderContainer.setAttribute('aria-valuetext', `${progressPercent}% unlocked`);
         
         // Rotate arrow based on progress (180deg to 0deg)
         const rotation = 180 - (progress * 180);

@@ -1,12 +1,23 @@
 ---
 // Hero section component with gradient background - mobile first design
+import { Image } from 'astro:assets';
+import heroGradient from '../assets/hero-gradient-2eb61d.png';
 ---
 
-<section id="hero" class="hero-section">
-  <div class="gradient-background"></div>
+<section id="hero" class="hero-section" role="banner" aria-labelledby="hero-title">
+  <div class="gradient-background" aria-hidden="true">
+    <Image 
+      src={heroGradient} 
+      alt="" 
+      format="webp"
+      quality={85}
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
   <div class="hero-content">
     <div class="hero-text">
-      <h1 class="hero-title">
+      <h1 id="hero-title" class="hero-title">
         <span class="title-line-1">Architecting Your</span>
         <span class="title-line-2">Digital Future.</span>
       </h1>
@@ -16,7 +27,7 @@
       Unlock the transformative power of data with Cloud Intelligence. We deliver cutting-edge AI-driven solutions that accelerate growth, optimise operations, and propel your business forward.
     </p>
     <div class="hero-cta">
-      <button class="btn btn-primary">Explore our Solutions</button>
+      <button class="btn btn-primary" aria-label="Explore our solutions and services">Explore our Solutions</button>
     </div>
   </div>
 </section>
@@ -40,9 +51,14 @@
     left: 0;
     right: 0;
     height: 70vh;
-    background: url('/webtest/hero-gradient-2eb61d.png') no-repeat center center;
-    background-size: cover;
     z-index: 1;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
   }
   
   .hero-content {

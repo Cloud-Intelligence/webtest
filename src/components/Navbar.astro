@@ -1,5 +1,9 @@
 ---
 // Navbar component with glassmorphism effect
+import { Image } from 'astro:assets';
+import ciLogo from '../assets/ci-logo.png';
+import logo from '../assets/logo.png';
+
 export interface Props {
   currentPage?: string;
 }
@@ -14,22 +18,44 @@ const navLinks = [
 ];
 ---
 
-<nav class="navbar">
+<nav class="navbar" role="navigation" aria-label="Main navigation">
   <div class="navbar-container">
     <div class="navbar-content">
       <!-- Logo -->
-      <a href="/" class="navbar-logo">
-        <img src="/webtest/ci-logo.png" alt="Cloud Intelligence" class="desktop-logo" />
-        <img src="/webtest/logo.png" alt="CI Logo" class="mobile-logo" />
+      <a href="/" class="navbar-logo" aria-label="Cloud Intelligence home">
+        <Image 
+          src={ciLogo} 
+          alt="Cloud Intelligence logo" 
+          class="desktop-logo"
+          format="webp"
+          quality={90}
+          width={50}
+          height={50}
+          loading="eager"
+          fetchpriority="high"
+        />
+        <Image 
+          src={logo} 
+          alt="CI logo" 
+          class="mobile-logo"
+          format="webp"
+          quality={90}
+          width={29}
+          height={24}
+          loading="eager"
+          fetchpriority="high"
+        />
         <span class="logo-text">Cloud Intelligence</span>
       </a>
       
       <!-- Navigation Links -->
-      <div class="navbar-links">
+      <div class="navbar-links" role="menubar" aria-label="Main menu">
         {navLinks.map(link => (
           <a 
             href={link.href} 
             class={`nav-link ${currentPage === link.label.toLowerCase() ? 'active' : ''}`}
+            role="menuitem"
+            aria-current={currentPage === link.label.toLowerCase() ? 'page' : undefined}
           >
             {link.label}
           </a>
@@ -37,27 +63,27 @@ const navLinks = [
       </div>
       
       <!-- CTA Button -->
-      <button class="cta-button">Book a call</button>
+      <button class="cta-button" aria-label="Schedule a consultation call">Book a call</button>
       
       <!-- Mobile Menu Toggle -->
-      <button class="mobile-menu-toggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
       </button>
     </div>
   </div>
 </nav>
 
 <!-- Mobile Menu -->
-<div class="mobile-menu">
-  <div class="mobile-menu-content">
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
+  <div class="mobile-menu-content" role="menu">
     {navLinks.map(link => (
-      <a href={link.href} class="mobile-nav-link">
+      <a href={link.href} class="mobile-nav-link" role="menuitem">
         {link.label}
       </a>
     ))}
-    <button class="mobile-cta-button">Book a call</button>
+    <button class="mobile-cta-button" role="menuitem" aria-label="Schedule a consultation call">Book a call</button>
   </div>
 </div>
 
@@ -69,9 +95,15 @@ const navLinks = [
   
   if (mobileMenuToggle && mobileMenu) {
     mobileMenuToggle.addEventListener('click', () => {
+      const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+      
       mobileMenuToggle.classList.toggle('active');
       mobileMenu.classList.toggle('active');
       document.body.classList.toggle('menu-open');
+      
+      // Update ARIA attributes
+      mobileMenuToggle.setAttribute('aria-expanded', (!isExpanded).toString());
+      mobileMenu.setAttribute('aria-hidden', isExpanded.toString());
     });
     
     // Close menu when clicking links
@@ -80,18 +112,23 @@ const navLinks = [
         mobileMenuToggle.classList.remove('active');
         mobileMenu.classList.remove('active');
         document.body.classList.remove('menu-open');
+        
+        // Update ARIA attributes
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
       });
     });
   }
 </script>
 
 <style lang="scss">
+  @use '../styles/base/variables' as vars;
   .navbar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: vars.$z-navbar;
     padding: 24px 64px;
     
     @media (max-width: 768px) {
@@ -318,12 +355,10 @@ const navLinks = [
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('/webtest/hero-gradient-2eb61d.png') no-repeat center center;
-    background-size: cover;
-    backdrop-filter: blur(4px);
-    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    background: #87CEEB;
+    z-index: vars.$z-mobile-menu;
     display: flex;
     align-items: center;
     justify-content: center;

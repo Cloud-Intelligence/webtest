@@ -1,9 +1,25 @@
+@use '../base/variables' as vars;
+
 // Screen components
 #unlockScreen {
   position: fixed;
   inset: 0;
-  z-index: $z-unlock-screen;
+  z-index: vars.$z-unlock-screen;
   background: white;
+}
+
+// Main screen - initially hidden
+#mainScreen {
+  visibility: hidden;
+  opacity: 0;
+}
+
+// Navbar container - initially hidden  
+#navbar-container {
+  display: none;
+  opacity: 0;
+  z-index: vars.$z-navbar;
+  position: relative;
 }
 
 .lockscreen-logo {

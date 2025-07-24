@@ -1,26 +1,21 @@
 ---
 // UnlockScreen component
 import UnlockSlider from './UnlockSlider.astro';
-import Navbar from './Navbar.astro';
 ---
 
 <!-- Unlock Screen -->
-<div id="unlockScreen">
-  <div class="animated-gradient-bg"></div>
+<div id="unlockScreen" role="application" aria-label="Unlock screen with interactive slider">
+  <div class="animated-gradient-bg" aria-hidden="true"></div>
 
   <!-- Logo -->
-  <img src="/webtest/logo.png" class="lockscreen-logo" alt="CI Logo" />
+  <img src="/webtest/logo.png" class="lockscreen-logo" alt="Cloud Intelligence logo" />
 
   <!-- Slider Component -->
-  <div class="slider-wrapper">
+  <div class="slider-wrapper" role="group" aria-label="Unlock slider controls">
     <UnlockSlider />
   </div>
 </div>
 
-<!-- Hidden Navbar (will show after unlock) -->
-<div id="navbar-container" style="display: none;">
-  <Navbar />
-</div>
 
 <script>
   import { gsap } from 'gsap';
@@ -74,31 +69,48 @@ import Navbar from './Navbar.astro';
   document.addEventListener('slider-unlock', (event: CustomEvent) => {
     console.log('Slider unlocked!', event.detail);
     
-    // Simple unlock animation
+    // GSAP unlock animation
     const unlockScreen = document.getElementById('unlockScreen');
     const mainScreen = document.getElementById('mainScreen');
     const navbarContainer = document.getElementById('navbar-container');
     
     if (unlockScreen && mainScreen && navbarContainer) {
-      // Fade out unlock screen
-      unlockScreen.style.transition = 'opacity 0.5s ease-out';
-      unlockScreen.style.opacity = '0';
+      // Timeline for smooth sequential animations
+      const tl = gsap.timeline();
       
-      setTimeout(() => {
+      // Fade out unlock screen
+      tl.to(unlockScreen, {
+        opacity: 0,
+        duration: 0.5,
+        ease: 'power2.out'
+      })
+      // Hide unlock screen and show main content
+      .call(() => {
         unlockScreen.style.display = 'none';
         mainScreen.style.visibility = 'visible';
-        mainScreen.style.opacity = '1';
-        
-        // Show navbar with fade-in effect
         navbarContainer.style.display = 'block';
-        navbarContainer.style.opacity = '0';
-        navbarContainer.style.transition = 'opacity 0.3s ease-in';
-        
-        // Delay navbar appearance slightly
-        setTimeout(() => {
-          navbarContainer.style.opacity = '1';
-        }, 200);
-      }, 500);
+      })
+      // Fade in main screen
+      .to(mainScreen, {
+        opacity: 1,
+        duration: 0.3,
+        ease: 'power2.out'
+      }, '-=0.1')
+      // Animate navbar entrance with smooth slide down and fade
+      .fromTo(navbarContainer, 
+        {
+          opacity: 0,
+          y: -50,
+          scale: 0.95
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          ease: 'back.out(1.7)'
+        }, '-=0.2'
+      );
     }
   });
 </script>
