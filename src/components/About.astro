@@ -1,0 +1,203 @@
+---
+// About section component - Mobile first design
+---
+
+<!-- About Us Section -->
+<section id="about" class="about-section">
+  <div class="about-container">
+    <div class="about-header">
+      <h2 class="about-title">About Us</h2>
+      <div class="about-divider"></div>
+    </div>
+    <p class="about-description">
+      At Cloud Intelligence, we're passionate about empowering businesses to unlock the full potential of their data. We believe that data-driven insights are the key to making informed decisions, driving innovation, and achieving sustainable growth in today's competitive landscape.
+    </p>
+  </div>
+</section>
+
+<!-- Statistics Section -->
+<section id="stats" class="stats-section">
+  <div class="stats-container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">8TB+ daily</div>
+        <div class="stat-description">Data processed via customer data pipelines</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1M+ users</div>
+        <div class="stat-description">Trusted by million+ people globally</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100+ countries</div>
+        <div class="stat-description">Powering applications across the globe.</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">$400M+</div>
+        <div class="stat-description">Processed & audited through our systems</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  // About Us Section
+  .about-section {
+    background: #FFFFFF;
+    padding: 5vh 28px 24px;
+    
+    .about-container {
+      max-width: 334px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    
+    .about-header {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .about-title {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 1.25;
+      color: #000000;
+      margin: 0;
+    }
+    
+    .about-divider {
+      width: 300px;
+      height: 1px;
+      background: #000000;
+    }
+    
+    .about-description {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.43;
+      color: #000000;
+      text-align: justify;
+      margin: 0;
+    }
+  }
+
+  // Statistics Section
+  .stats-section {
+    background: #000000;
+    padding: 48px 28px;
+    
+    .stats-container {
+      max-width: 334px;
+      margin: 0 auto;
+    }
+    
+    .stats-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      
+      &:nth-child(1), &:nth-child(3) {
+        width: 145px;
+      }
+      
+      &:nth-child(2), &:nth-child(4) {
+        width: 120px;
+      }
+      
+      // Create 2x2 grid layout
+      &:nth-child(1) {
+        align-self: flex-start;
+      }
+      
+      &:nth-child(2) {
+        align-self: flex-end;
+        margin-top: -30px; // Overlap to create grid effect
+      }
+      
+      &:nth-child(3) {
+        align-self: flex-start;
+      }
+      
+      &:nth-child(4) {
+        align-self: flex-end;
+        margin-top: -30px; // Overlap to create grid effect
+      }
+    }
+    
+    .stat-number {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 1;
+      color: #FFFFFF;
+      
+      &:nth-child(2n) {
+        font-weight: 600; // Alternate weight for some items
+      }
+    }
+    
+    .stat-description {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 1.21;
+      color: #C0C4CC;
+    }
+  }
+
+  // Responsive adjustments
+  @media (min-width: 768px) {
+    .about-section {
+      padding: 60px 40px 80px;
+      
+      .about-container {
+        max-width: 800px;
+      }
+      
+      .about-title {
+        font-size: clamp(32px, 4vw, 48px);
+      }
+      
+      .about-description {
+        font-size: clamp(14px, 1.5vw, 16px);
+      }
+    }
+    
+    .stats-section {
+      padding: 80px 40px;
+      
+      .stats-container {
+        max-width: 800px;
+      }
+      
+      .stats-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px 20px;
+        align-items: center;
+      }
+      
+      .stat-item {
+        margin-top: 0 !important; // Reset mobile overlaps
+        
+        &:nth-child(1), &:nth-child(3) {
+          width: auto;
+        }
+        
+        &:nth-child(2), &:nth-child(4) {
+          width: auto;
+        }
+      }
+    }
+  }
+</style>

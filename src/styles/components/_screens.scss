@@ -17,24 +17,4 @@
   pointer-events: none;
 }
 
-#mainScreen {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: white;
-  opacity: 0;
-  visibility: hidden;
-}
-
-.logo {
-  font-size: clamp(24px, 5vw, 48px);
-  color: $primary-blue;
-  text-align: center;
-  line-height: 1.5;
-  text-shadow:
-    4px 4px 0 rgba($medium-blue, 0.3),
-    8px 8px 0 rgba($dark-blue, 0.2),
-    12px 12px 0 rgba($light-blue, 0.1);
-}
+// mainScreen styles are now in _landing.scss

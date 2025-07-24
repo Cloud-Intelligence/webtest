@@ -1,0 +1,378 @@
+---
+// UnlockSlider component - A draggable slider with GSAP
+---
+
+<div class="slider-container">
+  <div class="slider-track"></div>
+  <div class="slider-handle" data-slider-handle></div>
+  <div class="slider-text">Swipe to Unlock your Data</div>
+</div>
+
+<script>
+  import { gsap } from 'gsap';
+  import { Draggable } from 'gsap/Draggable';
+
+  // Register GSAP plugin
+  gsap.registerPlugin(Draggable);
+
+  // Wait for DOM to be ready
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get elements
+    const sliderHandle = document.querySelector('[data-slider-handle]') as HTMLElement;
+    const sliderText = document.querySelector('.slider-text') as HTMLElement;
+    const sliderContainer = document.querySelector('.slider-container') as HTMLElement;
+
+    if (!sliderHandle || !sliderText || !sliderContainer) return;
+
+    // Calculate boundaries
+    const updateBounds = () => {
+      const containerWidth = sliderContainer.offsetWidth;
+      const handleWidth = sliderHandle.offsetWidth;
+      const padding = 8; // Account for container padding
+      return containerWidth - handleWidth - padding;
+    };
+
+    let maxX = updateBounds();
+    let unlocked = false;
+
+    // Create draggable instance
+    const draggable = Draggable.create(sliderHandle, {
+      type: "x",
+      bounds: { minX: 0, maxX: maxX },
+      onDrag: function() {
+        const progress = this.x / maxX;
+        sliderText.style.opacity = (1 - progress).toString();
+        
+        // Rotate arrow based on progress (180deg to 0deg)
+        const rotation = 180 - (progress * 180);
+        sliderHandle.style.setProperty('--arrow-rotation', `${rotation}deg`);
+
+        // Check if reached the end
+        if (progress > 0.95 && !unlocked) {
+          unlocked = true;
+          this.disable();
+          performUnlock();
+        }
+      },
+      onRelease: function() {
+        if (!unlocked && this.x < maxX * 0.95) {
+          // Snap back if not far enough
+          gsap.to(sliderHandle, {
+            x: 0,
+            duration: 0.3,
+            ease: "power2.out",
+            onUpdate: function() {
+              // Update arrow rotation during snap back
+              const xValue = gsap.getProperty(sliderHandle, "x") as number;
+              const progress = xValue / maxX;
+              const rotation = 180 - (progress * 180);
+              sliderHandle.style.setProperty('--arrow-rotation', `${rotation}deg`);
+            },
+            onComplete: function() {
+              // Reset text opacity to full when snap back completes
+              sliderText.style.opacity = '1';
+            }
+          });
+          
+          // Also animate text opacity back to 1
+          gsap.to(sliderText, {
+            opacity: 1,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        }
+      }
+    })[0];
+
+    // Update bounds on window resize
+    window.addEventListener('resize', () => {
+      maxX = updateBounds();
+      draggable.applyBounds({ minX: 0, maxX: maxX });
+    });
+
+    // Unlock function
+    function performUnlock() {
+      // Complete slider movement
+      gsap.to(sliderHandle, {
+        x: maxX,
+        duration: 0.2,
+        ease: "power2.out",
+        onComplete: () => {
+          // First, show loading state (green)
+          sliderContainer.classList.add('loading');
+          sliderHandle.style.opacity = '0';
+          sliderText.textContent = '';
+          
+          // After 200ms, change to success state (stay green)
+          setTimeout(() => {
+            sliderContainer.classList.remove('loading');
+            sliderContainer.classList.add('success');
+            sliderText.textContent = 'Success';
+            sliderText.style.opacity = '1';
+            
+            // After 800ms more, dispatch unlock event
+            setTimeout(() => {
+              const unlockEvent = new CustomEvent('slider-unlock', {
+                bubbles: true,
+                detail: { timestamp: Date.now() }
+              });
+              sliderContainer.dispatchEvent(unlockEvent);
+            }, 800);
+          }, 200);
+        }
+      });
+    }
+  });
+</script>
+
+<style lang="scss">
+  .slider-container {
+    position: relative;
+    width: 328px;
+    max-width: 90vw;
+    height: 48px;
+    background: linear-gradient(
+      90deg,
+      #8BCBEF 0%,
+      #27AAE1 46.64%,
+      #3366FF 100%
+    );
+    border-radius: 48px;
+    overflow: hidden;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    gap: 65px;
+    transition: all 0.6s ease;
+    
+    // Enhanced liquid glass base
+    backdrop-filter: blur(8px) saturate(160%);
+    -webkit-backdrop-filter: blur(8px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 
+      0px 8px 24px rgba(0, 0, 0, 0.12),
+      0px 2px 6px rgba(0, 0, 0, 0.08),
+      inset 0px 1px 0px rgba(255, 255, 255, 0.4);
+    
+    // Liquid shine effect overlay
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        transparent 100%
+      );
+      pointer-events: none;
+      border-radius: 48px 48px 0 0;
+    }
+    
+    // Animated liquid highlight
+    &::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -100%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.15) 48%,
+        rgba(255, 255, 255, 0.35) 50%,
+        rgba(255, 255, 255, 0.15) 52%,
+        transparent 100%
+      );
+      animation: liquidShine 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    
+    // Loading state (green)
+    &.loading {
+      background: #216E4E;
+      
+      &::before {
+        opacity: 0.6;
+      }
+      
+      &::after {
+        animation: none;
+        opacity: 0;
+      }
+    }
+    
+    // Success state (green)
+    &.success {
+      background: #1F845A;
+      position: relative;
+      
+      &::before {
+        opacity: 0.6;
+      }
+      
+      &::after {
+        animation: none;
+        opacity: 0;
+      }
+    }
+  }
+
+  @keyframes liquidShine {
+    0% {
+      transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    50% {
+      transform: translateX(0%) translateY(0%) rotate(45deg);
+    }
+    100% {
+      transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+  }
+  
+  // Green shine animation overlay
+  .shine-animation {
+    position: absolute;
+    inset: 0;
+    background: #1F845A;
+    border-radius: inherit;
+    transform: translateX(-100%);
+    animation: shineSlide 0.6s ease-out forwards;
+  }
+  
+  @keyframes shineSlide {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .slider-track {
+    position: absolute;
+    inset: 0;
+    background: transparent;
+  }
+
+  .slider-handle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.4s ease;
+    --arrow-rotation: 180deg;
+    left: -2px;
+    
+    // Enhanced liquid glass for handle
+    backdrop-filter: blur(6px) saturate(150%);
+    -webkit-backdrop-filter: blur(6px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+      0px 6px 16px rgba(0, 0, 0, 0.15),
+      0px 2px 4px rgba(0, 0, 0, 0.1),
+      inset 0px 1px 0px rgba(255, 255, 255, 0.5);
+    
+    // Subtle shine overlay
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60%;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(255, 255, 255, 0.1) 70%,
+        transparent 100%
+      );
+      border-radius: 50% 50% 0 0;
+      pointer-events: none;
+    }
+
+    &:active {
+      cursor: grabbing;
+      transform: scale(0.95);
+      box-shadow: 
+        0px 3px 8px rgba(0, 0, 0, 0.2),
+        0px 1px 2px rgba(0, 0, 0, 0.15),
+        inset 0px 1px 0px rgba(255, 255, 255, 0.6);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background-color: #3366FF;
+      mask-image: url('/webtest/arrow-icon.png');
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: contain;
+      -webkit-mask-image: url('/webtest/arrow-icon.png');
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      -webkit-mask-size: contain;
+      opacity: 0.66;
+      transition: transform 0.3s ease;
+      transform: rotate(var(--arrow-rotation));
+    }
+  }
+
+  .slider-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.8);
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.286;
+    letter-spacing: 0.01em;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 1;
+  }
+
+  // Hover effects
+  .slider-container:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 
+      0px 12px 32px rgba(0, 0, 0, 0.18),
+      0px 3px 8px rgba(0, 0, 0, 0.12),
+      inset 0px 1px 0px rgba(255, 255, 255, 0.5);
+    
+    .slider-handle {
+      transform: scale(1.05);
+      box-shadow: 
+        0px 8px 20px rgba(0, 0, 0, 0.2),
+        0px 3px 6px rgba(0, 0, 0, 0.15),
+        inset 0px 1px 0px rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .slider-container {
+      gap: 20px;
+    }
+    
+    .slider-text {
+      font-size: 12px;
+    }
+  }
+</style>

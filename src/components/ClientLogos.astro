@@ -1,0 +1,104 @@
+---
+// Client Logos section component - Mobile first design
+---
+
+<section id="client-logos" class="client-logos-section">
+  <div class="logos-container">
+    <div class="logo-item">
+      <div class="logo-placeholder">CrossAmerica Financial</div>
+    </div>
+    <div class="logo-item">
+      <div class="logo-placeholder">Metabase</div>
+    </div>
+    <div class="logo-item">
+      <div class="logo-placeholder">Analytix Engine</div>
+    </div>
+    <div class="logo-item">
+      <div class="logo-placeholder">Right Refund</div>
+    </div>
+    <div class="logo-item">
+      <div class="logo-placeholder">Partner Logo</div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .client-logos-section {
+    background: #000000;
+    padding: 10px 28px;
+    
+    .logos-container {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      max-width: 893px;
+      margin: 0 auto;
+      overflow-x: auto;
+      
+      // Hide scrollbar but keep functionality
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    
+    .logo-item {
+      flex-shrink: 0;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      &:nth-child(1) {
+        width: 78px;
+      }
+      
+      &:nth-child(2) {
+        width: 123px;
+      }
+      
+      &:nth-child(3) {
+        width: 199px;
+      }
+      
+      &:nth-child(4) {
+        width: 136px;
+      }
+      
+      &:nth-child(5) {
+        width: 139px;
+      }
+      
+      .logo-placeholder {
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        color: #FFFFFF;
+        text-align: center;
+        opacity: 0.7;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  // Responsive adjustments
+  @media (min-width: 768px) {
+    .client-logos-section {
+      padding: 20px 40px;
+      
+      .logos-container {
+        justify-content: center;
+        overflow: visible;
+      }
+      
+      .logo-item {
+        .logo-placeholder {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+</style>

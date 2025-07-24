@@ -1,0 +1,211 @@
+---
+// Client Testimonials section component - Mobile first design
+---
+
+<section id="testimonials" class="testimonials-section">
+  <div class="testimonials-container">
+    <div class="testimonials-header">
+      <h2 class="testimonials-title">Client Testimonials</h2>
+      <div class="testimonials-divider"></div>
+      <p class="testimonials-subtitle">The Data Doesn't Lie - Neither Do Our Clients</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-content">
+          <div class="quote-icon">
+            <svg width="60" height="59" viewBox="0 0 60 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 59V29.5L29.5 0H59V29.5H29.5L59 59H0Z" fill="#000000"/>
+            </svg>
+          </div>
+          <p class="testimonial-text">
+            Customer saying how much they adore Cloud Intelligence. Customer saying how much they adore Cloud Intelligence. 
+            <br><br>
+            Customer saying how much they adore Cloud Intelligence. Customer saying how much they adore Cloud Intelligence.
+            <br><br>
+            Customer saying how much they adore Cloud Intelligence.
+          </p>
+        </div>
+        <div class="testimonial-author">
+          <h4 class="author-name">Alan Doe</h4>
+          <span class="author-title">CEO of Cross Roads Health</span>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-content">
+          <div class="quote-icon">
+            <svg width="60" height="59" viewBox="0 0 60 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 59V29.5L29.5 0H59V29.5H29.5L59 59H0Z" fill="#000000"/>
+            </svg>
+          </div>
+          <p class="testimonial-text">
+            Customer saying how much they adore Cloud Intelligence. Customer saying how much they adore Cloud Intelligence. 
+            <br><br>
+            Customer saying how much they adore Cloud Intelligence. Customer saying how much they adore Cloud Intelligence.
+            <br><br>
+            Customer saying how much they adore Cloud Intelligence.
+          </p>
+        </div>
+        <div class="testimonial-author">
+          <h4 class="author-name">Alan Doe</h4>
+          <span class="author-title">CEO of Cross Roads Health</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .testimonials-section {
+    background: #FFFFFF;
+    padding: 48px 28px;
+    
+    .testimonials-container {
+      max-width: 334px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+    
+    .testimonials-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .testimonials-title {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 1.25;
+      color: #02040A;
+      text-align: center;
+      margin: 0;
+    }
+    
+    .testimonials-divider {
+      width: 334px;
+      height: 1px;
+      background: #000000;
+    }
+    
+    .testimonials-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 1.21;
+      letter-spacing: -0.03125em;
+      color: #02040A;
+      text-align: right;
+      margin: 0;
+      width: 100%;
+    }
+    
+    .testimonials-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    
+    .testimonial-card {
+      background: #FFFFFF;
+      border-radius: 2px;
+      padding: 24px;
+      box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), inset 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+      position: relative;
+      
+      &:first-child {
+        box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1), inset 0px 1px 1px 0px rgba(0, 0, 0, 0.1), 4px 4px 64px 4px rgba(225, 226, 228, 0.4);
+      }
+      
+      &:last-child {
+        margin-top: 32px;
+        
+        .testimonial-content {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
+      }
+      
+      .testimonial-content {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin-bottom: 24px;
+        
+        .quote-icon {
+          width: 60px;
+          height: 57px;
+          flex-shrink: 0;
+        }
+        
+        .testimonial-text {
+          font-family: 'Inter', sans-serif;
+          font-weight: 300;
+          font-size: 14px;
+          line-height: 1.43;
+          color: #000000;
+          margin: 0;
+        }
+      }
+      
+      .testimonial-author {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        
+        .author-name {
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 1.26;
+          color: #000000;
+          text-align: right;
+          margin: 0;
+        }
+        
+        .author-title {
+          font-family: 'Inter', sans-serif;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 1.21;
+          color: #A8ABB2;
+          text-align: right;
+        }
+      }
+    }
+  }
+
+  // Responsive adjustments
+  @media (min-width: 768px) {
+    .testimonials-section {
+      padding: 80px 40px;
+      
+      .testimonials-container {
+        max-width: 800px;
+      }
+      
+      .testimonials-title {
+        font-size: clamp(32px, 4vw, 48px);
+      }
+      
+      .testimonials-subtitle {
+        font-size: clamp(16px, 2vw, 20px);
+      }
+      
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      
+      .testimonial-card {
+        &:last-child {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+</style>

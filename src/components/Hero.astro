@@ -1,0 +1,199 @@
+---
+// Hero section component with gradient background - mobile first design
+---
+
+<section id="hero" class="hero-section">
+  <div class="gradient-background"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1 class="hero-title">
+        <span class="title-line-1">Architecting Your</span>
+        <span class="title-line-2">Digital Future.</span>
+      </h1>
+      <p class="hero-subtitle">Powered by AI.</p>
+    </div>
+    <p class="hero-description">
+      Unlock the transformative power of data with Cloud Intelligence. We deliver cutting-edge AI-driven solutions that accelerate growth, optimise operations, and propel your business forward.
+    </p>
+    <div class="hero-cta">
+      <button class="btn btn-primary">Explore our Solutions</button>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .hero-section {
+    position: relative;
+    height: auto;
+    min-height: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: hidden;
+    background: #FFFFFF;
+    padding: 30vh 0 40px;
+  }
+  
+  .gradient-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70vh;
+    background: url('/webtest/hero-gradient-2eb61d.png') no-repeat center center;
+    background-size: cover;
+    z-index: 1;
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 334px;
+    margin: 0 auto;
+    padding: 0 29px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-end;
+  }
+
+  .hero-text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0;
+  }
+  
+  .hero-title {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 1.25;
+    color: #FFFFFF;
+    margin: 0;
+    text-align: left;
+    width: 100%;
+    
+    .title-line-1 {
+      display: block;
+    }
+    
+    .title-line-2 {
+      display: block;
+    }
+  }
+  
+  .hero-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 2;
+    color: #FFFFFF;
+    text-align: right;
+    margin: 0;
+    width: 100%;
+  }
+
+  .hero-description {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.21;
+    color: #FFFFFF;
+    text-align: left;
+    margin: 0;
+    width: 100%;
+  }
+
+  .hero-cta {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 24px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    border-radius: 100px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.21;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    
+    &.btn-primary {
+      // Liquid glass base
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px) saturate(180%);
+      -webkit-backdrop-filter: blur(10px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      width: 163px; // Fixed width from Figma
+      
+      // Enhanced shadow
+      box-shadow: 
+        0px 8px 32px rgba(0, 0, 0, 0.08),
+        0px 1px 4px rgba(0, 0, 0, 0.04),
+        inset 0px 1px 0px rgba(255, 255, 255, 0.3);
+      
+      // Liquid shine effect
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 40%;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.3) 0%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 100%
+        );
+        pointer-events: none;
+        border-radius: 100px 100px 0 0;
+      }
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 
+          0px 12px 40px rgba(0, 0, 0, 0.12),
+          0px 2px 8px rgba(0, 0, 0, 0.06),
+          inset 0px 1px 0px rgba(255, 255, 255, 0.4);
+      }
+      
+      &:active {
+        transform: translateY(-1px);
+      }
+    }
+  }
+
+  // Tablet and larger screens
+  @media (min-width: 768px) {
+    .hero-content {
+      max-width: 800px;
+      padding: 0 40px;
+    }
+    
+    .hero-title {
+      font-size: clamp(32px, 4vw, 48px);
+    }
+    
+    .hero-subtitle {
+      font-size: clamp(24px, 3vw, 32px);
+    }
+    
+    .hero-description {
+      font-size: clamp(14px, 1.5vw, 16px);
+    }
+  }
+</style>

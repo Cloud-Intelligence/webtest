@@ -4,12 +4,20 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "devDependencies": {
-    "vite": "^5.0.0",
-    "sass": "^1.69.0"
+    "sass": "^1.89.2"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/node": "^9.3.0",
+    "astro": "^5.12.3",
+    "gsap": "^3.13.0",
+    "typescript": "^5.8.3"
   }
 }

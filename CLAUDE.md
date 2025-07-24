@@ -2,63 +2,64 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Development Commands
+## Commands
 
-**Essential commands for this project:**
-- `npm run dev` - Start Vite development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
+### Development
+- `npm run dev` - Start development server with hot reload
+- `npm run start` - Alias for `npm run dev`
+- `npm run build` - Run Astro type checking and build for production
+- `npm run preview` - Preview production build locally
 
-**Dependencies:** The project uses Vite + Sass as dev dependencies, with GSAP loaded from CDN.
+### Dependencies
+- `npm ci` - Install dependencies (production builds)
+- `npm install` - Install dependencies (development)
 
-## Architecture Overview
+## Architecture
 
-This is a **Cloud Intelligence unlock screen application** built with a **modular ES6 + Vite + SCSS architecture**. The app displays an animated unlock screen that transitions to a main screen when the slider is dragged to completion.
+This is an Astro-based landing page for Cloud Intelligence with a unique unlock screen interaction pattern.
 
-### Core Application Flow
-1. **Initialization:** HTML partials are dynamically loaded via fetch API
-2. **Animation Systems:** GSAP-powered gradient, cloud, and slider animations start
-3. **User Interaction:** Draggable slider with 95% completion threshold
-4. **Unlock Sequence:** Coordinated timeline animation transitions screens
+## Philosophy
+the goal is to create a highly performant mobile first marketing website for a professional software engineering company.
+seo is vital.
+fast load is vital.
+coverage for all screen sizes is vital.
+following of figma designs must be pixel perfect.
 
-### Modular JavaScript Architecture
 
-**Entry Point:** `src/main.js` - Coordinates all module loading and initialization
+### Core Structure
+- **Astro Framework**: Static site generator with component-based architecture
+- **SCSS Styling**: Modular SCSS with base styles and component-specific styles
+- **Unlock Screen Pattern**: Interactive unlock animation before showing main content
+- **Component Architecture**: Reusable Astro components for each page section
 
-**Key Modules:**
-- `modules/partials.js` - Loads HTML fragments from `src/partials/` directory
-- `modules/slider.js` - GSAP Draggable slider with completion logic
-- `modules/clouds.js` - Complex 9-cloud animation system with click interactions
-- `modules/gradient.js` - Morphing gradient background (225s cycle, 9 colors)
-- `modules/unlock.js` - Screen transition timeline orchestration
+### Key Components Flow
+1. **UnlockScreen**: Initial animated screen with slider interaction
+2. **Hero**: Main landing section with gradient background  
+3. **About**: Company description section
+4. **Testimonials**: Client testimonials section
+5. **Contact**: Contact information section
 
-**HTML Partials System:** The app dynamically loads `unlock-screen.html` and `main-screen.html` from `src/partials/` using fetch API, avoiding the need for a framework while maintaining modularity.
+### Styling Architecture
+- `src/styles/main.scss` - Main stylesheet entry point
+- `src/styles/base/` - Global variables and reset styles
+- `src/styles/components/` - Component-specific styles (gradient, clouds, slider, screens, landing)
 
-### SCSS Organization
+### Deployment
+- Configured for GitHub Pages deployment via `.github/workflows/deploy.yml`
+- Site URL: `https://cloud-intelligence.github.io/webtest`
+- Uses `/webtest` base path for GitHub Pages subpath
 
-**Structure:** `src/styles/main.scss` imports from organized `base/` and `components/` directories
+### Animation System
+- GSAP library included for advanced animations
+- Custom unlock slider interaction using vanilla JavaScript events
+- Cloud animations and gradient backgrounds
 
-**Key Features:**
-- Variable-driven design (`base/_variables.scss`)
-- Component-based styling (screens, slider, clouds, gradient)
-- Pixel-art aesthetic with Press Start 2P font
-- Responsive design with modern CSS (clamp, inset)
+### Layout System
+- Single main layout (`Layout.astro`) with SEO meta tags and structured data
+- Conditional navbar display controlled by `showNavbar` prop
+- Mobile-responsive design with breakpoints
 
-### Animation Systems
-
-**GSAP Integration:** All animations use GSAP with CDN loading. Key systems:
-- **Cloud System:** 9 SVG clouds with scale animations (1-5x), randomized movement, click-to-redirect
-- **Gradient Animation:** Smooth transitions between linear/radial gradients over 225s
-- **Slider Animation:** Draggable with visual feedback, snap-back if incomplete
-- **Unlock Timeline:** Coordinated sequence of cloud exits and screen transitions
-
-**Critical Detail:** Clouds are constrained to bottom 50% of screen and use point-to-point movement logic.
-
-### File Organization Notes
-
-- **Static Assets:** Cloud SVGs and logo.png in `/public/`
-- **Modular CSS:** Each component has its own SCSS file
-- **ES6 Modules:** Clean separation of concerns across animation systems
-- **HTML Partials:** Separate unlock and main screen templates
-
-The codebase prioritizes modularity and maintainability while delivering sophisticated animations and interactions.
+### Asset Management
+- Public assets in `/public/` directory with `/webtest/` path prefix
+- Logo and cloud SVG assets for animations
+- Google Fonts integration (Inter, Press Start 2P, Roboto)
