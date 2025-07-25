@@ -48,11 +48,6 @@ const navLinks = [
       { label: 'Live Demos', href: createUrl('/resources/live-demos') },
       { label: 'Documentation', href: createUrl('/resources/documentation') },
     ]
-  },
-  {
-    label: 'Contact',
-    href: '#contact',
-    submenu: null
   }
 ];
 ---
@@ -371,16 +366,16 @@ const navLinks = [
     position: relative;
     overflow: visible;
     
-    // Enhanced liquid glass base
-    background: rgba(255, 255, 255, 0.15);
+    // Enhanced liquid glass base with darker background
+    background: rgba(0, 0, 0, 0.18);
     backdrop-filter: blur(10px) saturate(180%);
     -webkit-backdrop-filter: blur(10px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
     box-shadow: 
-      0px 8px 32px rgba(0, 0, 0, 0.08),
-      0px 1px 4px rgba(0, 0, 0, 0.04),
-      inset 0px 1px 0px rgba(255, 255, 255, 0.3);
+      0px 8px 32px rgba(0, 0, 0, 0.12),
+      0px 1px 4px rgba(0, 0, 0, 0.06),
+      inset 0px 1px 0px rgba(255, 255, 255, 0.25);
     
     // Liquid shine effect
     &::before {
@@ -522,7 +517,7 @@ const navLinks = [
     transform: translateX(-50%);
     margin-top: 16px;
     min-width: 220px;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.18);
     backdrop-filter: blur(10px) saturate(180%);
     -webkit-backdrop-filter: blur(10px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -532,9 +527,9 @@ const navLinks = [
     visibility: hidden;
     transition: all 0.2s ease;
     box-shadow: 
-      0px 8px 32px rgba(0, 0, 0, 0.08),
-      0px 1px 4px rgba(0, 0, 0, 0.04),
-      inset 0px 1px 0px rgba(255, 255, 255, 0.3);
+      0px 8px 32px rgba(0, 0, 0, 0.12),
+      0px 1px 4px rgba(0, 0, 0, 0.06),
+      inset 0px 1px 0px rgba(255, 255, 255, 0.25);
     overflow: hidden;
     
     &.active {
@@ -570,7 +565,7 @@ const navLinks = [
       transform: translateX(-50%);
       width: 12px;
       height: 12px;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(0, 0, 0, 0.18);
       backdrop-filter: blur(10px) saturate(180%);
       -webkit-backdrop-filter: blur(10px) saturate(180%);
       border-top: 1px solid rgba(255, 255, 255, 0.2);
