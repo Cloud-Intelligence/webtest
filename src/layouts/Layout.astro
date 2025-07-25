@@ -101,11 +101,13 @@ import NavbarEnhanced from '../components/NavbarEnhanced.astro';
     <!-- Performance Monitoring -->
     <script type="module">
       import { initPerformanceTracking } from '/webtest/src/utils/performance.js';
+      import { initTabVisibility } from '/webtest/src/utils/tab-visibility.js';
       
-      // Initialize performance tracking
+      // Initialize performance tracking and tab visibility
       if (typeof window !== 'undefined') {
         window.addEventListener('load', () => {
           initPerformanceTracking();
+          initTabVisibility();
         });
       }
     </script>
