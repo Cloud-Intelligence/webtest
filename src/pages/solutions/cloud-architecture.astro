@@ -77,8 +77,173 @@ const features = [
     </div>
   </section>
   
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>What cloud platforms do you specialize in?</h3>
+          <p>We work with all major cloud providers including AWS, Google Cloud Platform, Microsoft Azure, and hybrid multi-cloud environments. Our architects are certified across platforms and select the best fit based on your requirements, existing infrastructure, and business objectives.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do you approach cloud migration projects?</h3>
+          <p>We follow a systematic approach: assessment of current infrastructure, migration strategy development (rehost, refactor, rearchitect), pilot migrations, gradual rollout, and optimization. We minimize downtime and ensure business continuity throughout the migration process.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Can you help with cost optimization?</h3>
+          <p>Yes, we implement cost optimization strategies including right-sizing resources, reserved instances, spot instances, auto-scaling, serverless adoption, and multi-cloud cost arbitrage. We provide ongoing monitoring and recommendations to maintain cost efficiency as you scale.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do you ensure security in cloud architectures?</h3>
+          <p>We implement defense-in-depth security including network segmentation, identity and access management (IAM), encryption at rest and in transit, security monitoring, compliance frameworks, and zero-trust architecture principles. All designs follow cloud security best practices.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What's the difference between microservices and monolithic architecture?</h3>
+          <p>Microservices break applications into small, independent services that can be developed, deployed, and scaled separately. This offers better scalability, technology diversity, and fault isolation compared to monolithic architectures, but requires more sophisticated orchestration and monitoring.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Do you provide ongoing support and optimization?</h3>
+          <p>Yes, we offer comprehensive managed services including 24/7 monitoring, performance optimization, security updates, capacity planning, disaster recovery, and continuous cost optimization. Our support ensures your cloud infrastructure evolves with your business needs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <ContactSection />
 </PageLayout>
+
+<!-- Service Schema for Cloud Architecture -->
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Cloud Architecture Solutions",
+  "description": "Design resilient, cost-effective cloud architectures that scale with your business including microservices, serverless computing, and multi-cloud strategies.",
+  "provider": {
+    "@type": "Organization",
+    "@name": "Cloud Intelligence",
+    "url": "https://cloud-intelligence.github.io/webtest/"
+  },
+  "areaServed": "Global",
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://cloud-intelligence.github.io/webtest/solutions/cloud-architecture",
+    "serviceType": "Cloud Architecture"
+  },
+  "category": "Software Development",
+  "serviceType": "Cloud Architecture",
+  "offers": {
+    "@type": "Offer",
+    "description": "Custom cloud architecture design and implementation services",
+    "availability": "InStock"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Cloud Architecture Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Microservices Design",
+          "description": "Architect scalable, loosely-coupled microservices that enable independent deployment and horizontal scaling"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Serverless Computing",
+          "description": "Build event-driven applications with serverless functions that automatically scale and reduce operational overhead"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Container Orchestration",
+          "description": "Deploy and manage containerized applications with Kubernetes and Docker for maximum portability and efficiency"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Multi-cloud Strategy",
+          "description": "Design cloud-agnostic architectures that leverage multiple cloud providers for redundancy and cost optimization"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Infrastructure as Code",
+          "description": "Automate infrastructure provisioning and management with declarative templates and version-controlled deployments"
+        }
+      }
+    ]
+  }
+}
+</script>
+
+<!-- FAQ Schema for Cloud Architecture -->
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What cloud platforms do you specialize in?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We work with all major cloud providers including AWS, Google Cloud Platform, Microsoft Azure, and hybrid multi-cloud environments. Our architects are certified across platforms and select the best fit based on your requirements, existing infrastructure, and business objectives."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you approach cloud migration projects?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We follow a systematic approach: assessment of current infrastructure, migration strategy development (rehost, refactor, rearchitect), pilot migrations, gradual rollout, and optimization. We minimize downtime and ensure business continuity throughout the migration process."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you help with cost optimization?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, we implement cost optimization strategies including right-sizing resources, reserved instances, spot instances, auto-scaling, serverless adoption, and multi-cloud cost arbitrage. We provide ongoing monitoring and recommendations to maintain cost efficiency as you scale."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you ensure security in cloud architectures?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We implement defense-in-depth security including network segmentation, identity and access management (IAM), encryption at rest and in transit, security monitoring, compliance frameworks, and zero-trust architecture principles. All designs follow cloud security best practices."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between microservices and monolithic architecture?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Microservices break applications into small, independent services that can be developed, deployed, and scaled separately. This offers better scalability, technology diversity, and fault isolation compared to monolithic architectures, but requires more sophisticated orchestration and monitoring."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you provide ongoing support and optimization?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, we offer comprehensive managed services including 24/7 monitoring, performance optimization, security updates, capacity planning, disaster recovery, and continuous cost optimization. Our support ensures your cloud infrastructure evolves with your business needs."
+      }
+    }
+  ]
+}
+</script>
 
 <style lang="scss">
   .content-section {
@@ -209,6 +374,61 @@ const features = [
         background: #2952CC;
         transform: translateY(-2px);
         box-shadow: 0 6px 24px rgba(51, 102, 255, 0.4);
+      }
+    }
+  }
+
+  // FAQ Section
+  .faq-section {
+    background: #FFFFFF;
+    padding: 80px 0;
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 60px;
+      color: #1a1a1a;
+    }
+    
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+    
+    .faq-item {
+      background: #f8f9fa;
+      padding: 30px;
+      border-radius: 12px;
+      border-left: 4px solid #3366FF;
+      
+      h3 {
+        font-family: 'Manrope', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #3366FF;
+        margin-bottom: 16px;
+        line-height: 1.4;
+      }
+      
+      p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #4a4a4a;
+        margin: 0;
       }
     }
   }

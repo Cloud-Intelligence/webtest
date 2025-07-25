@@ -112,6 +112,176 @@ const { Content } = await post.render();
   </main>
 </Layout>
 
+<!-- Article Schema Markup -->
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {JSON.stringify(post.data.title)},
+  "description": {JSON.stringify(post.data.description)},
+  "image": {
+    "@type": "ImageObject",
+    "url": `https://cloud-intelligence.github.io/webtest/logo.png`,
+    "width": 1200,
+    "height": 630
+  },
+  "author": {
+    "@type": "Person",
+    "name": {JSON.stringify(post.data.author)},
+    "url": "https://cloud-intelligence.github.io/webtest/team"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "@name": "Cloud Intelligence",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://cloud-intelligence.github.io/webtest/logo.png",
+      "width": 200,
+      "height": 200
+    },
+    "url": "https://cloud-intelligence.github.io/webtest/"
+  },
+  "datePublished": {JSON.stringify(post.data.pubDate.toISOString())},
+  "dateModified": {JSON.stringify(post.data.pubDate.toISOString())},
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `https://cloud-intelligence.github.io/webtest/blog/${post.slug}`
+  },
+  "url": `https://cloud-intelligence.github.io/webtest/blog/${post.slug}`,
+  "isPartOf": {
+    "@type": "Blog",
+    "name": "Cloud Intelligence Technical Blog",
+    "url": "https://cloud-intelligence.github.io/webtest/resources/technical-blog"
+  },
+  "articleSection": "Technology",
+  "keywords": {JSON.stringify(post.data.tags.join(', '))},
+  "wordCount": 1500,
+  "timeRequired": "PT5M",
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Cloud Computing"
+    },
+    {
+      "@type": "Thing", 
+      "name": "Software Development"
+    },
+    {
+      "@type": "Thing",
+      "name": "Technology Solutions"
+    }
+  ],
+  "mentions": [
+    {
+      "@type": "Organization",
+      "name": "Cloud Intelligence",
+      "url": "https://cloud-intelligence.github.io/webtest/"
+    }
+  ],
+  "inLanguage": "en-US",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "name": "Cloud Intelligence"
+  },
+  "copyrightYear": 2024,
+  "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "potentialAction": {
+    "@type": "ReadAction",
+    "target": `https://cloud-intelligence.github.io/webtest/blog/${post.slug}`
+  }
+}
+</script>
+
+<!-- TechArticle Schema for Technical Posts -->
+{post.data.tags.some(tag => ['technical', 'development', 'programming', 'tutorial', 'guide'].some(keyword => tag.toLowerCase().includes(keyword))) && (
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": {JSON.stringify(post.data.title)},
+  "description": {JSON.stringify(post.data.description)},
+  "author": {
+    "@type": "Person",
+    "name": {JSON.stringify(post.data.author)}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "@name": "Cloud Intelligence"
+  },
+  "datePublished": {JSON.stringify(post.data.pubDate.toISOString())},
+  "proficiencyLevel": "Intermediate",
+  "dependencies": {JSON.stringify(post.data.tags.filter(tag => 
+    ['javascript', 'python', 'react', 'node', 'aws', 'azure', 'docker', 'kubernetes'].includes(tag.toLowerCase())
+  ))},
+  "applicationCategory": "DeveloperApplication"
+}
+</script>
+)}
+
+<!-- HowTo Schema for Tutorial Posts -->
+{post.data.tags.some(tag => ['tutorial', 'guide', 'how-to', 'step-by-step'].some(keyword => tag.toLowerCase().includes(keyword))) && (
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": {JSON.stringify(post.data.title)},
+  "description": {JSON.stringify(post.data.description)},
+  "image": "https://cloud-intelligence.github.io/webtest/logo.png",
+  "author": {
+    "@type": "Person",
+    "name": {JSON.stringify(post.data.author)}
+  },
+  "datePublished": {JSON.stringify(post.data.pubDate.toISOString())},
+  "totalTime": "PT30M",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": "0"
+  },
+  "supply": [
+    {
+      "@type": "HowToSupply",
+      "name": "Computer with internet access"
+    },
+    {
+      "@type": "HowToSupply", 
+      "name": "Basic programming knowledge"
+    }
+  ],
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "Code Editor"
+    },
+    {
+      "@type": "HowToTool",
+      "name": "Terminal/Command Line"
+    }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Setup",
+      "text": "Follow the setup instructions in the article",
+      "url": `https://cloud-intelligence.github.io/webtest/blog/${post.slug}#setup`
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Implementation", 
+      "text": "Implement the solution as described",
+      "url": `https://cloud-intelligence.github.io/webtest/blog/${post.slug}#implementation`
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Testing",
+      "text": "Test and validate your implementation",
+      "url": `https://cloud-intelligence.github.io/webtest/blog/${post.slug}#testing`
+    }
+  ]
+}
+</script>
+)}
+
 <style is:global>
   .blog-content {
     color: #374151;

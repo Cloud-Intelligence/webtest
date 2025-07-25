@@ -77,8 +77,173 @@ const features = [
     </div>
   </section>
   
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>What data sources can you integrate?</h3>
+          <p>We integrate with databases (SQL, NoSQL), APIs, file systems, cloud storage, streaming platforms (Kafka, Kinesis), SaaS applications, IoT devices, and legacy systems. Our pipelines handle structured, semi-structured, and unstructured data from any source with appropriate connectors and protocols.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do you ensure data quality and reliability?</h3>
+          <p>We implement comprehensive data quality frameworks including schema validation, data profiling, anomaly detection, automated testing, lineage tracking, and monitoring dashboards. Our pipelines include error handling, data reconciliation, and automated alerts for quality issues.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Can you handle both real-time and batch processing?</h3>
+          <p>Yes, we design hybrid architectures supporting both real-time streaming and batch processing. We use technologies like Apache Kafka, Flink, Spark, and cloud-native services to process data at different velocities based on business requirements and latency needs.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What cloud platforms do you work with?</h3>
+          <p>We work with all major cloud platforms including AWS (S3, Redshift, Glue, Kinesis), Google Cloud (BigQuery, Dataflow, Pub/Sub), Azure (Data Factory, Synapse, Event Hubs), and hybrid multi-cloud architectures. We select platforms based on your existing infrastructure and requirements.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do you handle data security and compliance?</h3>
+          <p>We implement encryption in transit and at rest, access controls, data masking, audit logging, and compliance frameworks (GDPR, HIPAA, SOC 2). Our pipelines include data lineage tracking, retention policies, and automated compliance reporting for regulatory requirements.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What's the typical timeline for data engineering projects?</h3>
+          <p>Simple pipelines take 2-4 weeks, complex data lakes require 8-16 weeks, and enterprise-scale data platforms need 3-6 months. Timeline depends on data complexity, integration requirements, compliance needs, and performance specifications. We provide detailed project plans with milestones.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <ContactSection />
 </PageLayout>
+
+<!-- Service Schema for Data Engineering -->
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Data Engineering Solutions",
+  "description": "Transform your data landscape with robust pipelines, modern architectures, and real-time processing capabilities including data lakes, warehousing, and ETL/ELT processing.",
+  "provider": {
+    "@type": "Organization",
+    "@name": "Cloud Intelligence",
+    "url": "https://cloud-intelligence.github.io/webtest/"
+  },
+  "areaServed": "Global",
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://cloud-intelligence.github.io/webtest/solutions/data-engineering",
+    "serviceType": "Data Engineering"
+  },
+  "category": "Software Development",
+  "serviceType": "Data Engineering",
+  "offers": {
+    "@type": "Offer",
+    "description": "Custom data engineering and infrastructure development services",
+    "availability": "InStock"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Data Engineering Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Data Pipelines",
+          "description": "Build robust, scalable data pipelines that efficiently process and transform data from multiple sources with automated workflows"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "ETL/ELT Processing",
+          "description": "Design and implement extraction, transformation, and loading processes to move data between systems with high reliability"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Real-time Streaming",
+          "description": "Process continuous data streams in real-time with technologies like Apache Kafka, Apache Flink, and cloud-native solutions"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Data Lakes",
+          "description": "Architect and implement data lakes that store structured and unstructured data at scale with cost-effective storage solutions"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Data Warehousing",
+          "description": "Build modern data warehouses optimized for analytics with dimensional modeling and columnar storage architectures"
+        }
+      }
+    ]
+  }
+}
+</script>
+
+<!-- FAQ Schema for Data Engineering -->
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What data sources can you integrate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We integrate with databases (SQL, NoSQL), APIs, file systems, cloud storage, streaming platforms (Kafka, Kinesis), SaaS applications, IoT devices, and legacy systems. Our pipelines handle structured, semi-structured, and unstructured data from any source with appropriate connectors and protocols."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you ensure data quality and reliability?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We implement comprehensive data quality frameworks including schema validation, data profiling, anomaly detection, automated testing, lineage tracking, and monitoring dashboards. Our pipelines include error handling, data reconciliation, and automated alerts for quality issues."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you handle both real-time and batch processing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, we design hybrid architectures supporting both real-time streaming and batch processing. We use technologies like Apache Kafka, Flink, Spark, and cloud-native services to process data at different velocities based on business requirements and latency needs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What cloud platforms do you work with?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We work with all major cloud platforms including AWS (S3, Redshift, Glue, Kinesis), Google Cloud (BigQuery, Dataflow, Pub/Sub), Azure (Data Factory, Synapse, Event Hubs), and hybrid multi-cloud architectures. We select platforms based on your existing infrastructure and requirements."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you handle data security and compliance?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We implement encryption in transit and at rest, access controls, data masking, audit logging, and compliance frameworks (GDPR, HIPAA, SOC 2). Our pipelines include data lineage tracking, retention policies, and automated compliance reporting for regulatory requirements."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the typical timeline for data engineering projects?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Simple pipelines take 2-4 weeks, complex data lakes require 8-16 weeks, and enterprise-scale data platforms need 3-6 months. Timeline depends on data complexity, integration requirements, compliance needs, and performance specifications. We provide detailed project plans with milestones."
+      }
+    }
+  ]
+}
+</script>
 
 <style lang="scss">
   .content-section {
@@ -209,6 +374,61 @@ const features = [
         background: #2952CC;
         transform: translateY(-2px);
         box-shadow: 0 6px 24px rgba(51, 102, 255, 0.4);
+      }
+    }
+  }
+
+  // FAQ Section
+  .faq-section {
+    background: #FFFFFF;
+    padding: 80px 0;
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 60px;
+      color: #1a1a1a;
+    }
+    
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+    
+    .faq-item {
+      background: #f8f9fa;
+      padding: 30px;
+      border-radius: 12px;
+      border-left: 4px solid #3366FF;
+      
+      h3 {
+        font-family: 'Manrope', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #3366FF;
+        margin-bottom: 16px;
+        line-height: 1.4;
+      }
+      
+      p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #4a4a4a;
+        margin: 0;
       }
     }
   }

@@ -3,6 +3,7 @@ import compress from '@playform/compress';
 import compressor from 'astro-compressor';
 import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
@@ -23,10 +24,6 @@ export default defineConfig({
       
       rollupOptions: {
         output: {
-          manualChunks: {
-            vendor: ['gsap'],
-            draggable: ['gsap/Draggable']
-          },
           assetFileNames: 'assets/[name].[hash][extname]',
           chunkFileNames: 'chunks/[name].[hash].js',
           entryFileNames: '[name].[hash].js'
@@ -56,6 +53,7 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false,
     }),
+    sitemap(),
     compress(),
     compressor({
       gzip: true,

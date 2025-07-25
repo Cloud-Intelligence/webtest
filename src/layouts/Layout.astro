@@ -183,19 +183,19 @@ import NavbarEnhanced from '../components/NavbarEnhanced.astro';
     </noscript>
     
     <!-- Non-critical CSS (Async loaded) -->
-    <link rel="preload" href="/webtest/assets/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/webtest/assets/main.css"></noscript>
+    <!-- CSS is bundled by Astro automatically -->
     
     <!-- Structured Data -->
     <script type="application/ld+json" is:inline>
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
+        "@type": ["Organization", "TechnologyCompany"],
         "name": "Cloud Intelligence",
+        "alternateName": "Cloud Intelligence South Africa",
         "url": "https://cloud-intelligence.github.io",
         "logo": "https://cloud-intelligence.github.io/logo.png",
-        "description": "Enterprise cloud intelligence platform providing intelligent cloud solutions",
-        "foundingDate": "2024",
+        "description": "Enterprise cloud intelligence platform providing intelligent cloud solutions, AI integration, and data engineering services",
+        "foundingDate": "2020",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "123 Cloud Street",
@@ -204,11 +204,164 @@ import NavbarEnhanced from '../components/NavbarEnhanced.astro';
           "postalCode": "94105",
           "addressCountry": "US"
         },
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "+1-555-123-4567",
-          "contactType": "customer service",
-          "email": "hello@cloudintelligence.com"
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+1-555-123-4567",
+            "contactType": "customer service",
+            "email": "hello@cloudintelligence.co.za",
+            "availableLanguage": ["English"]
+          },
+          {
+            "@type": "ContactPoint",
+            "email": "privacy@cloudintelligence.co.za",
+            "contactType": "privacy"
+          }
+        ],
+        "founder": [
+          {
+            "@type": "Person",
+            "name": "James Burgess",
+            "jobTitle": "CEO & Lead Architect",
+            "description": "GCP Certified Lead Architect with expertise in enterprise systems"
+          },
+          {
+            "@type": "Person", 
+            "name": "Kaitlyn Wilson",
+            "jobTitle": "COO",
+            "description": "Operations leader with expertise in remote team management"
+          }
+        ],
+        "numberOfEmployees": "8",
+        "industry": "Software Development",
+        "serviceArea": {
+          "@type": "Place",
+          "name": "Global",
+          "description": "Serving clients globally with focus on US and international markets"
+        },
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "Machine Learning", 
+          "Data Engineering",
+          "Cloud Architecture",
+          "Enterprise Software Development",
+          "Python Development",
+          "Django Framework",
+          "Vue.js",
+          "Kubernetes",
+          "PostgreSQL",
+          "Google Cloud Platform"
+        ],
+        "hasCredential": [
+          {
+            "@type": "EducationalOccupationalCredential",
+            "name": "Google Cloud Platform Cloud Engineer",
+            "credentialCategory": "Professional Certification"
+          }
+        ],
+        "awards": [
+          {
+            "@type": "Award",
+            "name": "Processing $400M+ in transactions",
+            "description": "Successfully processed and audited over $400 million through our systems"
+          },
+          {
+            "@type": "Award", 
+            "name": "Serving 1M+ users globally",
+            "description": "Platforms trusted by over 1 million users across 100+ countries"
+          }
+        ]
+      }
+    </script>
+    
+    <!-- WebSite Schema with Search -->
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Cloud Intelligence",
+        "url": "https://cloud-intelligence.github.io/webtest/",
+        "description": "Enterprise cloud intelligence platform providing AI solutions, data engineering, and software development services",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Cloud Intelligence"
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://cloud-intelligence.github.io/webtest/resources/technical-blog?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        },
+        "mainEntity": {
+          "@type": "ItemList",
+          "name": "Main Services",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "item": {
+                "@type": "Service",
+                "name": "Enterprise Software Development",
+                "url": "https://cloud-intelligence.github.io/webtest/solutions/enterprise-software"
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "item": {
+                "@type": "Service",
+                "name": "Data Analytics Solutions",
+                "url": "https://cloud-intelligence.github.io/webtest/solutions/data-analytics"
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "item": {
+                "@type": "Service",
+                "name": "AI Agents Development",
+                "url": "https://cloud-intelligence.github.io/webtest/solutions/ai-agents"
+              }
+            },
+            {
+              "@type": "ListItem", 
+              "position": 4,
+              "item": {
+                "@type": "Service",
+                "name": "Machine Learning Solutions",
+                "url": "https://cloud-intelligence.github.io/webtest/solutions/machine-learning"
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 5, 
+              "item": {
+                "@type": "Service",
+                "name": "Data Engineering",
+                "url": "https://cloud-intelligence.github.io/webtest/solutions/data-engineering"
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 6,
+              "item": {
+                "@type": "Service", 
+                "name": "Cloud Architecture",
+                "url": "https://cloud-intelligence.github.io/webtest/solutions/cloud-architecture"
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 7,
+              "item": {
+                "@type": "Service",
+                "name": "Web Applications",
+                "url": "https://cloud-intelligence.github.io/webtest/solutions/web-applications"
+              }
+            }
+          ]
         }
       }
     </script>

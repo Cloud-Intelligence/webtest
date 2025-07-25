@@ -22,9 +22,11 @@ import ContactSection from '../components/ContactSection.astro';
   </noscript>
   
   <!-- Unlock Screen Animation -->
-  <UnlockScreen />
+  <div id="unlock-screen-container">
+    <UnlockScreen />
+  </div>
   
-  <!-- Hidden Navbar (will show after unlock) -->
+  <!-- Navbar (will be shown/hidden by JavaScript) -->
   <div id="navbar-container" style="display: none; opacity: 0;">
     <NavbarEnhanced />
   </div>
@@ -43,9 +45,41 @@ import ContactSection from '../components/ContactSection.astro';
 </Layout>
 
 <style>
-  /* Only apply overflow hidden to home page with unlock screen */
+  /* Default: apply overflow hidden for unlock screen */
   body {
     overflow: hidden;
     height: 100vh;
   }
+  
+  /* Hide unlock screen when skipped */
+  body.skip-lock-screen #unlock-screen-container {
+    display: none !important;
+  }
+  
+  /* Show main content when lock screen is skipped */
+  body.skip-lock-screen #navbar-container {
+    display: block !important;
+    opacity: 1 !important;
+  }
+  
+  body.skip-lock-screen #mainScreen {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Remove overflow restriction when lock screen is skipped */
+  body.skip-lock-screen {
+    overflow: auto !important;
+    height: auto !important;
+  }
 </style>
+
+<script>
+  // Check URL hash immediately to avoid flash
+  (function() {
+    // Check if URL has any hash present
+    if (window.location.hash) {
+      document.body.classList.add('skip-lock-screen');
+    }
+  })();
+</script>

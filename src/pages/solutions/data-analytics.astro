@@ -1,0 +1,757 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContactSection from '../../components/ContactSection.astro';
+
+const features = [
+  {
+    title: "Real-time Dashboards",
+    description: "Interactive, customizable dashboards that provide instant insights with live data updates and drill-down capabilities.",
+    icon: "📊"
+  },
+  {
+    title: "Predictive Analytics",
+    description: "Advanced forecasting models that predict trends, identify opportunities, and anticipate potential issues before they occur.",
+    icon: "🔮"
+  },
+  {
+    title: "Data Visualization",
+    description: "Transform complex datasets into compelling visual stories with charts, graphs, heatmaps, and interactive visualizations.",
+    icon: "📈"
+  },
+  {
+    title: "Business Intelligence",
+    description: "Comprehensive BI solutions that turn raw data into actionable insights for strategic decision-making.",
+    icon: "🧠"
+  },
+  {
+    title: "Customer Analytics",
+    description: "Deep customer behavior analysis, segmentation, and lifetime value calculations to optimize marketing and retention.",
+    icon: "👥"
+  },
+  {
+    title: "Performance Metrics",
+    description: "Track KPIs, measure performance against goals, and identify optimization opportunities across all business functions.",
+    icon: "🎯"
+  }
+];
+
+const analyticsProcess = [
+  {
+    step: "1",
+    title: "Data Collection",
+    description: "Gather data from multiple sources including databases, APIs, files, and real-time streams.",
+    icon: "📥"
+  },
+  {
+    step: "2", 
+    title: "Data Processing",
+    description: "Clean, transform, and enrich raw data to ensure accuracy and consistency for analysis.",
+    icon: "⚙️"
+  },
+  {
+    step: "3",
+    title: "Analysis & Modeling",
+    description: "Apply statistical models, machine learning algorithms, and business logic to extract insights.",
+    icon: "🔬"
+  },
+  {
+    step: "4",
+    title: "Visualization & Reporting",
+    description: "Present findings through interactive dashboards, automated reports, and actionable recommendations.",
+    icon: "📋"
+  }
+];
+
+const useCases = [
+  {
+    title: "Sales Performance Analysis",
+    description: "Track sales metrics, identify top performers, and forecast revenue with detailed pipeline analysis.",
+    metrics: ["40% increase in sales efficiency", "25% better forecast accuracy", "60% faster reporting"],
+    color: "#10B981"
+  },
+  {
+    title: "Customer Behavior Insights", 
+    description: "Understand customer journeys, preferences, and churn patterns to improve retention and satisfaction.",
+    metrics: ["35% reduction in churn", "50% improvement in targeting", "30% increase in CLV"],
+    color: "#3B82F6"
+  },
+  {
+    title: "Operational Analytics",
+    description: "Monitor business operations, identify bottlenecks, and optimize processes for maximum efficiency.",
+    metrics: ["45% cost reduction", "70% faster issue resolution", "90% process automation"],
+    color: "#8B5CF6"
+  },
+  {
+    title: "Financial Intelligence",
+    description: "Real-time financial monitoring, budget analysis, and profitability insights across all business units.",
+    metrics: ["20% profit margin improvement", "85% faster financial close", "100% compliance accuracy"],
+    color: "#F59E0B"
+  }
+];
+---
+
+<PageLayout 
+  title="Data Analytics - Cloud Intelligence"
+  description="Transform your business data into actionable insights with comprehensive analytics, real-time dashboards, and predictive intelligence."
+  keywords="data analytics, business intelligence, data visualization, predictive analytics, real-time dashboards, KPI tracking"
+>
+  <PageHero 
+    title="Data Analytics"
+    subtitle="Intelligence That Drives Decisions"
+    description="Turn your data into your competitive advantage with advanced analytics, real-time insights, and predictive intelligence that powers smarter business decisions."
+  />
+
+  <section class="content-section">
+    <div class="container">
+      <div class="intro-content">
+        <h2>From Data to Decisions in Real-Time</h2>
+        <p>
+          Our comprehensive data analytics platform transforms raw data into actionable intelligence. 
+          From real-time dashboards to predictive modeling, we help organizations make data-driven 
+          decisions that accelerate growth and optimize performance across every business function.
+        </p>
+      </div>
+      
+      <div class="features-grid">
+        {features.map((feature) => (
+          <div class="feature-card">
+            <div class="feature-icon">{feature.icon}</div>
+            <h3>{feature.title}</h3>
+            <p>{feature.description}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="process-section">
+        <h2>Our Analytics Process</h2>
+        <div class="process-grid">
+          {analyticsProcess.map((process, index) => (
+            <div class="process-card">
+              <div class="process-step">{process.step}</div>
+              <div class="process-icon">{process.icon}</div>
+              <h4>{process.title}</h4>
+              <p>{process.description}</p>
+              {index < analyticsProcess.length - 1 && <div class="process-arrow">→</div>}
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <div class="use-cases-section">
+        <h2>Proven Use Cases</h2>
+        <div class="use-cases-grid">
+          {useCases.map((useCase) => (
+            <div class="use-case-card">
+              <div class="use-case-header" style={`border-left: 4px solid ${useCase.color}`}>
+                <h3>{useCase.title}</h3>
+                <p>{useCase.description}</p>
+              </div>
+              <div class="metrics-list">
+                {useCase.metrics.map((metric) => (
+                  <div class="metric-item">
+                    <span class="metric-icon" style={`color: ${useCase.color}`}>✓</span>
+                    <span>{metric}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="stats-section">
+        <h2>Analytics That Deliver Results</h2>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">10TB+</div>
+            <div class="stat-label">Data Processed Daily</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">50ms</div>
+            <div class="stat-label">Average Query Response</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">99.9%</div>
+            <div class="stat-label">Dashboard Uptime</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">500M+</div>
+            <div class="stat-label">Records Analyzed</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="cta-section">
+        <h2>Ready to Unlock Your Data's Potential?</h2>
+        <p>Transform your business with intelligent analytics and real-time insights</p>
+        <a href="#contact" class="cta-button">Start Your Analytics Journey</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>What data sources can you integrate for analytics?</h3>
+          <p>We integrate with virtually any data source including databases (SQL, NoSQL), cloud platforms (AWS, Azure, GCP), SaaS applications (Salesforce, HubSpot, Google Analytics), file systems, APIs, and real-time streaming data. Our connectors ensure seamless data flow from all your business systems.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How quickly can we see results from data analytics implementation?</h3>
+          <p>Basic dashboards and reporting can be delivered within 1-2 weeks. Comprehensive analytics platforms typically take 4-8 weeks for full implementation. Advanced predictive models require 8-12 weeks. We prioritize quick wins with immediate insights while building toward more sophisticated analytics capabilities.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Do you provide real-time analytics and dashboards?</h3>
+          <p>Yes, our platform supports real-time data processing and live dashboards with sub-second updates. We use streaming technologies like Apache Kafka and real-time databases to ensure your dashboards reflect the most current business state, enabling immediate response to critical events.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do you ensure data accuracy and quality?</h3>
+          <p>We implement comprehensive data quality frameworks including validation rules, automated cleansing processes, anomaly detection, and data lineage tracking. Our systems include data profiling, duplicate detection, and continuous monitoring to maintain high-quality, reliable analytics.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Can you build custom analytics solutions for our industry?</h3>
+          <p>Absolutely. We develop industry-specific analytics solutions with relevant KPIs, compliance requirements, and domain expertise. Whether you're in healthcare, finance, retail, manufacturing, or any other sector, we tailor analytics to your unique business challenges and regulatory needs.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What's the difference between your analytics and basic reporting tools?</h3>
+          <p>Our analytics go beyond simple reporting to include predictive modeling, advanced statistical analysis, machine learning insights, and automated anomaly detection. We provide interactive visualizations, drill-down capabilities, and actionable recommendations rather than static reports.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ContactSection />
+</PageLayout>
+
+<!-- Service Schema for Data Analytics -->
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Data Analytics Solutions",
+  "description": "Transform your business data into actionable insights with comprehensive analytics, real-time dashboards, and predictive intelligence that powers smarter business decisions.",
+  "provider": {
+    "@type": "Organization",
+    "@name": "Cloud Intelligence",
+    "url": "https://cloud-intelligence.github.io/webtest/"
+  },
+  "areaServed": "Global",
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://cloud-intelligence.github.io/webtest/solutions/data-analytics",
+    "serviceType": "Data Analytics"
+  },
+  "category": "Software Development",
+  "serviceType": "Data Analytics",
+  "offers": {
+    "@type": "Offer",
+    "description": "Custom data analytics and business intelligence solutions",
+    "availability": "InStock"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Data Analytics Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Real-time Dashboards",
+          "description": "Interactive, customizable dashboards that provide instant insights with live data updates and drill-down capabilities"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Predictive Analytics",
+          "description": "Advanced forecasting models that predict trends, identify opportunities, and anticipate potential issues before they occur"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Data Visualization",
+          "description": "Transform complex datasets into compelling visual stories with charts, graphs, heatmaps, and interactive visualizations"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Business Intelligence",
+          "description": "Comprehensive BI solutions that turn raw data into actionable insights for strategic decision-making"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Customer Analytics",
+          "description": "Deep customer behavior analysis, segmentation, and lifetime value calculations to optimize marketing and retention"
+        }
+      }
+    ]
+  }
+}
+</script>
+
+<!-- FAQ Schema for Data Analytics -->
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What data sources can you integrate for analytics?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We integrate with virtually any data source including databases (SQL, NoSQL), cloud platforms (AWS, Azure, GCP), SaaS applications (Salesforce, HubSpot, Google Analytics), file systems, APIs, and real-time streaming data. Our connectors ensure seamless data flow from all your business systems."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How quickly can we see results from data analytics implementation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Basic dashboards and reporting can be delivered within 1-2 weeks. Comprehensive analytics platforms typically take 4-8 weeks for full implementation. Advanced predictive models require 8-12 weeks. We prioritize quick wins with immediate insights while building toward more sophisticated analytics capabilities."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you provide real-time analytics and dashboards?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, our platform supports real-time data processing and live dashboards with sub-second updates. We use streaming technologies like Apache Kafka and real-time databases to ensure your dashboards reflect the most current business state, enabling immediate response to critical events."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you ensure data accuracy and quality?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We implement comprehensive data quality frameworks including validation rules, automated cleansing processes, anomaly detection, and data lineage tracking. Our systems include data profiling, duplicate detection, and continuous monitoring to maintain high-quality, reliable analytics."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you build custom analytics solutions for our industry?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. We develop industry-specific analytics solutions with relevant KPIs, compliance requirements, and domain expertise. Whether you're in healthcare, finance, retail, manufacturing, or any other sector, we tailor analytics to your unique business challenges and regulatory needs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between your analytics and basic reporting tools?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our analytics go beyond simple reporting to include predictive modeling, advanced statistical analysis, machine learning insights, and automated anomaly detection. We provide interactive visualizations, drill-down capabilities, and actionable recommendations rather than static reports."
+      }
+    }
+  ]
+}
+</script>
+
+<style lang="scss">
+  .content-section {
+    background: #040913;
+    padding: 80px 0;
+    
+    @media (max-width: 768px) {
+      padding: 60px 0;
+    }
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    
+    @media (max-width: 768px) {
+      padding: 0 24px;
+    }
+  }
+  
+  .intro-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 80px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      color: #FFFFFF;
+      margin-bottom: 24px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 32px;
+    margin-bottom: 80px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+  
+  .feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 32px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+    
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.975rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .process-section {
+    margin: 80px 0;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      position: relative;
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+    
+    .process-card {
+      text-align: center;
+      position: relative;
+      padding: 24px;
+      background: rgba(51, 102, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(51, 102, 255, 0.2);
+      border-radius: 16px;
+      
+      .process-step {
+        width: 48px;
+        height: 48px;
+        background: #3366FF;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 1.25rem;
+        margin: 0 auto 16px;
+      }
+      
+      .process-icon {
+        font-size: 2rem;
+        margin-bottom: 16px;
+      }
+      
+      h4 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 1.125rem;
+        color: #FFFFFF;
+        margin-bottom: 8px;
+      }
+      
+      p {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.5;
+      }
+      
+      .process-arrow {
+        position: absolute;
+        top: 50%;
+        right: -16px;
+        transform: translateY(-50%);
+        font-size: 1.5rem;
+        color: #3366FF;
+        
+        @media (max-width: 768px) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .use-cases-section {
+    margin: 80px 0;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .use-cases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 32px;
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+    
+    .use-case-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-4px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      }
+      
+      .use-case-header {
+        padding-left: 16px;
+        margin-bottom: 24px;
+        
+        h3 {
+          font-family: 'Inter', sans-serif;
+          font-weight: 600;
+          font-size: 1.25rem;
+          color: #FFFFFF;
+          margin-bottom: 12px;
+        }
+        
+        p {
+          font-family: 'Inter', sans-serif;
+          font-size: 0.975rem;
+          line-height: 1.6;
+          color: rgba(255, 255, 255, 0.7);
+        }
+      }
+      
+      .metrics-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        
+        .metric-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.9rem;
+          color: rgba(255, 255, 255, 0.8);
+          
+          .metric-icon {
+            font-weight: 600;
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  .stats-section {
+    margin: 80px 0;
+    text-align: center;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      color: #FFFFFF;
+      margin-bottom: 48px;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      
+      @media (max-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+    }
+    
+    .stat-item {
+      background: rgba(51, 102, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(51, 102, 255, 0.2);
+      border-radius: 16px;
+      padding: 32px 16px;
+      
+      .stat-number {
+        font-family: 'Manrope', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #3366FF;
+        margin-bottom: 8px;
+      }
+      
+      .stat-label {
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+  
+  .cta-section {
+    text-align: center;
+    padding: 60px;
+    background: rgba(51, 102, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(51, 102, 255, 0.2);
+    border-radius: 24px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      color: #FFFFFF;
+      margin-bottom: 16px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 32px;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: #3366FF;
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(51, 102, 255, 0.3);
+      
+      &:hover {
+        background: #2952CC;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(51, 102, 255, 0.4);
+      }
+    }
+  }
+
+  // FAQ Section
+  .faq-section {
+    background: #FFFFFF;
+    padding: 80px 0;
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 60px;
+      color: #1a1a1a;
+    }
+    
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+    
+    .faq-item {
+      background: #f8f9fa;
+      padding: 30px;
+      border-radius: 12px;
+      border-left: 4px solid #3366FF;
+      
+      h3 {
+        font-family: 'Manrope', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #3366FF;
+        margin-bottom: 16px;
+        line-height: 1.4;
+      }
+      
+      p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #4a4a4a;
+        margin: 0;
+      }
+    }
+  }
+</style>

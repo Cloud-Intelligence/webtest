@@ -1,0 +1,739 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContactSection from '../../components/ContactSection.astro';
+
+const features = [
+  {
+    title: "Legacy System Modernization",
+    description: "Transform outdated systems into modern, maintainable applications without disrupting critical business operations.",
+    icon: "🔄"
+  },
+  {
+    title: "Enterprise Architecture",
+    description: "Design robust, scalable architectures that handle millions of users and transactions with enterprise-grade reliability.",
+    icon: "🏗️"
+  },
+  {
+    title: "Performance Engineering",
+    description: "Optimize applications for peak performance, handling high-load scenarios that would crash prototype solutions.",
+    icon: "⚡"
+  },
+  {
+    title: "Security & Compliance",
+    description: "Implement comprehensive security frameworks meeting SOC 2, HIPAA, PCI DSS, and other regulatory requirements.",
+    icon: "🔒"
+  },
+  {
+    title: "Mission-Critical Systems",
+    description: "Build systems that can't fail - with 99.99% uptime, disaster recovery, and enterprise-grade monitoring.",
+    icon: "🎯"
+  },
+  {
+    title: "Technical Due Diligence",
+    description: "Audit and rescue projects that have gone off the rails, providing expert analysis and remediation strategies.",
+    icon: "🔍"
+  }
+];
+
+const rescueScenarios = [
+  {
+    title: "The Prototype That Broke",
+    description: "When your MVP hits real-world usage and everything falls apart",
+    problem: "Can't handle more than 10 concurrent users",
+    solution: "Scalable architecture supporting millions"
+  },
+  {
+    title: "The Security Nightmare",
+    description: "When you realize your system is wide open to attacks",
+    problem: "No proper authentication or data protection",
+    solution: "Enterprise security with zero-trust architecture"
+  },
+  {
+    title: "The Performance Crisis",
+    description: "When your app takes 30 seconds to load a simple page",
+    problem: "Inefficient code and poor database design",
+    solution: "Sub-second response times at scale"
+  },
+  {
+    title: "The Compliance Panic",
+    description: "When auditors find your system doesn't meet regulations",
+    problem: "Missing audit trails and data governance",
+    solution: "Full compliance with automated reporting"
+  }
+];
+---
+
+<PageLayout 
+  title="Enterprise Software - Cloud Intelligence"
+  description="When prototype solutions fail and you need enterprise-grade software that scales, performs, and complies with regulations."
+  keywords="enterprise software, legacy modernization, performance engineering, compliance, scalability, technical rescue"
+>
+  <PageHero 
+    title="Enterprise Software"
+    subtitle="When Prototypes Break, Call the Pros"
+    description="Transform failing projects into enterprise-grade solutions that scale, perform, and meet the highest standards of reliability and security."
+  />
+  
+  <section class="intro-section">
+    <div class="container">
+      <div class="intro-content">
+        <h2>From Prototype Panic to Production Ready</h2>
+        <p class="large-text">
+          We've all been there. The quick prototype worked beautifully in the demo. 
+          But now it's crashing under real load, security is a nightmare, and compliance auditors are asking uncomfortable questions.
+        </p>
+        <p>
+          <strong>That's where we come in.</strong> We're the team enterprises call when their "move fast and break things" 
+          approach has broken everything, and they need professionals to build something that actually works at scale.
+        </p>
+        
+        <div class="warning-box">
+          <h3>⚠️ Warning Signs You Need Enterprise Software</h3>
+          <ul>
+            <li>Your app crashes when more than 50 people use it</li>
+            <li>You're storing passwords in plain text (yes, really)</li>
+            <li>Your database queries take 30+ seconds</li>
+            <li>You have no idea where your data is or who can access it</li>
+            <li>Compliance auditors are having nightmares about your system</li>
+            <li>Your "temporary" prototype is now mission-critical</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="rescue-scenarios">
+    <div class="container">
+      <h2>Common Rescue Scenarios</h2>
+      <div class="scenarios-grid">
+        {rescueScenarios.map((scenario) => (
+          <div class="scenario-card">
+            <h3>{scenario.title}</h3>
+            <p class="scenario-description">{scenario.description}</p>
+            <div class="problem-solution">
+              <div class="problem">
+                <strong>The Problem:</strong> {scenario.problem}
+              </div>
+              <div class="arrow">→</div>
+              <div class="solution">
+                <strong>Our Solution:</strong> {scenario.solution}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <div class="intro-content">
+        <h2>Enterprise-Grade Solutions</h2>
+        <p>
+          We don't just fix broken prototypes—we architect solutions that handle the demands of real enterprise environments. 
+          From day one, we build for scale, security, and compliance.
+        </p>
+      </div>
+      
+      <div class="features-grid">
+        {features.map((feature) => (
+          <div class="feature-card">
+            <div class="feature-icon">{feature.icon}</div>
+            <h3>{feature.title}</h3>
+            <p>{feature.description}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="stats-section">
+        <h2>Why Enterprises Trust Us</h2>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">99.99%</div>
+            <div class="stat-label">Uptime Guarantee</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">$400M+</div>
+            <div class="stat-label">Transactions Processed</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">1M+</div>
+            <div class="stat-label">Concurrent Users Supported</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Security Audits Passed</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="cta-section">
+        <h2>Ready to Go from Prototype to Production?</h2>
+        <p>Stop patching problems. Start building solutions that scale.</p>
+        <a href="#contact" class="cta-button">Get Emergency Help</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>What makes enterprise software different from regular applications?</h3>
+          <p>Enterprise software is built for scale, security, and compliance from day one. It handles thousands of concurrent users, implements enterprise-grade security, meets regulatory requirements, and includes comprehensive monitoring, disaster recovery, and audit trails that prototype solutions typically lack.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Can you rescue a failing project that's already in production?</h3>
+          <p>Yes, we specialize in technical rescue missions. We conduct thorough assessments, identify critical issues, implement immediate fixes to stabilize the system, then systematically rebuild components to meet enterprise standards while maintaining business continuity.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do you handle legacy system modernization?</h3>
+          <p>We use a phased approach: analyze existing systems, design modern architecture, create integration bridges, migrate data safely, train teams, and gradually replace legacy components. This ensures minimal disruption while modernizing your technology stack.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What security and compliance standards do you support?</h3>
+          <p>We implement comprehensive security frameworks including SOC 2, HIPAA, PCI DSS, GDPR, ISO 27001, and industry-specific regulations. Our solutions include encryption, access controls, audit logging, vulnerability management, and automated compliance reporting.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How do you ensure system performance at enterprise scale?</h3>
+          <p>We use performance engineering principles including load testing, database optimization, caching strategies, CDN implementation, auto-scaling, and monitoring. Our systems are designed to handle millions of users with sub-second response times and 99.99% uptime.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What's your approach to mission-critical system development?</h3>
+          <p>Mission-critical systems require redundancy, monitoring, disaster recovery, and zero-downtime deployments. We implement high-availability architectures, comprehensive testing, gradual rollouts, and 24/7 monitoring to ensure systems never fail when they matter most.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ContactSection />
+</PageLayout>
+
+<!-- Service Schema for Enterprise Software -->
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Enterprise Software Development",
+  "description": "Transform failing projects into enterprise-grade solutions that scale, perform, and meet the highest standards of reliability and security when prototype solutions fail.",
+  "provider": {
+    "@type": "Organization",
+    "@name": "Cloud Intelligence",
+    "url": "https://cloud-intelligence.github.io/webtest/"
+  },
+  "areaServed": "Global",
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://cloud-intelligence.github.io/webtest/solutions/enterprise-software",
+    "serviceType": "Enterprise Software Development"
+  },
+  "category": "Software Development",
+  "serviceType": "Enterprise Software Development",
+  "offers": {
+    "@type": "Offer",
+    "description": "Custom enterprise software development and technical rescue services",
+    "availability": "InStock"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Enterprise Software Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Legacy System Modernization",
+          "description": "Transform outdated systems into modern, maintainable applications without disrupting critical business operations"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Enterprise Architecture",
+          "description": "Design robust, scalable architectures that handle millions of users and transactions with enterprise-grade reliability"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Performance Engineering",
+          "description": "Optimize applications for peak performance, handling high-load scenarios that would crash prototype solutions"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Security & Compliance",
+          "description": "Implement comprehensive security frameworks meeting SOC 2, HIPAA, PCI DSS, and other regulatory requirements"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Technical Due Diligence",
+          "description": "Audit and rescue projects that have gone off the rails, providing expert analysis and remediation strategies"
+        }
+      }
+    ]
+  }
+}
+</script>
+
+<!-- FAQ Schema for Enterprise Software -->
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What makes enterprise software different from regular applications?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Enterprise software is built for scale, security, and compliance from day one. It handles thousands of concurrent users, implements enterprise-grade security, meets regulatory requirements, and includes comprehensive monitoring, disaster recovery, and audit trails that prototype solutions typically lack."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you rescue a failing project that's already in production?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, we specialize in technical rescue missions. We conduct thorough assessments, identify critical issues, implement immediate fixes to stabilize the system, then systematically rebuild components to meet enterprise standards while maintaining business continuity."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you handle legacy system modernization?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We use a phased approach: analyze existing systems, design modern architecture, create integration bridges, migrate data safely, train teams, and gradually replace legacy components. This ensures minimal disruption while modernizing your technology stack."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What security and compliance standards do you support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We implement comprehensive security frameworks including SOC 2, HIPAA, PCI DSS, GDPR, ISO 27001, and industry-specific regulations. Our solutions include encryption, access controls, audit logging, vulnerability management, and automated compliance reporting."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you ensure system performance at enterprise scale?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We use performance engineering principles including load testing, database optimization, caching strategies, CDN implementation, auto-scaling, and monitoring. Our systems are designed to handle millions of users with sub-second response times and 99.99% uptime."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's your approach to mission-critical system development?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mission-critical systems require redundancy, monitoring, disaster recovery, and zero-downtime deployments. We implement high-availability architectures, comprehensive testing, gradual rollouts, and 24/7 monitoring to ensure systems never fail when they matter most."
+      }
+    }
+  ]
+}
+</script>
+
+<style lang="scss">
+  .intro-section {
+    background: #FFFFFF;
+    padding: 80px 0;
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    
+    .intro-content {
+      text-align: left;
+      
+      h2 {
+        font-family: 'Manrope', sans-serif;
+        font-weight: 600;
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        color: #1a1a1a;
+        margin-bottom: 32px;
+        text-align: center;
+      }
+      
+      .large-text {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.25rem;
+        line-height: 1.6;
+        color: #2d3748;
+        margin-bottom: 24px;
+        font-style: italic;
+      }
+      
+      p {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.125rem;
+        line-height: 1.6;
+        color: #4a5568;
+        margin-bottom: 24px;
+      }
+    }
+    
+    .warning-box {
+      background: #fef5e7;
+      border: 2px solid #f6ad55;
+      border-radius: 12px;
+      padding: 32px;
+      margin-top: 48px;
+      
+      h3 {
+        font-family: 'Manrope', sans-serif;
+        font-size: 1.5rem;
+        color: #c53030;
+        margin-bottom: 20px;
+      }
+      
+      ul {
+        list-style: none;
+        padding: 0;
+        
+        li {
+          font-family: 'Inter', sans-serif;
+          font-size: 1rem;
+          color: #744210;
+          margin-bottom: 12px;
+          padding-left: 24px;
+          position: relative;
+          
+          &:before {
+            content: "💥";
+            position: absolute;
+            left: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .rescue-scenarios {
+    background: #f7fafc;
+    padding: 80px 0;
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      color: #1a1a1a;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .scenarios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 32px;
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .scenario-card {
+      background: #FFFFFF;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid #e53e3e;
+      
+      h3 {
+        font-family: 'Manrope', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #e53e3e;
+        margin-bottom: 16px;
+      }
+      
+      .scenario-description {
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        color: #4a5568;
+        margin-bottom: 24px;
+        font-style: italic;
+      }
+      
+      .problem-solution {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        
+        .problem {
+          background: #fed7d7;
+          padding: 16px;
+          border-radius: 8px;
+          font-size: 0.9rem;
+          color: #742a2a;
+        }
+        
+        .arrow {
+          font-size: 1.5rem;
+          color: #3366FF;
+          text-align: center;
+          font-weight: bold;
+        }
+        
+        .solution {
+          background: #c6f6d5;
+          padding: 16px;
+          border-radius: 8px;
+          font-size: 0.9rem;
+          color: #22543d;
+        }
+      }
+    }
+  }
+
+  .content-section {
+    background: #040913;
+    padding: 80px 0;
+    
+    @media (max-width: 768px) {
+      padding: 60px 0;
+    }
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    
+    @media (max-width: 768px) {
+      padding: 0 24px;
+    }
+  }
+  
+  .intro-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 80px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      color: #FFFFFF;
+      margin-bottom: 24px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 32px;
+    margin-bottom: 80px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+  
+  .feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 32px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+    
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.975rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .stats-section {
+    margin: 80px 0;
+    text-align: center;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      color: #FFFFFF;
+      margin-bottom: 48px;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      
+      @media (max-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+    }
+    
+    .stat-item {
+      background: rgba(51, 102, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(51, 102, 255, 0.2);
+      border-radius: 16px;
+      padding: 32px 16px;
+      
+      .stat-number {
+        font-family: 'Manrope', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #3366FF;
+        margin-bottom: 8px;
+      }
+      
+      .stat-label {
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+  
+  .cta-section {
+    text-align: center;
+    padding: 60px;
+    background: rgba(229, 62, 62, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(229, 62, 62, 0.3);
+    border-radius: 24px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      color: #FFFFFF;
+      margin-bottom: 16px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 32px;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: #e53e3e;
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(229, 62, 62, 0.3);
+      
+      &:hover {
+        background: #c53030;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(229, 62, 62, 0.4);
+      }
+    }
+  }
+
+  // FAQ Section
+  .faq-section {
+    background: #FFFFFF;
+    padding: 80px 0;
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 60px;
+      color: #1a1a1a;
+    }
+    
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+    
+    .faq-item {
+      background: #f8f9fa;
+      padding: 30px;
+      border-radius: 12px;
+      border-left: 4px solid #e53e3e;
+      
+      h3 {
+        font-family: 'Manrope', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #e53e3e;
+        margin-bottom: 16px;
+        line-height: 1.4;
+      }
+      
+      p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #4a4a4a;
+        margin: 0;
+      }
+    }
+  }
+</style>

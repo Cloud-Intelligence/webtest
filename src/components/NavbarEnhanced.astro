@@ -22,9 +22,16 @@ const createUrl = (path: string) => {
 
 const navLinks = [
   {
+    label: 'About',
+    href: createUrl('/about'),
+    submenu: null
+  },
+  {
     label: 'Solutions',
     href: createUrl('/solutions'),
     submenu: [
+      { label: 'Enterprise Software', href: createUrl('/solutions/enterprise-software') },
+      { label: 'Data Analytics', href: createUrl('/solutions/data-analytics') },
       { label: 'AI Agents', href: createUrl('/solutions/ai-agents') },
       { label: 'Machine Learning', href: createUrl('/solutions/machine-learning') },
       { label: 'Web Applications', href: createUrl('/solutions/web-applications') },
@@ -54,7 +61,7 @@ const navLinks = [
   <div class="navbar-container">
     <div class="navbar-content">
       <!-- Logo -->
-      <a href={baseUrl} class="navbar-logo" aria-label="Cloud Intelligence home">
+      <a href={`${baseUrl}#unlocked`} class="navbar-logo" id="navbar-logo" aria-label="Cloud Intelligence home">
         <Image 
           src={ciLogo} 
           alt="Cloud Intelligence logo" 
@@ -208,6 +215,24 @@ const navLinks = [
 </div>
 
 <script>
+  // Logo click handler to skip lock screen when already on homepage
+  const navbarLogo = document.getElementById('navbar-logo');
+  if (navbarLogo) {
+    navbarLogo.addEventListener('click', (e) => {
+      // If we're already on the homepage, just update the hash and apply class immediately
+      const isHomePage = window.location.pathname === '/webtest/' || 
+                        window.location.pathname === '/webtest/index.html' || 
+                        window.location.pathname === '/';
+      
+      if (isHomePage) {
+        e.preventDefault();
+        window.location.hash = '#unlocked';
+        document.body.classList.add('skip-lock-screen');
+      }
+      // For other pages, let the href handle navigation to home#unlocked
+    });
+  }
+
   // Desktop dropdown functionality
   const dropdownTriggers = document.querySelectorAll('.nav-dropdown-trigger');
   
@@ -232,7 +257,8 @@ const navLinks = [
     
     // Keyboard navigation - only prevent default on keyboard interaction, not clicks
     trigger.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
+      const keyboardEvent = e as KeyboardEvent;
+      if (keyboardEvent.key === 'Enter' || keyboardEvent.key === ' ') {
         e.preventDefault();
         const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
         trigger.setAttribute('aria-expanded', (!isExpanded).toString());
