@@ -6,6 +6,15 @@
   inset: 0;
   z-index: vars.$z-unlock-screen;
   background: white;
+  
+  // Force full viewport height on mobile
+  @media (max-width: 768px) {
+    height: 100vh;
+    height: 100dvh; // Dynamic viewport height for mobile browsers
+    min-height: -webkit-fill-available; // iOS Safari
+    overflow: hidden;
+    touch-action: none; // Prevent scrolling
+  }
 }
 
 // Main screen - initially hidden

@@ -89,6 +89,18 @@ import UnlockSlider from './UnlockSlider.astro';
         unlockScreen.style.display = 'none';
         mainScreen.style.visibility = 'visible';
         navbarContainer.style.display = 'block';
+        
+        // Reset body overflow on mobile after unlock
+        if (window.innerWidth <= 768) {
+          document.documentElement.style.overflow = '';
+          document.documentElement.style.height = '';
+          document.documentElement.style.position = '';
+          document.documentElement.style.width = '';
+          document.body.style.overflow = '';
+          document.body.style.height = '';
+          document.body.style.position = '';
+          document.body.style.width = '';
+        }
       })
       // Fade in main screen
       .to(mainScreen, {
@@ -161,5 +173,13 @@ import UnlockSlider from './UnlockSlider.astro';
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
+  }
+  
+  /* Mobile specific adjustments */
+  @media (max-width: 768px) {
+    .slider-wrapper {
+      bottom: 15%; /* Adjust for smaller screens */
+      width: 90%; /* Ensure slider doesn't overflow on small screens */
+    }
   }
 </style>
