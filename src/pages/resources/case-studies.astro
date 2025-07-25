@@ -1,9 +1,27 @@
 ---
+import { getCollection } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import ContactSection from '../../components/ContactSection.astro';
 
-const caseStudies = [
+// Get case studies from content collections
+const allCaseStudies = await getCollection('caseStudies');
+const sortedCaseStudies = allCaseStudies.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Transform content collection posts to match existing structure
+const dynamicCaseStudies = sortedCaseStudies.map((caseStudy) => ({
+  title: caseStudy.data.title,
+  industry: caseStudy.data.industry,
+  solution: caseStudy.data.technologies[0] || "Technology Solutions",
+  description: caseStudy.data.description,
+  results: caseStudy.data.results.slice(0, 3),
+  category: caseStudy.data.industry.toLowerCase().replace(/\s+/g, '-'),
+  featured: caseStudy.data.featured || false,
+  slug: caseStudy.slug
+}));
+
+// Static case studies for variety
+const staticCaseStudies = [
   {
     title: "E-commerce AI Revolution",
     industry: "Retail",
@@ -60,6 +78,9 @@ const caseStudies = [
   }
 ];
 
+// Combine dynamic and static case studies
+const caseStudies = [...dynamicCaseStudies, ...staticCaseStudies];
+
 const industries = ["All", "Retail", "Healthcare", "Finance", "Manufacturing", "Education", "Logistics"];
 const solutions = ["All", "AI Agents", "Machine Learning", "Data Engineering", "Cloud Architecture", "Web Applications"];
 ---
@@ -97,7 +118,7 @@ const solutions = ["All", "AI Agents", "Machine Learning", "Data Engineering", "
                   ))}
                 </ul>
               </div>
-              <a href="#contact" class="case-study-link">View Full Case Study</a>
+              <a href={study.slug ? `/webtest/case-studies/${study.slug}` : '#contact'} class="case-study-link">View Full Case Study</a>
             </div>
           ))}
         </div>
@@ -144,7 +165,7 @@ const solutions = ["All", "AI Agents", "Machine Learning", "Data Engineering", "
                 ))}
               </ul>
             </div>
-            <a href="#contact" class="case-study-link">Learn More</a>
+            <a href={study.slug ? `/webtest/case-studies/${study.slug}` : '#contact'} class="case-study-link">Learn More</a>
           </div>
         ))}
       </div>

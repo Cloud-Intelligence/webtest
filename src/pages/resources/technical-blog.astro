@@ -1,98 +1,26 @@
 ---
+import { getCollection } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import ContactSection from '../../components/ContactSection.astro';
 
-const blogPosts = [
-  {
-    title: "The Future of AI Agents in Enterprise Software",
-    excerpt: "Exploring how autonomous AI agents are revolutionizing business processes and what it means for the future of work.",
-    author: "Sarah Chen",
-    date: "2024-07-20",
-    readTime: "8 min read",
-    category: "AI/ML",
-    tags: ["AI Agents", "Enterprise", "Automation"],
-    featured: true,
-    image: "/webtest/blog-ai-agents.jpg"
-  },
-  {
-    title: "Building Scalable Data Pipelines with Cloud-Native Architecture",
-    excerpt: "A comprehensive guide to designing and implementing data pipelines that can handle massive scale using modern cloud technologies.",
-    author: "Michael Rodriguez", 
-    date: "2024-07-18",
-    readTime: "12 min read",
-    category: "Data Engineering",
-    tags: ["Data Pipeline", "Cloud Architecture", "Scalability"],
-    featured: true,
-    image: "/webtest/blog-data-pipeline.jpg"
-  },
-  {
-    title: "Machine Learning Model Deployment Best Practices",
-    excerpt: "Learn the essential practices for deploying ML models to production, including monitoring, versioning, and A/B testing.",
-    author: "Dr. Emily Watson",
-    date: "2024-07-15",
-    readTime: "10 min read", 
-    category: "Machine Learning",
-    tags: ["MLOps", "Model Deployment", "Production"],
-    featured: false,
-    image: "/webtest/blog-ml-deployment.jpg"
-  },
-  {
-    title: "Microservices vs Monoliths: When to Choose What",
-    excerpt: "A practical comparison of microservices and monolithic architectures with real-world examples and decision frameworks.",
-    author: "James Park",
-    date: "2024-07-12",
-    readTime: "7 min read",
-    category: "Architecture",
-    tags: ["Microservices", "Architecture", "Development"],
-    featured: false,
-    image: "/webtest/blog-architecture.jpg"
-  },
-  {
-    title: "Securing AI Systems: A Comprehensive Security Framework",
-    excerpt: "Essential security considerations for AI and ML systems, from data privacy to model protection and adversarial attacks.",
-    author: "Alex Thompson",
-    date: "2024-07-10",
-    readTime: "15 min read",
-    category: "Security",
-    tags: ["AI Security", "Privacy", "Cybersecurity"],
-    featured: false,
-    image: "/webtest/blog-security.jpg"
-  },
-  {
-    title: "Real-time Data Processing with Apache Kafka and Flink",
-    excerpt: "Building high-throughput, low-latency data processing systems using Apache Kafka and Apache Flink for real-time analytics.",
-    author: "Lisa Kumar",
-    date: "2024-07-08",
-    readTime: "11 min read",
-    category: "Data Engineering", 
-    tags: ["Kafka", "Flink", "Real-time", "Streaming"],
-    featured: false,
-    image: "/webtest/blog-kafka-flink.jpg"
-  },
-  {
-    title: "Progressive Web Apps: The Future of Mobile Development",
-    excerpt: "How PWAs are bridging the gap between web and native mobile applications with improved performance and user experience.",
-    author: "David Kim",
-    date: "2024-07-05",
-    readTime: "9 min read",
-    category: "Web Development",
-    tags: ["PWA", "Mobile", "Web Development"],
-    featured: false,
-    image: "/webtest/blog-pwa.jpg"
-  },
-  {
-    title: "Kubernetes Cost Optimization: A Practical Guide",
-    excerpt: "Strategies and tools for optimizing Kubernetes costs while maintaining performance and reliability in production environments.",
-    author: "Rachel Green",
-    date: "2024-07-03",
-    readTime: "13 min read",
-    category: "DevOps",
-    tags: ["Kubernetes", "Cost Optimization", "DevOps"],
-    featured: false,
-    image: "/webtest/blog-kubernetes.jpg"
-  }
-];
+// Get blog posts from content collections
+const allBlogPosts = await getCollection('blog');
+const sortedPosts = allBlogPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Transform content collection posts to match existing structure
+const blogPosts = sortedPosts.map((post, index) => ({
+  title: post.data.title,
+  excerpt: post.data.description,
+  author: post.data.author,
+  date: post.data.pubDate.toISOString().split('T')[0],
+  readTime: "5 min read", // Default read time
+  category: post.data.tags[0] || "Technology",
+  tags: post.data.tags,
+  featured: index < 2, // Make first 2 posts featured
+  image: post.data.heroImage || "/webtest/blog-default.jpg",
+  slug: post.slug
+}));
 
 const categories = ["All", "AI/ML", "Data Engineering", "Machine Learning", "Architecture", "Security", "Web Development", "DevOps"];
 const tags = ["All", "AI Agents", "Cloud Architecture", "MLOps", "Microservices", "Security", "Kubernetes", "PWA"];
@@ -134,7 +62,7 @@ const tags = ["All", "AI Agents", "Cloud Architecture", "MLOps", "Microservices"
                     <span class="tag">{tag}</span>
                   ))}
                 </div>
-                <a href="#" class="read-more">Read Full Article</a>
+                <a href={`/webtest/blog/${post.slug}`} class="read-more">Read Full Article</a>
               </div>
             </article>
           ))}
@@ -191,7 +119,7 @@ const tags = ["All", "AI Agents", "Cloud Architecture", "MLOps", "Microservices"
                   <span class="tag">{tag}</span>
                 ))}
               </div>
-              <a href="#" class="read-more">Read Article</a>
+              <a href={`/webtest/blog/${post.slug}`} class="read-more">Read Article</a>
             </div>
           </article>
         ))}

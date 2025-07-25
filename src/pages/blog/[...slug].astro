@@ -1,0 +1,349 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={`${post.data.title} - Cloud Intelligence`} showNavbar={false}>
+  <main class="min-h-screen bg-gray-50">
+    <div class="bg-white border-b">
+      <div class="container mx-auto px-6 py-4 max-w-4xl">
+        <a 
+          href="/webtest/resources/technical-blog"
+          class="inline-flex items-center text-gray-600 hover:text-gray-800 font-medium transition-colors"
+        >
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Back to Technical Blog
+        </a>
+      </div>
+    </div>
+    
+    <article class="container mx-auto px-6 py-8 max-w-4xl">
+      <header class="mb-8">
+        <div class="flex items-center gap-3 text-sm text-gray-500 mb-4">
+          <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-xs">
+            {post.data.author.split(' ').map(n => n[0]).join('').slice(0, 2)}
+          </div>
+          <div>
+            <div class="font-medium text-gray-900">{post.data.author}</div>
+            <div class="text-xs">
+              <time datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric'
+                })}
+              </time>
+              <span class="mx-1">•</span>
+              <span>5 min read</span>
+            </div>
+          </div>
+        </div>
+        
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+          {post.data.title}
+        </h1>
+        
+        <div class="flex flex-wrap gap-2 mb-6">
+          {post.data.tags.map((tag) => (
+            <span class="px-2 py-1 bg-gray-200 text-gray-700 text-xs rounded hover:bg-gray-300 transition-colors cursor-pointer">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      </header>
+      
+      <div class="bg-white rounded-lg shadow-sm border p-8 md:p-12">
+        <div class="blog-content max-w-none">
+          <Content />
+        </div>
+      </div>
+      
+      <footer class="mt-12 pt-8 border-t">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2">
+              <button class="flex items-center gap-1 px-3 py-2 rounded-lg border hover:bg-gray-50 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+                <span class="text-sm font-medium">12</span>
+              </button>
+              <button class="flex items-center gap-1 px-3 py-2 rounded-lg border hover:bg-gray-50 transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                </svg>
+                <span class="text-sm font-medium">3</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-2">
+            <a 
+              href="/webtest/resources/technical-blog"
+              class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+            >
+              More Posts
+            </a>
+            <a 
+              href="/webtest/"
+              class="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Home
+            </a>
+          </div>
+        </div>
+      </footer>
+    </article>
+  </main>
+</Layout>
+
+<style is:global>
+  .blog-content {
+    color: #374151;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    font-size: 1.125rem;
+  }
+  
+  .blog-content h1,
+  .blog-content h2,
+  .blog-content h3,
+  .blog-content h4,
+  .blog-content h5,
+  .blog-content h6 {
+    color: #1f2937;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.25;
+  }
+  
+  .blog-content h1 {
+    font-size: 2.5rem;
+    margin-top: 0;
+  }
+  
+  .blog-content h2 {
+    font-size: 2rem;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.5rem;
+  }
+  
+  .blog-content h3 {
+    font-size: 1.5rem;
+    color: #374151;
+  }
+  
+  .blog-content h4 {
+    font-size: 1.25rem;
+    color: #4b5563;
+  }
+  
+  .blog-content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+  
+  .blog-content a {
+    color: #2563eb;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease;
+  }
+  
+  .blog-content a:hover {
+    color: #1d4ed8;
+    border-bottom-color: #1d4ed8;
+  }
+  
+  .blog-content ul,
+  .blog-content ol {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+  }
+  
+  .blog-content ul {
+    list-style-type: disc;
+  }
+  
+  .blog-content ol {
+    list-style-type: decimal;
+  }
+  
+  .blog-content li {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+  }
+  
+  .blog-content li p {
+    margin: 0.5rem 0;
+  }
+  
+  .blog-content strong {
+    font-weight: 600;
+    color: #1f2937;
+  }
+  
+  .blog-content em {
+    font-style: italic;
+    color: #4b5563;
+  }
+  
+  .blog-content code {
+    background-color: #f3f4f6;
+    color: #e11d48;
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-weight: 500;
+  }
+  
+  .blog-content pre {
+    background-color: #1f2937;
+    color: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 2rem 0;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+  
+  .blog-content pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+  }
+  
+  .blog-content blockquote {
+    border-left: 4px solid #e5e7eb;
+    padding-left: 1rem;
+    margin: 2rem 0;
+    color: #6b7280;
+    font-style: italic;
+    background-color: #f9fafb;
+    padding: 1rem 1rem 1rem 2rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+  
+  .blog-content blockquote p {
+    margin: 0;
+  }
+  
+  .blog-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 2rem 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .blog-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    background-color: white;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  .blog-content th,
+  .blog-content td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .blog-content th {
+    background-color: #f9fafb;
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .blog-content td {
+    color: #4b5563;
+  }
+  
+  .blog-content hr {
+    border: none;
+    height: 1px;
+    background-color: #e5e7eb;
+    margin: 3rem 0;
+  }
+  
+  /* Syntax highlighting for code blocks */
+  .blog-content pre[class*="language-"] {
+    background: #2d3748;
+  }
+  
+  .blog-content .token.comment,
+  .blog-content .token.prolog,
+  .blog-content .token.doctype,
+  .blog-content .token.cdata {
+    color: #718096;
+  }
+  
+  .blog-content .token.punctuation {
+    color: #a0aec0;
+  }
+  
+  .blog-content .token.property,
+  .blog-content .token.tag,
+  .blog-content .token.boolean,
+  .blog-content .token.number,
+  .blog-content .token.constant,
+  .blog-content .token.symbol,
+  .blog-content .token.deleted {
+    color: #f56565;
+  }
+  
+  .blog-content .token.selector,
+  .blog-content .token.attr-name,
+  .blog-content .token.string,
+  .blog-content .token.char,
+  .blog-content .token.builtin,
+  .blog-content .token.inserted {
+    color: #68d391;
+  }
+  
+  .blog-content .token.operator,
+  .blog-content .token.entity,
+  .blog-content .token.url,
+  .blog-content .language-css .token.string,
+  .blog-content .style .token.string {
+    color: #81e6d9;
+  }
+  
+  .blog-content .token.atrule,
+  .blog-content .token.attr-value,
+  .blog-content .token.keyword {
+    color: #9f7aea;
+  }
+  
+  .blog-content .token.function,
+  .blog-content .token.class-name {
+    color: #63b3ed;
+  }
+</style>
