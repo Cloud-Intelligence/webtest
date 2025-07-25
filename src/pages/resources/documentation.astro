@@ -9,10 +9,10 @@ const documentationSections = [
     description: "Quick start guides and basic setup instructions for all our platforms and services.",
     icon: "🚀",
     docs: [
-      { title: "Platform Overview", url: "/docs/getting-started/overview", type: "guide", difficulty: "beginner" },
-      { title: "Quick Start Guide", url: "/docs/getting-started/quickstart", type: "guide", difficulty: "beginner" },
-      { title: "Environment Setup", url: "/docs/getting-started/setup", type: "guide", difficulty: "beginner" },
-      { title: "First API Call", url: "/docs/getting-started/first-api-call", type: "tutorial", difficulty: "beginner" }
+      { title: "Docker Fundamentals", url: "https://docs.docker.com/get-started/", type: "guide", difficulty: "beginner" },
+      { title: "Kubernetes Basics", url: "https://kubernetes.io/docs/tutorials/kubernetes-basics/", type: "guide", difficulty: "beginner" },
+      { title: "AWS Getting Started", url: "https://aws.amazon.com/getting-started/", type: "guide", difficulty: "beginner" },
+      { title: "Python Installation Guide", url: "https://docs.python.org/3/using/index.html", type: "tutorial", difficulty: "beginner" }
     ]
   },
   {
@@ -20,11 +20,11 @@ const documentationSections = [
     description: "Complete API documentation with endpoints, parameters, and example responses.",
     icon: "📚",
     docs: [
-      { title: "AI Agents API", url: "/docs/api/ai-agents", type: "reference", difficulty: "intermediate" },
-      { title: "Machine Learning API", url: "/docs/api/ml", type: "reference", difficulty: "intermediate" },
-      { title: "Data Pipeline API", url: "/docs/api/data-pipeline", type: "reference", difficulty: "advanced" },
-      { title: "Authentication", url: "/docs/api/auth", type: "reference", difficulty: "beginner" },
-      { title: "Webhooks", url: "/docs/api/webhooks", type: "reference", difficulty: "intermediate" }
+      { title: "OpenAI API Reference", url: "https://platform.openai.com/docs/api-reference", type: "reference", difficulty: "intermediate" },
+      { title: "TensorFlow API Docs", url: "https://www.tensorflow.org/api_docs", type: "reference", difficulty: "intermediate" },
+      { title: "Apache Kafka API", url: "https://kafka.apache.org/documentation/#api", type: "reference", difficulty: "advanced" },
+      { title: "OAuth 2.0 Specification", url: "https://oauth.net/2/", type: "reference", difficulty: "beginner" },
+      { title: "Webhook Best Practices", url: "https://webhooks.fyi/", type: "reference", difficulty: "intermediate" }
     ]
   },
   {
@@ -32,11 +32,11 @@ const documentationSections = [
     description: "Language-specific SDKs and libraries to integrate with our services.",
     icon: "📦",
     docs: [
-      { title: "Python SDK", url: "/docs/sdks/python", type: "reference", difficulty: "intermediate" },
-      { title: "JavaScript SDK", url: "/docs/sdks/javascript", type: "reference", difficulty: "intermediate" },
-      { title: "Go SDK", url: "/docs/sdks/go", type: "reference", difficulty: "intermediate" },
-      { title: "Java SDK", url: "/docs/sdks/java", type: "reference", difficulty: "intermediate" },
-      { title: "CLI Tools", url: "/docs/sdks/cli", type: "reference", difficulty: "beginner" }
+      { title: "Requests Library (Python)", url: "https://requests.readthedocs.io/en/latest/", type: "reference", difficulty: "intermediate" },
+      { title: "Axios (JavaScript)", url: "https://axios-http.com/docs/intro", type: "reference", difficulty: "intermediate" },
+      { title: "Go HTTP Client", url: "https://pkg.go.dev/net/http", type: "reference", difficulty: "intermediate" },
+      { title: "Apache HttpClient (Java)", url: "https://hc.apache.org/httpcomponents-client-5.2.x/", type: "reference", difficulty: "intermediate" },
+      { title: "curl Command Line", url: "https://curl.se/docs/manpage.html", type: "reference", difficulty: "beginner" }
     ]
   },
   {
@@ -44,11 +44,11 @@ const documentationSections = [
     description: "Step-by-step tutorials and comprehensive guides for common use cases.",
     icon: "📖",
     docs: [
-      { title: "Building Your First AI Agent", url: "/docs/tutorials/first-ai-agent", type: "tutorial", difficulty: "beginner" },
-      { title: "Setting Up Data Pipelines", url: "/docs/tutorials/data-pipelines", type: "tutorial", difficulty: "intermediate" },
-      { title: "ML Model Deployment", url: "/docs/tutorials/ml-deployment", type: "tutorial", difficulty: "advanced" },
-      { title: "Real-time Analytics Setup", url: "/docs/tutorials/realtime-analytics", type: "tutorial", difficulty: "intermediate" },
-      { title: "Multi-Agent Orchestration", url: "/docs/tutorials/multi-agent", type: "tutorial", difficulty: "advanced" }
+      { title: "LangChain Tutorial", url: "https://python.langchain.com/docs/get_started/introduction", type: "tutorial", difficulty: "beginner" },
+      { title: "Apache Airflow Tutorial", url: "https://airflow.apache.org/docs/apache-airflow/stable/tutorial/", type: "tutorial", difficulty: "intermediate" },
+      { title: "MLflow Tutorial", url: "https://mlflow.org/docs/latest/tutorials-and-examples/tutorial.html", type: "tutorial", difficulty: "advanced" },
+      { title: "Real-time Analytics with Apache Spark", url: "https://spark.apache.org/docs/latest/streaming-programming-guide.html", type: "tutorial", difficulty: "intermediate" },
+      { title: "Multi-Agent Systems with CrewAI", url: "https://docs.crewai.com/", type: "tutorial", difficulty: "advanced" }
     ]
   },
   {
@@ -56,11 +56,11 @@ const documentationSections = [
     description: "System architecture, design patterns, and best practices documentation.",
     icon: "🏗️",
     docs: [
-      { title: "System Architecture", url: "/docs/architecture/system", type: "guide", difficulty: "advanced" },
-      { title: "Security Model", url: "/docs/architecture/security", type: "guide", difficulty: "advanced" },
-      { title: "Scalability Patterns", url: "/docs/architecture/scalability", type: "guide", difficulty: "advanced" },
-      { title: "Data Flow Design", url: "/docs/architecture/data-flow", type: "guide", difficulty: "intermediate" },
-      { title: "Best Practices", url: "/docs/architecture/best-practices", type: "guide", difficulty: "intermediate" }
+      { title: "Microservices Patterns", url: "https://microservices.io/patterns/index.html", type: "guide", difficulty: "advanced" },
+      { title: "Zero Trust Architecture", url: "https://www.nist.gov/publications/zero-trust-architecture", type: "guide", difficulty: "advanced" },
+      { title: "12-Factor App Methodology", url: "https://12factor.net/", type: "guide", difficulty: "advanced" },
+      { title: "Event-Driven Architecture", url: "https://aws.amazon.com/event-driven-architecture/", type: "guide", difficulty: "intermediate" },
+      { title: "API Design Best Practices", url: "https://swagger.io/resources/articles/best-practices-in-api-design/", type: "guide", difficulty: "intermediate" }
     ]
   },
   {
@@ -68,11 +68,11 @@ const documentationSections = [
     description: "Common issues, error codes, and solutions to help you resolve problems quickly.",
     icon: "🔧",
     docs: [
-      { title: "Common Issues", url: "/docs/troubleshooting/common-issues", type: "guide", difficulty: "beginner" },
-      { title: "Error Codes Reference", url: "/docs/troubleshooting/error-codes", type: "reference", difficulty: "beginner" },
-      { title: "Performance Optimization", url: "/docs/troubleshooting/performance", type: "guide", difficulty: "advanced" },
-      { title: "Debugging Guide", url: "/docs/troubleshooting/debugging", type: "guide", difficulty: "intermediate" },
-      { title: "Support Channels", url: "/docs/troubleshooting/support", type: "guide", difficulty: "beginner" }
+      { title: "Kubernetes Troubleshooting", url: "https://kubernetes.io/docs/tasks/debug/debug-application/", type: "guide", difficulty: "beginner" },
+      { title: "HTTP Status Codes", url: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status", type: "reference", difficulty: "beginner" },
+      { title: "Performance Testing Guide", url: "https://k6.io/docs/", type: "guide", difficulty: "advanced" },
+      { title: "Python Debugging Guide", url: "https://docs.python.org/3/library/pdb.html", type: "guide", difficulty: "intermediate" },
+      { title: "Stack Overflow", url: "https://stackoverflow.com/", type: "guide", difficulty: "beginner" }
     ]
   }
 ];
@@ -90,14 +90,14 @@ const difficulties = ["All", "Beginner", "Intermediate", "Advanced"];
 ---
 
 <PageLayout 
-  title="Documentation - Cloud Intelligence"
-  description="Comprehensive technical documentation, API references, tutorials, and guides for all Cloud Intelligence services."
-  keywords="documentation, API reference, technical guides, tutorials, SDK documentation, developer resources"
+  title="Resources - Cloud Intelligence"
+  description="Curated collection of technical resources, API references, tutorials, and guides for developers and engineers."
+  keywords="developer resources, API reference, technical guides, tutorials, documentation, tools"
 >
   <PageHero 
-    title="Documentation"
-    subtitle="Your Complete Technical Resource"
-    description="Find everything you need to build, integrate, and optimize your solutions with our comprehensive documentation."
+    title="Resources"
+    subtitle="Curated Developer Resources"
+    description="Access carefully selected technical resources, documentation, and tools to accelerate your development workflow."
   />
   
   <section class="documentation-section">
@@ -105,7 +105,7 @@ const difficulties = ["All", "Beginner", "Intermediate", "Advanced"];
       <!-- Search Bar -->
       <div class="search-section">
         <div class="search-box">
-          <input type="text" placeholder="Search documentation..." class="search-input" />
+          <input type="text" placeholder="Search resources..." class="search-input" />
           <span class="search-icon">🔍</span>
         </div>
         <div class="search-filters">
@@ -126,32 +126,32 @@ const difficulties = ["All", "Beginner", "Intermediate", "Advanced"];
       <div class="quick-links-section">
         <h2>Popular Resources</h2>
         <div class="quick-links-grid">
-          <a href="/docs/getting-started/quickstart" class="quick-link-card">
+          <a href="https://docs.docker.com/get-started/" class="quick-link-card" target="_blank" rel="noopener noreferrer">
             <div class="icon">⚡</div>
-            <h3>Quick Start</h3>
+            <h3>Docker Quick Start</h3>
             <p>Get up and running in minutes</p>
           </a>
-          <a href="/docs/api/ai-agents" class="quick-link-card">
+          <a href="https://platform.openai.com/docs/api-reference" class="quick-link-card" target="_blank" rel="noopener noreferrer">
             <div class="icon">🤖</div>
-            <h3>AI Agents API</h3>
+            <h3>OpenAI API</h3>
             <p>Complete API reference</p>
           </a>
-          <a href="/docs/tutorials/first-ai-agent" class="quick-link-card">
+          <a href="https://python.langchain.com/docs/get_started/introduction" class="quick-link-card" target="_blank" rel="noopener noreferrer">
             <div class="icon">🎯</div>
-            <h3>First AI Agent</h3>
+            <h3>LangChain Tutorial</h3>
             <p>Step-by-step tutorial</p>
           </a>
-          <a href="/docs/sdks/python" class="quick-link-card">
+          <a href="https://requests.readthedocs.io/en/latest/" class="quick-link-card" target="_blank" rel="noopener noreferrer">
             <div class="icon">🐍</div>
-            <h3>Python SDK</h3>
-            <p>Python integration guide</p>
+            <h3>Python Requests</h3>
+            <p>HTTP library documentation</p>
           </a>
         </div>
       </div>
 
-      <!-- Documentation Sections -->
+      <!-- Resource Sections -->
       <div class="docs-sections">
-        <h2>Documentation Sections</h2>
+        <h2>Resource Categories</h2>
         <div class="sections-grid">
           {documentationSections.map((section) => (
             <div class="section-card">
@@ -164,11 +164,14 @@ const difficulties = ["All", "Beginner", "Intermediate", "Advanced"];
               </div>
               <div class="docs-list">
                 {section.docs.map((doc) => (
-                  <a href={doc.url} class="doc-link" data-type={doc.type} data-difficulty={doc.difficulty}>
+                  <a href={doc.url} class="doc-link" data-type={doc.type} data-difficulty={doc.difficulty} target="_blank" rel="noopener noreferrer">
                     <span class="doc-title">{doc.title}</span>
                     <div class="doc-badges">
                       <span class="type-badge {doc.type}">{doc.type}</span>
                       <span class="difficulty-badge {doc.difficulty}">{doc.difficulty}</span>
+                      <svg class="external-link-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+                      </svg>
                     </div>
                   </a>
                 ))}
@@ -202,9 +205,9 @@ const difficulties = ["All", "Beginner", "Intermediate", "Advanced"];
         <div class="support-grid">
           <div class="support-card">
             <div class="support-icon">💬</div>
-            <h3>Community Forum</h3>
-            <p>Join our developer community for discussions and support</p>
-            <a href="#" class="support-link">Visit Forum</a>
+            <h3>GitHub Discussions</h3>
+            <p>Join developer discussions and find community solutions</p>
+            <a href="https://github.com/discussions" class="support-link" target="_blank" rel="noopener noreferrer">Visit GitHub</a>
           </div>
           <div class="support-card">
             <div class="support-icon">📧</div>
@@ -214,20 +217,20 @@ const difficulties = ["All", "Beginner", "Intermediate", "Advanced"];
           </div>
           <div class="support-card">
             <div class="support-icon">📞</div>
-            <h3>Enterprise Support</h3>
-            <p>Dedicated support for enterprise customers</p>
-            <a href="#contact" class="support-link">Learn More</a>
+            <h3>Developer Resources</h3>
+            <p>Additional tools and resources for developers</p>
+            <a href="https://developer.mozilla.org/" class="support-link" target="_blank" rel="noopener noreferrer">MDN Web Docs</a>
           </div>
         </div>
       </div>
 
       <!-- Contribute Section -->
       <div class="contribute-section">
-        <h2>Help Improve Our Documentation</h2>
-        <p>Found an error or want to contribute? We welcome feedback and contributions to make our documentation better.</p>
+        <h2>Additional Developer Resources</h2>
+        <p>Explore more tools and platforms to enhance your development workflow and knowledge.</p>
         <div class="contribute-actions">
-          <a href="#" class="contribute-button">Report Issue</a>
-          <a href="#" class="contribute-button secondary">Suggest Improvement</a>
+          <a href="https://github.com/" class="contribute-button" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://docs.github.com/" class="contribute-button secondary" target="_blank" rel="noopener noreferrer">GitHub Docs</a>
         </div>
       </div>
     </div>
@@ -491,6 +494,18 @@ const difficulties = ["All", "Beginner", "Intermediate", "Advanced"];
   .doc-badges {
     display: flex;
     gap: 6px;
+    align-items: center;
+  }
+
+  .external-link-icon {
+    color: rgba(255, 255, 255, 0.4);
+    margin-left: 4px;
+    flex-shrink: 0;
+    transition: color 0.3s ease;
+  }
+
+  .doc-link:hover .external-link-icon {
+    color: rgba(255, 255, 255, 0.8);
   }
 
   .type-badge, .difficulty-badge {

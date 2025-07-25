@@ -30,4 +30,23 @@ const caseStudies = defineCollection({
   }),
 });
 
-export const collections = { blog, caseStudies };
+const liveDemos = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    category: z.string(),
+    complexity: z.enum(['Beginner', 'Intermediate', 'Advanced']),
+    duration: z.string(),
+    features: z.array(z.string()),
+    demoUrl: z.string(),
+    videoUrl: z.string(),
+    screenshot: z.string(),
+    featured: z.boolean().optional(),
+    interactive: z.boolean(),
+    technologies: z.array(z.string()).optional(),
+  }),
+});
+
+export const collections = { blog, caseStudies, liveDemos };

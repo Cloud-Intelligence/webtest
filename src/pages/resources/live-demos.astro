@@ -1,61 +1,31 @@
 ---
+import { getCollection } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import ContactSection from '../../components/ContactSection.astro';
 
-const demos = [
-  {
-    title: "AI-Powered Customer Service Agent",
-    description: "Experience our intelligent chatbot that understands context, handles complex queries, and learns from interactions.",
-    category: "AI Agents",
-    complexity: "Beginner",
-    duration: "5-10 minutes",
-    features: ["Natural Language Processing", "Context Awareness", "Multi-language Support", "Sentiment Analysis"],
-    demoUrl: "/demo/customer-service",
-    videoUrl: "/webtest/demo-customer-service.mp4",
-    screenshot: "/webtest/demo-customer-service.jpg",
-    featured: true,
-    interactive: true
-  },
-  {
-    title: "Real-Time Data Analytics Dashboard",
-    description: "Explore live data visualization with real-time streaming analytics, predictive insights, and interactive charts.",
-    category: "Data Engineering",
-    complexity: "Intermediate",
-    duration: "10-15 minutes", 
-    features: ["Real-time Streaming", "Interactive Charts", "Predictive Analytics", "Custom Filters"],
-    demoUrl: "/demo/analytics-dashboard",
-    videoUrl: "/webtest/demo-analytics.mp4",
-    screenshot: "/webtest/demo-analytics.jpg",
-    featured: true,
-    interactive: true
-  },
-  {
-    title: "Machine Learning Model Training",
-    description: "Train and deploy ML models with our interactive platform. See how different algorithms perform on real datasets.",
-    category: "Machine Learning",
-    complexity: "Advanced",
-    duration: "15-20 minutes",
-    features: ["Model Selection", "Hyperparameter Tuning", "Performance Metrics", "Deployment Pipeline"],
-    demoUrl: "/demo/ml-training",
-    videoUrl: "/webtest/demo-ml-training.mp4",
-    screenshot: "/webtest/demo-ml-training.jpg",
-    featured: false,
-    interactive: true
-  },
-  {
-    title: "Cloud Infrastructure Scaling",
-    description: "Watch how our auto-scaling infrastructure adapts to changing loads in real-time with zero downtime.",
-    category: "Cloud Architecture",
-    complexity: "Intermediate",
-    duration: "8-12 minutes",
-    features: ["Auto-scaling", "Load Balancing", "Health Monitoring", "Cost Optimization"],
-    demoUrl: "/demo/cloud-scaling",
-    videoUrl: "/webtest/demo-cloud-scaling.mp4",
-    screenshot: "/webtest/demo-cloud-scaling.jpg",
-    featured: false,
-    interactive: false
-  },
+// Get demos from content collections
+const allDemos = await getCollection('liveDemos');
+const sortedDemos = allDemos.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Transform content collection posts to match existing structure
+const dynamicDemos = sortedDemos.map((demo) => ({
+  title: demo.data.title,
+  description: demo.data.description,
+  category: demo.data.category,
+  complexity: demo.data.complexity,
+  duration: demo.data.duration,
+  features: demo.data.features,
+  demoUrl: demo.data.demoUrl,
+  videoUrl: demo.data.videoUrl,
+  screenshot: demo.data.screenshot,
+  featured: demo.data.featured || false,
+  interactive: demo.data.interactive,
+  slug: demo.slug
+}));
+
+// Static demos for additional variety (can be removed if all demos are in CMS)
+const staticDemos = [
   {
     title: "Progressive Web App Builder",
     description: "Build responsive, fast-loading web applications with offline capabilities and native-like experiences.",
@@ -110,6 +80,9 @@ const demos = [
   }
 ];
 
+// Combine dynamic and static demos
+const demos = [...dynamicDemos, ...staticDemos];
+
 const categories = ["All", "AI Agents", "Data Engineering", "Machine Learning", "Cloud Architecture", "Web Applications", "DevOps", "Blockchain"];
 const complexityLevels = ["All", "Beginner", "Intermediate", "Advanced"];
 ---
@@ -163,6 +136,9 @@ const complexityLevels = ["All", "Beginner", "Intermediate", "Advanced"];
                     <a href={demo.demoUrl} class="try-demo-button">Try Interactive Demo</a>
                   ) : (
                     <button class="watch-demo-button" data-video={demo.videoUrl}>Watch Demo Video</button>
+                  )}
+                  {demo.slug && (
+                    <a href={`/webtest/demos/${demo.slug}`} class="learn-more-button">Learn More</a>
                   )}
                 </div>
               </div>
@@ -240,6 +216,9 @@ const complexityLevels = ["All", "Beginner", "Intermediate", "Advanced"];
                   <a href={demo.demoUrl} class="try-demo-button">Try Demo</a>
                 ) : (
                   <button class="watch-demo-button" data-video={demo.videoUrl}>Watch Video</button>
+                )}
+                {demo.slug && (
+                  <a href={`/webtest/demos/${demo.slug}`} class="learn-more-button">Learn More</a>
                 )}
               </div>
             </div>
@@ -606,7 +585,7 @@ const complexityLevels = ["All", "Beginner", "Intermediate", "Advanced"];
     gap: 12px;
   }
 
-  .try-demo-button, .watch-demo-button {
+  .try-demo-button, .watch-demo-button, .learn-more-button {
     padding: 10px 20px;
     border-radius: 8px;
     font-family: 'Inter', sans-serif;
@@ -638,6 +617,18 @@ const complexityLevels = ["All", "Beginner", "Intermediate", "Advanced"];
     &:hover {
       background: rgba(255, 255, 255, 0.15);
       border-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  .learn-more-button {
+    background: transparent;
+    color: #00D4AA;
+    border: 1px solid #00D4AA;
+    
+    &:hover {
+      background: #00D4AA;
+      color: #040913;
+      transform: translateY(-1px);
     }
   }
 

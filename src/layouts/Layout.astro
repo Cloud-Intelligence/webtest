@@ -62,14 +62,15 @@ import NavbarEnhanced from '../components/NavbarEnhanced.astro';
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/webtest/logo.png" />
     
-    <!-- Fonts - Optimized Loading -->
+    <!-- Fonts - Non-blocking Loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Only load critical fonts with used weights -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Manrope:wght@500;700&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <!-- Preload critical font files -->
+    <!-- Preload critical font files first -->
     <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="https://fonts.gstatic.com/s/manrope/v15/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk59FO_F87jxeN7B.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Load fonts asynchronously to prevent render blocking -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Manrope:wght@500;700&family=Press+Start+2P&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Manrope:wght@500;700&family=Press+Start+2P&display=swap" rel="stylesheet"></noscript>
     
     <!-- Preload critical images -->
     <link rel="preload" href="/webtest/hero-gradient-2eb61d.png" as="image" type="image/webp">
@@ -111,7 +112,10 @@ import NavbarEnhanced from '../components/NavbarEnhanced.astro';
       /* Critical above-the-fold styles */
       *, *::before, *::after { box-sizing: border-box; }
       html { line-height: 1.15; -webkit-text-size-adjust: 100%; }
-      body { margin: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+      body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-display: swap; }
+      /* Font-face declarations with fallbacks */
+      @font-face { font-family: 'Inter Fallback'; font-style: normal; font-weight: 400; font-display: swap; src: local('Inter'), local('Inter-Regular'); }
+      @font-face { font-family: 'Manrope Fallback'; font-style: normal; font-weight: 500; font-display: swap; src: local('Manrope'), local('Manrope-Medium'); }
       
       /* JavaScript enabled - show unlock screen */
       .js #unlockScreen { position: fixed; inset: 0; z-index: 1000; background: white; display: flex; flex-direction: column; align-items: center; justify-content: center; }
