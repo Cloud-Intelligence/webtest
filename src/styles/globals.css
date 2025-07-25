@@ -8,15 +8,9 @@
 }
 
 /* Custom View Transition Animations */
-@keyframes slide-from-right {
-  from {
-    transform: translateX(100%);
-  }
-}
-
-@keyframes slide-to-left {
+@keyframes fade-out {
   to {
-    transform: translateX(-100%);
+    opacity: 0;
   }
 }
 
@@ -26,29 +20,23 @@
   }
 }
 
-@keyframes fade-out {
-  to {
-    opacity: 0;
-  }
-}
-
-/* Default page transition: slide effect */
+/* Simple fade transition between pages */
 ::view-transition-old(root) {
-  animation: 0.4s ease-in-out both slide-to-left;
+  animation: 0.2s ease-out both fade-out;
 }
 
 ::view-transition-new(root) {
-  animation: 0.4s ease-in-out both slide-from-right;
+  animation: 0.3s ease-in both fade-in;
 }
 
 /* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root) {
-    animation: 0.2s ease-in-out both fade-out;
+    animation: 0.15s ease-out both fade-out;
   }
   
   ::view-transition-new(root) {
-    animation: 0.2s ease-in-out both fade-in;
+    animation: 0.2s ease-in both fade-in;
   }
 }
 
@@ -62,6 +50,7 @@
   animation: none;
   transform: none;
 }
+
 
 @layer base {
   :root {
