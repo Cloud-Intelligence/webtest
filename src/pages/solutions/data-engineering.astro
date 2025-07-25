@@ -1,0 +1,215 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContactSection from '../../components/ContactSection.astro';
+
+const features = [
+  {
+    title: "Data Pipelines",
+    description: "Build robust, scalable data pipelines that efficiently process and transform data from multiple sources with automated workflows.",
+    icon: "🔄"
+  },
+  {
+    title: "ETL/ELT Processing",
+    description: "Design and implement extraction, transformation, and loading processes to move data between systems with high reliability.",
+    icon: "⚙️"
+  },
+  {
+    title: "Real-time Streaming",
+    description: "Process continuous data streams in real-time with technologies like Apache Kafka, Apache Flink, and cloud-native solutions.",
+    icon: "🌊"
+  },
+  {
+    title: "Data Lakes",
+    description: "Architect and implement data lakes that store structured and unstructured data at scale with cost-effective storage solutions.",
+    icon: "🏞️"
+  },
+  {
+    title: "Data Warehousing",
+    description: "Build modern data warehouses optimized for analytics with dimensional modeling and columnar storage architectures.",
+    icon: "🏗️"
+  },
+  {
+    title: "Data Quality Management",
+    description: "Implement comprehensive data quality frameworks with validation, monitoring, and automated remediation processes.",
+    icon: "✅"
+  }
+];
+---
+
+<PageLayout 
+  title="Data Engineering - Cloud Intelligence"
+  description="Build scalable data infrastructure and pipelines that transform raw data into valuable business insights."
+  keywords="data engineering, data pipelines, ETL, data lakes, data warehousing, real-time streaming"
+>
+  <PageHero 
+    title="Data Engineering"
+    subtitle="Scalable Data Infrastructure"
+    description="Transform your data landscape with robust pipelines, modern architectures, and real-time processing capabilities."
+  />
+  
+  <section class="content-section">
+    <div class="container">
+      <div class="intro-content">
+        <h2>Unlock the Power of Your Data</h2>
+        <p>
+          Our data engineering solutions help organizations build reliable, scalable data infrastructure 
+          that supports analytics, machine learning, and business intelligence initiatives. From real-time 
+          streaming to batch processing, we create data systems that grow with your business needs.
+        </p>
+      </div>
+      
+      <div class="features-grid">
+        {features.map((feature) => (
+          <div class="feature-card">
+            <div class="feature-icon">{feature.icon}</div>
+            <h3>{feature.title}</h3>
+            <p>{feature.description}</p>
+          </div>
+        ))}
+      </div>
+      
+      <div class="cta-section">
+        <h2>Ready to Transform Your Data Architecture?</h2>
+        <p>Build the foundation for data-driven decision making</p>
+        <a href="#contact" class="cta-button">Get Started</a>
+      </div>
+    </div>
+  </section>
+  
+  <ContactSection />
+</PageLayout>
+
+<style lang="scss">
+  .content-section {
+    background: #040913;
+    padding: 80px 0;
+    
+    @media (max-width: 768px) {
+      padding: 60px 0;
+    }
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    
+    @media (max-width: 768px) {
+      padding: 0 24px;
+    }
+  }
+  
+  .intro-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 80px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      color: #FFFFFF;
+      margin-bottom: 24px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 32px;
+    margin-bottom: 80px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+  
+  .feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 32px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+    
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.975rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+  
+  .cta-section {
+    text-align: center;
+    padding: 60px;
+    background: rgba(51, 102, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(51, 102, 255, 0.2);
+    border-radius: 24px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      color: #FFFFFF;
+      margin-bottom: 16px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 32px;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: #3366FF;
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(51, 102, 255, 0.3);
+      
+      &:hover {
+        background: #2952CC;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(51, 102, 255, 0.4);
+      }
+    }
+  }
+</style>

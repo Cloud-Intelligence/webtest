@@ -1,12 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import UnlockScreen from '../components/UnlockScreen.astro';
-import Navbar from '../components/Navbar.astro';
+import NavbarEnhanced from '../components/NavbarEnhanced.astro';
 import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import Testimonials from '../components/Testimonials.astro';
 import ClientLogos from '../components/ClientLogos.astro';
-import Contact from '../components/Contact.astro';
+import ContactSection from '../components/ContactSection.astro';
 ---
 
 <Layout 
@@ -26,7 +26,7 @@ import Contact from '../components/Contact.astro';
   
   <!-- Hidden Navbar (will show after unlock) -->
   <div id="navbar-container" style="display: none; opacity: 0;">
-    <Navbar />
+    <NavbarEnhanced />
   </div>
   
   <!-- Main Landing Page Content -->
@@ -36,8 +36,16 @@ import Contact from '../components/Contact.astro';
       <About />
       <Testimonials />
       <ClientLogos />
-      <Contact />
+      <ContactSection />
     </main>
   </div>
 
 </Layout>
+
+<style>
+  /* Only apply overflow hidden to home page with unlock screen */
+  body {
+    overflow: hidden;
+    height: 100vh;
+  }
+</style>

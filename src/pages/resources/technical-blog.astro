@@ -1,0 +1,626 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContactSection from '../../components/ContactSection.astro';
+
+const blogPosts = [
+  {
+    title: "The Future of AI Agents in Enterprise Software",
+    excerpt: "Exploring how autonomous AI agents are revolutionizing business processes and what it means for the future of work.",
+    author: "Sarah Chen",
+    date: "2024-07-20",
+    readTime: "8 min read",
+    category: "AI/ML",
+    tags: ["AI Agents", "Enterprise", "Automation"],
+    featured: true,
+    image: "/webtest/blog-ai-agents.jpg"
+  },
+  {
+    title: "Building Scalable Data Pipelines with Cloud-Native Architecture",
+    excerpt: "A comprehensive guide to designing and implementing data pipelines that can handle massive scale using modern cloud technologies.",
+    author: "Michael Rodriguez", 
+    date: "2024-07-18",
+    readTime: "12 min read",
+    category: "Data Engineering",
+    tags: ["Data Pipeline", "Cloud Architecture", "Scalability"],
+    featured: true,
+    image: "/webtest/blog-data-pipeline.jpg"
+  },
+  {
+    title: "Machine Learning Model Deployment Best Practices",
+    excerpt: "Learn the essential practices for deploying ML models to production, including monitoring, versioning, and A/B testing.",
+    author: "Dr. Emily Watson",
+    date: "2024-07-15",
+    readTime: "10 min read", 
+    category: "Machine Learning",
+    tags: ["MLOps", "Model Deployment", "Production"],
+    featured: false,
+    image: "/webtest/blog-ml-deployment.jpg"
+  },
+  {
+    title: "Microservices vs Monoliths: When to Choose What",
+    excerpt: "A practical comparison of microservices and monolithic architectures with real-world examples and decision frameworks.",
+    author: "James Park",
+    date: "2024-07-12",
+    readTime: "7 min read",
+    category: "Architecture",
+    tags: ["Microservices", "Architecture", "Development"],
+    featured: false,
+    image: "/webtest/blog-architecture.jpg"
+  },
+  {
+    title: "Securing AI Systems: A Comprehensive Security Framework",
+    excerpt: "Essential security considerations for AI and ML systems, from data privacy to model protection and adversarial attacks.",
+    author: "Alex Thompson",
+    date: "2024-07-10",
+    readTime: "15 min read",
+    category: "Security",
+    tags: ["AI Security", "Privacy", "Cybersecurity"],
+    featured: false,
+    image: "/webtest/blog-security.jpg"
+  },
+  {
+    title: "Real-time Data Processing with Apache Kafka and Flink",
+    excerpt: "Building high-throughput, low-latency data processing systems using Apache Kafka and Apache Flink for real-time analytics.",
+    author: "Lisa Kumar",
+    date: "2024-07-08",
+    readTime: "11 min read",
+    category: "Data Engineering", 
+    tags: ["Kafka", "Flink", "Real-time", "Streaming"],
+    featured: false,
+    image: "/webtest/blog-kafka-flink.jpg"
+  },
+  {
+    title: "Progressive Web Apps: The Future of Mobile Development",
+    excerpt: "How PWAs are bridging the gap between web and native mobile applications with improved performance and user experience.",
+    author: "David Kim",
+    date: "2024-07-05",
+    readTime: "9 min read",
+    category: "Web Development",
+    tags: ["PWA", "Mobile", "Web Development"],
+    featured: false,
+    image: "/webtest/blog-pwa.jpg"
+  },
+  {
+    title: "Kubernetes Cost Optimization: A Practical Guide",
+    excerpt: "Strategies and tools for optimizing Kubernetes costs while maintaining performance and reliability in production environments.",
+    author: "Rachel Green",
+    date: "2024-07-03",
+    readTime: "13 min read",
+    category: "DevOps",
+    tags: ["Kubernetes", "Cost Optimization", "DevOps"],
+    featured: false,
+    image: "/webtest/blog-kubernetes.jpg"
+  }
+];
+
+const categories = ["All", "AI/ML", "Data Engineering", "Machine Learning", "Architecture", "Security", "Web Development", "DevOps"];
+const tags = ["All", "AI Agents", "Cloud Architecture", "MLOps", "Microservices", "Security", "Kubernetes", "PWA"];
+---
+
+<PageLayout 
+  title="Technical Blog - Cloud Intelligence"
+  description="Stay updated with the latest insights on AI, ML, cloud architecture, and software development from our expert team."
+  keywords="technical blog, AI articles, machine learning, cloud architecture, software development, data engineering"
+>
+  <PageHero 
+    title="Technical Blog"
+    subtitle="Insights from the Cutting Edge"
+    description="Explore the latest trends, best practices, and deep dives into AI, machine learning, cloud architecture, and modern software development."
+  />
+  
+  <section class="blog-section">
+    <div class="container">
+      <!-- Featured Articles -->
+      <div class="featured-section">
+        <h2>Featured Articles</h2>
+        <div class="featured-grid">
+          {blogPosts.filter(post => post.featured).map((post) => (
+            <article class="featured-article">
+              <div class="article-image">
+                <img src={post.image} alt={post.title} />
+                <div class="category-badge">{post.category}</div>
+              </div>
+              <div class="article-content">
+                <div class="article-meta">
+                  <span class="author">{post.author}</span>
+                  <span class="date">{new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                  <span class="read-time">{post.readTime}</span>
+                </div>
+                <h3>{post.title}</h3>
+                <p class="excerpt">{post.excerpt}</p>
+                <div class="tags">
+                  {post.tags.map((tag) => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </div>
+                <a href="#" class="read-more">Read Full Article</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <!-- Search and Filters -->
+      <div class="filters-section">
+        <h2>Explore All Articles</h2>
+        <div class="search-filters">
+          <div class="search-box">
+            <input type="text" placeholder="Search articles..." class="search-input" />
+            <span class="search-icon">🔍</span>
+          </div>
+          <div class="filters">
+            <div class="filter-group">
+              <label>Category:</label>
+              <select class="filter-select" data-filter="category">
+                {categories.map((category) => (
+                  <option value={category.toLowerCase().replace('/', '-')}>{category}</option>
+                ))}
+              </select>
+            </div>
+            <div class="filter-group">
+              <label>Sort by:</label>
+              <select class="sort-select">
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+                <option value="popular">Most Popular</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- All Articles Grid -->
+      <div class="articles-grid">
+        {blogPosts.map((post) => (
+          <article class="article-card" data-category={post.category.toLowerCase().replace('/', '-')} data-date={post.date}>
+            <div class="article-image">
+              <img src={post.image} alt={post.title} />
+              <div class="category-badge">{post.category}</div>
+            </div>
+            <div class="article-content">
+              <div class="article-meta">
+                <span class="author">{post.author}</span>
+                <span class="date">{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+                <span class="read-time">{post.readTime}</span>
+              </div>
+              <h3>{post.title}</h3>
+              <p class="excerpt">{post.excerpt}</p>
+              <div class="tags">
+                {post.tags.map((tag) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+              <a href="#" class="read-more">Read Article</a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Newsletter Signup -->
+      <div class="newsletter-section">
+        <h2>Stay Updated</h2>
+        <p>Get the latest technical insights delivered to your inbox weekly</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Enter your email address" class="email-input" />
+          <button type="submit" class="subscribe-button">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  
+  <ContactSection />
+</PageLayout>
+
+<style lang="scss">
+  .blog-section {
+    background: #040913;
+    padding: 80px 0;
+    
+    @media (max-width: 768px) {
+      padding: 60px 0;
+    }
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    
+    @media (max-width: 768px) {
+      padding: 0 24px;
+    }
+  }
+
+  .featured-section {
+    margin-bottom: 80px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 40px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  .featured-article {
+    background: linear-gradient(135deg, rgba(51, 102, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(51, 102, 255, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: linear-gradient(135deg, rgba(51, 102, 255, 0.15), rgba(255, 255, 255, 0.08));
+      border-color: rgba(51, 102, 255, 0.3);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(51, 102, 255, 0.2);
+    }
+  }
+
+  .filters-section {
+    margin-bottom: 48px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+  }
+
+  .search-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .search-box {
+    position: relative;
+    max-width: 400px;
+    width: 100%;
+    
+    .search-input {
+      width: 100%;
+      padding: 12px 48px 12px 16px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+      
+      &:focus {
+        outline: none;
+        border-color: #3366FF;
+        box-shadow: 0 0 0 3px rgba(51, 102, 255, 0.1);
+      }
+    }
+    
+    .search-icon {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  .filters {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    @media (max-width: 768px) {
+      gap: 16px;
+    }
+  }
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    
+    label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.875rem;
+    }
+  }
+
+  .filter-select, .sort-select {
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    min-width: 150px;
+    
+    &:focus {
+      outline: none;
+      border-color: #3366FF;
+      box-shadow: 0 0 0 3px rgba(51, 102, 255, 0.1);
+    }
+    
+    option {
+      background: #040913;
+      color: #FFFFFF;
+    }
+  }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 32px;
+    margin-bottom: 80px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+
+  .article-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .article-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .category-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      padding: 4px 12px;
+      background: rgba(51, 102, 255, 0.9);
+      color: #FFFFFF;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+    }
+  }
+
+  .article-content {
+    padding: 24px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 12px;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    flex-wrap: wrap;
+    
+    .author {
+      font-weight: 500;
+      color: #3366FF;
+    }
+  }
+
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: #FFFFFF;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .excerpt {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 16px;
+  }
+
+  .tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    
+    .tag {
+      padding: 2px 8px;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.8);
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-family: 'Inter', sans-serif;
+    }
+  }
+
+  .read-more {
+    display: inline-block;
+    color: #3366FF;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding: 8px 0;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      border-bottom-color: #3366FF;
+    }
+  }
+
+  .newsletter-section {
+    text-align: center;
+    padding: 60px;
+    background: rgba(0, 212, 170, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 212, 170, 0.2);
+    border-radius: 24px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      color: #FFFFFF;
+      margin-bottom: 16px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 32px;
+    }
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 16px;
+    max-width: 400px;
+    margin: 0 auto;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+
+  .email-input {
+    flex: 1;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    &:focus {
+      outline: none;
+      border-color: #00D4AA;
+      box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
+    }
+  }
+
+  .subscribe-button {
+    padding: 14px 24px;
+    background: #00D4AA;
+    color: #040913;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 212, 170, 0.3);
+    
+    &:hover {
+      background: #00B896;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0, 212, 170, 0.4);
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.querySelector('.search-input') as HTMLInputElement | null;
+    const filterSelect = document.querySelector('.filter-select') as HTMLSelectElement | null;
+    const sortSelect = document.querySelector('.sort-select') as HTMLSelectElement | null;
+    const articleCards = document.querySelectorAll('.article-card') as NodeListOf<HTMLElement>;
+    
+    // Search functionality
+    searchInput?.addEventListener('input', function(this: HTMLInputElement) {
+      const searchTerm = this.value.toLowerCase();
+      
+      articleCards.forEach(card => {
+        const titleElement = card.querySelector('h3') as HTMLElement | null;
+        const excerptElement = card.querySelector('.excerpt') as HTMLElement | null;
+        const title = titleElement?.textContent?.toLowerCase() || '';
+        const excerpt = excerptElement?.textContent?.toLowerCase() || '';
+        const shouldShow = title.includes(searchTerm) || excerpt.includes(searchTerm);
+        
+        card.style.display = shouldShow ? 'block' : 'none';
+      });
+    });
+    
+    // Filter functionality
+    filterSelect?.addEventListener('change', function(this: HTMLSelectElement) {
+      const filterValue = this.value;
+      
+      articleCards.forEach(card => {
+        const shouldShow = filterValue === 'all' || card.dataset.category === filterValue;
+        card.style.display = shouldShow ? 'block' : 'none';
+      });
+    });
+    
+    // Sort functionality
+    sortSelect?.addEventListener('change', function(this: HTMLSelectElement) {
+      const sortValue = this.value;
+      const articlesGrid = document.querySelector('.articles-grid') as HTMLElement | null;
+      const articles = Array.from(articleCards);
+      
+      articles.sort((a, b) => {
+        if (sortValue === 'newest') {
+          return new Date(b.dataset.date!).getTime() - new Date(a.dataset.date!).getTime();
+        } else if (sortValue === 'oldest') {
+          return new Date(a.dataset.date!).getTime() - new Date(b.dataset.date!).getTime();
+        }
+        return 0;
+      });
+      
+      articles.forEach(article => {
+        articlesGrid?.appendChild(article);
+      });
+    });
+  });
+</script>

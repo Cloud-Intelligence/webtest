@@ -1,0 +1,470 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContactSection from '../../components/ContactSection.astro';
+
+const caseStudies = [
+  {
+    title: "E-commerce AI Revolution",
+    industry: "Retail",
+    solution: "AI Agents & ML",
+    description: "Transformed customer experience with AI-powered recommendation engines and automated customer service.",
+    results: ["300% increase in conversion rates", "85% reduction in support tickets", "45% boost in customer satisfaction"],
+    category: "ai-ml",
+    featured: true
+  },
+  {
+    title: "Healthcare Data Pipeline",
+    industry: "Healthcare",
+    solution: "Data Engineering",
+    description: "Built secure, HIPAA-compliant data infrastructure for real-time patient monitoring and analytics.",
+    results: ["99.9% uptime achieved", "60% faster data processing", "100% compliance maintained"],
+    category: "data-engineering",
+    featured: true
+  },
+  {
+    title: "Financial Services Modernization",
+    industry: "Finance",
+    solution: "Cloud Architecture",
+    description: "Migrated legacy banking systems to cloud-native architecture with enhanced security and scalability.",
+    results: ["70% cost reduction", "10x improved performance", "Zero security incidents"],
+    category: "cloud-architecture",
+    featured: false
+  },
+  {
+    title: "Manufacturing Process Optimization",
+    industry: "Manufacturing",
+    solution: "Machine Learning",
+    description: "Implemented predictive maintenance and quality control systems using advanced ML algorithms.",
+    results: ["40% reduction in downtime", "25% improvement in quality", "30% cost savings"],
+    category: "machine-learning",
+    featured: false
+  },
+  {
+    title: "EdTech Platform Development",
+    industry: "Education",
+    solution: "Web Applications",
+    description: "Created scalable learning management system with real-time collaboration and analytics.",
+    results: ["1M+ active users", "99.5% availability", "50% faster load times"],
+    category: "web-applications",
+    featured: false
+  },
+  {
+    title: "Supply Chain Intelligence",
+    industry: "Logistics",
+    solution: "AI Agents",
+    description: "Deployed intelligent agents for route optimization and inventory management across global operations.",
+    results: ["35% delivery time reduction", "20% inventory cost savings", "95% accuracy in predictions"],
+    category: "ai-agents",
+    featured: false
+  }
+];
+
+const industries = ["All", "Retail", "Healthcare", "Finance", "Manufacturing", "Education", "Logistics"];
+const solutions = ["All", "AI Agents", "Machine Learning", "Data Engineering", "Cloud Architecture", "Web Applications"];
+---
+
+<PageLayout 
+  title="Case Studies - Cloud Intelligence"
+  description="Explore our client success stories across different industries and discover how our solutions deliver real business results."
+  keywords="case studies, client success, AI solutions, cloud architecture, data engineering, machine learning"
+>
+  <PageHero 
+    title="Case Studies"
+    subtitle="Success Stories That Inspire"
+    description="Discover how we've helped businesses across industries transform their operations with cutting-edge technology solutions."
+  />
+  
+  <section class="case-studies-section">
+    <div class="container">
+      <!-- Featured Case Studies -->
+      <div class="featured-section">
+        <h2>Featured Success Stories</h2>
+        <div class="featured-grid">
+          {caseStudies.filter(study => study.featured).map((study) => (
+            <div class="featured-card">
+              <div class="card-header">
+                <div class="industry-tag">{study.industry}</div>
+                <div class="solution-tag">{study.solution}</div>
+              </div>
+              <h3>{study.title}</h3>
+              <p class="description">{study.description}</p>
+              <div class="results">
+                <h4>Key Results:</h4>
+                <ul>
+                  {study.results.map((result) => (
+                    <li>{result}</li>
+                  ))}
+                </ul>
+              </div>
+              <a href="#contact" class="case-study-link">View Full Case Study</a>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters-section">
+        <h2>Explore All Case Studies</h2>
+        <div class="filters">
+          <div class="filter-group">
+            <label>Industry:</label>
+            <select class="filter-select" data-filter="industry">
+              {industries.map((industry) => (
+                <option value={industry.toLowerCase()}>{industry}</option>
+              ))}
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Solution:</label>
+            <select class="filter-select" data-filter="solution">
+              {solutions.map((solution) => (
+                <option value={solution.toLowerCase().replace(' ', '-')}>{solution}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- All Case Studies Grid -->
+      <div class="case-studies-grid">
+        {caseStudies.map((study) => (
+          <div class="case-study-card" data-industry={study.industry.toLowerCase()} data-solution={study.category}>
+            <div class="card-header">
+              <div class="industry-tag">{study.industry}</div>
+              <div class="solution-tag">{study.solution}</div>
+            </div>
+            <h3>{study.title}</h3>
+            <p class="description">{study.description}</p>
+            <div class="results">
+              <h4>Key Results:</h4>
+              <ul>
+                {study.results.map((result) => (
+                  <li>{result}</li>
+                ))}
+              </ul>
+            </div>
+            <a href="#contact" class="case-study-link">Learn More</a>
+          </div>
+        ))}
+      </div>
+
+      <!-- CTA Section -->
+      <div class="cta-section">
+        <h2>Ready to Create Your Success Story?</h2>
+        <p>Let's discuss how we can help transform your business with proven solutions.</p>
+        <a href="#contact" class="cta-button">Start Your Project</a>
+      </div>
+    </div>
+  </section>
+  
+  <ContactSection />
+</PageLayout>
+
+<style lang="scss">
+  .case-studies-section {
+    background: #040913;
+    padding: 80px 0;
+    
+    @media (max-width: 768px) {
+      padding: 60px 0;
+    }
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    
+    @media (max-width: 768px) {
+      padding: 0 24px;
+    }
+  }
+
+  .featured-section {
+    margin-bottom: 80px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 32px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+
+  .featured-card {
+    background: linear-gradient(135deg, rgba(51, 102, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(51, 102, 255, 0.2);
+    border-radius: 20px;
+    padding: 40px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: linear-gradient(135deg, rgba(51, 102, 255, 0.15), rgba(255, 255, 255, 0.08));
+      border-color: rgba(51, 102, 255, 0.3);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(51, 102, 255, 0.2);
+    }
+  }
+
+  .filters-section {
+    margin-bottom: 48px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+  }
+
+  .filters {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    
+    @media (max-width: 768px) {
+      gap: 16px;
+    }
+  }
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    
+    label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.875rem;
+    }
+  }
+
+  .filter-select {
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    min-width: 150px;
+    
+    &:focus {
+      outline: none;
+      border-color: #3366FF;
+      box-shadow: 0 0 0 3px rgba(51, 102, 255, 0.1);
+    }
+    
+    option {
+      background: #040913;
+      color: #FFFFFF;
+    }
+  }
+
+  .case-studies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 32px;
+    margin-bottom: 80px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+
+  .case-study-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 32px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .card-header {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .industry-tag, .solution-tag {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .industry-tag {
+    background: rgba(255, 193, 7, 0.2);
+    color: #FFC107;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+  }
+
+  .solution-tag {
+    background: rgba(51, 102, 255, 0.2);
+    color: #3366FF;
+    border: 1px solid rgba(51, 102, 255, 0.3);
+  }
+
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: #FFFFFF;
+    margin-bottom: 12px;
+  }
+
+  .description {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.975rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 20px;
+  }
+
+  .results {
+    margin-bottom: 24px;
+    
+    h4 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+    
+    ul {
+      list-style: none;
+      padding: 0;
+      
+      li {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 4px;
+        padding-left: 16px;
+        position: relative;
+        
+        &::before {
+          content: "✓";
+          position: absolute;
+          left: 0;
+          color: #00D4AA;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .case-study-link {
+    display: inline-block;
+    color: #3366FF;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding: 8px 0;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      border-bottom-color: #3366FF;
+    }
+  }
+
+  .cta-section {
+    text-align: center;
+    padding: 60px;
+    background: rgba(51, 102, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(51, 102, 255, 0.2);
+    border-radius: 24px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      color: #FFFFFF;
+      margin-bottom: 16px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 32px;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: #3366FF;
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(51, 102, 255, 0.3);
+      
+      &:hover {
+        background: #2952CC;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(51, 102, 255, 0.4);
+      }
+    }
+  }
+</style>
+
+<script>
+  // Filter functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const filterSelects = document.querySelectorAll('.filter-select') as NodeListOf<HTMLSelectElement>;
+    const caseStudyCards = document.querySelectorAll('.case-study-card') as NodeListOf<HTMLElement>;
+    
+    filterSelects.forEach(select => {
+      select.addEventListener('change', function(this: HTMLSelectElement) {
+        const filterType = this.dataset.filter;
+        const filterValue = this.value;
+        
+        caseStudyCards.forEach(card => {
+          const shouldShow = filterValue === 'all' || 
+            card.dataset[filterType!] === filterValue ||
+            (filterType === 'solution' && card.dataset.solution?.includes(filterValue));
+          
+          card.style.display = shouldShow ? 'block' : 'none';
+        });
+      });
+    });
+  });
+</script>

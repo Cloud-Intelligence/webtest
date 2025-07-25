@@ -17,7 +17,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://cloud-in
 
 // Import styles
 import '../styles/main.scss';
-import Navbar from '../components/Navbar.astro';
+import '../styles/globals.css';
+import NavbarEnhanced from '../components/NavbarEnhanced.astro';
 ---
 
 <!DOCTYPE html>
@@ -204,7 +205,7 @@ import Navbar from '../components/Navbar.astro';
     <a href="#main" class="skip-link">Skip to main content</a>
     <a href="#navbar-container" class="skip-link">Skip to navigation</a>
     
-    {showNavbar && <Navbar />}
+    {showNavbar && <NavbarEnhanced />}
     <slot />
   </body>
 </html>

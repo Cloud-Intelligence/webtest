@@ -1,0 +1,280 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContactSection from '../../components/ContactSection.astro';
+
+// Get base path from Astro config and ensure proper path formatting
+const baseUrl = import.meta.env.BASE_URL;
+
+// Helper function to create proper URLs
+const createUrl = (path: string) => {
+  const cleanBase = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  return `${cleanBase}${cleanPath}`;
+};
+
+const solutions = [
+  {
+    title: "AI Agents",
+    description: "Intelligent autonomous agents that can perform complex tasks, make decisions, and interact with users naturally.",
+    icon: "🤖",
+    href: createUrl('/solutions/ai-agents'),
+    features: ["Natural Language Processing", "Autonomous Decision Making", "Multi-modal Interactions", "Learning & Adaptation"]
+  },
+  {
+    title: "Machine Learning",
+    description: "Transform data into actionable insights with predictive analytics, computer vision, and intelligent automation.",
+    icon: "🧠",
+    href: createUrl('/solutions/machine-learning'),
+    features: ["Predictive Analytics", "Computer Vision", "NLP & Text Analysis", "AutoML Platform"]
+  },
+  {
+    title: "Web Applications",
+    description: "Modern, scalable web applications built with cutting-edge technologies for optimal performance and user experience.",
+    icon: "🌐",
+    href: createUrl('/solutions/web-applications'),
+    features: ["React & Next.js", "Cloud Native", "Real-time Features", "Progressive Web Apps"]
+  },
+  {
+    title: "Data Engineering",
+    description: "Build robust data pipelines and infrastructure to power your analytics and machine learning initiatives.",
+    icon: "📊",
+    href: createUrl('/solutions/data-engineering'),
+    features: ["ETL/ELT Pipelines", "Real-time Processing", "Data Warehousing", "API Development"]
+  },
+  {
+    title: "Cloud Architecture",
+    description: "Design and implement scalable, secure cloud infrastructure optimized for your business requirements.",
+    icon: "☁️",
+    href: createUrl('/solutions/cloud-architecture'),
+    features: ["AWS & Azure", "Microservices", "Auto-scaling", "Security & Compliance"]
+  }
+];
+---
+
+<PageLayout 
+  title="Solutions - Cloud Intelligence"
+  description="Explore our comprehensive range of cloud intelligence solutions including AI agents, machine learning, web applications, data engineering, and cloud architecture."
+  keywords="cloud solutions, AI agents, machine learning, web applications, data engineering, cloud architecture"
+>
+  <PageHero 
+    title="Our Solutions"
+    subtitle="Transforming Business Through Technology"
+    description="Explore our comprehensive suite of cloud intelligence solutions designed to accelerate your digital transformation and drive business growth."
+  />
+  
+  <section class="solutions-section">
+    <div class="container">
+      <div class="solutions-grid">
+        {solutions.map((solution) => (
+          <a href={solution.href} class="solution-card">
+            <div class="card-icon">{solution.icon}</div>
+            <h3>{solution.title}</h3>
+            <p class="card-description">{solution.description}</p>
+            <ul class="feature-list">
+              {solution.features.map((feature) => (
+                <li>{feature}</li>
+              ))}
+            </ul>
+            <div class="card-arrow">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+      
+      <div class="cta-section">
+        <h2>Ready to Get Started?</h2>
+        <p>Let's discuss which solution is right for your business</p>
+        <a href={createUrl('/book-a-call')} class="cta-button">Schedule a Consultation</a>
+      </div>
+    </div>
+  </section>
+  
+  <ContactSection />
+</PageLayout>
+
+<style lang="scss">
+  .solutions-section {
+    background: #040913;
+    padding: 80px 0;
+    
+    @media (max-width: 768px) {
+      padding: 60px 0;
+    }
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    
+    @media (max-width: 768px) {
+      padding: 0 24px;
+    }
+  }
+  
+  .solutions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 32px;
+    margin-bottom: 80px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+  }
+  
+  .solution-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px 32px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: block;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+      
+      .card-arrow {
+        transform: translateX(4px);
+      }
+    }
+    
+    // Subtle gradient overlay
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        transparent 100%
+      );
+      pointer-events: none;
+      border-radius: 20px 20px 0 0;
+    }
+    
+    .card-icon {
+      font-size: 4rem;
+      margin-bottom: 24px;
+      display: block;
+    }
+    
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: #FFFFFF;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .card-description {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px 0;
+      position: relative;
+      z-index: 1;
+      
+      li {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.7);
+        padding: 6px 0;
+        position: relative;
+        padding-left: 20px;
+        
+        &::before {
+          content: '✓';
+          position: absolute;
+          left: 0;
+          color: #3366FF;
+          font-weight: 600;
+        }
+      }
+    }
+    
+    .card-arrow {
+      position: absolute;
+      bottom: 32px;
+      right: 32px;
+      color: #3366FF;
+      transition: transform 0.3s ease;
+    }
+  }
+  
+  .cta-section {
+    text-align: center;
+    padding: 60px 40px;
+    background: rgba(51, 102, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(51, 102, 255, 0.2);
+    border-radius: 24px;
+    
+    @media (max-width: 768px) {
+      padding: 40px 24px;
+    }
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      color: #FFFFFF;
+      margin-bottom: 16px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 32px;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 16px 40px;
+      background: linear-gradient(135deg, #3366FF 0%, #6366F1 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 32px rgba(51, 102, 255, 0.3);
+      
+      &:hover {
+        background: linear-gradient(135deg, #2952CC 0%, #5B5CF6 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px rgba(51, 102, 255, 0.4);
+      }
+    }
+  }
+</style>

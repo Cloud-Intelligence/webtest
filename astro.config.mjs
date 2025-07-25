@@ -1,6 +1,8 @@
 import { defineConfig } from 'astro/config';
 import compress from '@playform/compress';
 import compressor from 'astro-compressor';
+import tailwind from '@astrojs/tailwind';
+import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
@@ -50,6 +52,10 @@ export default defineConfig({
   },
   
   integrations: [
+    react(),
+    tailwind({
+      applyBaseStyles: false,
+    }),
     compress(),
     compressor({
       gzip: true,

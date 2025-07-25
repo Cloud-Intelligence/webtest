@@ -1,0 +1,813 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContactSection from '../../components/ContactSection.astro';
+
+const demos = [
+  {
+    title: "AI-Powered Customer Service Agent",
+    description: "Experience our intelligent chatbot that understands context, handles complex queries, and learns from interactions.",
+    category: "AI Agents",
+    complexity: "Beginner",
+    duration: "5-10 minutes",
+    features: ["Natural Language Processing", "Context Awareness", "Multi-language Support", "Sentiment Analysis"],
+    demoUrl: "/demo/customer-service",
+    videoUrl: "/webtest/demo-customer-service.mp4",
+    screenshot: "/webtest/demo-customer-service.jpg",
+    featured: true,
+    interactive: true
+  },
+  {
+    title: "Real-Time Data Analytics Dashboard",
+    description: "Explore live data visualization with real-time streaming analytics, predictive insights, and interactive charts.",
+    category: "Data Engineering",
+    complexity: "Intermediate",
+    duration: "10-15 minutes", 
+    features: ["Real-time Streaming", "Interactive Charts", "Predictive Analytics", "Custom Filters"],
+    demoUrl: "/demo/analytics-dashboard",
+    videoUrl: "/webtest/demo-analytics.mp4",
+    screenshot: "/webtest/demo-analytics.jpg",
+    featured: true,
+    interactive: true
+  },
+  {
+    title: "Machine Learning Model Training",
+    description: "Train and deploy ML models with our interactive platform. See how different algorithms perform on real datasets.",
+    category: "Machine Learning",
+    complexity: "Advanced",
+    duration: "15-20 minutes",
+    features: ["Model Selection", "Hyperparameter Tuning", "Performance Metrics", "Deployment Pipeline"],
+    demoUrl: "/demo/ml-training",
+    videoUrl: "/webtest/demo-ml-training.mp4",
+    screenshot: "/webtest/demo-ml-training.jpg",
+    featured: false,
+    interactive: true
+  },
+  {
+    title: "Cloud Infrastructure Scaling",
+    description: "Watch how our auto-scaling infrastructure adapts to changing loads in real-time with zero downtime.",
+    category: "Cloud Architecture",
+    complexity: "Intermediate",
+    duration: "8-12 minutes",
+    features: ["Auto-scaling", "Load Balancing", "Health Monitoring", "Cost Optimization"],
+    demoUrl: "/demo/cloud-scaling",
+    videoUrl: "/webtest/demo-cloud-scaling.mp4",
+    screenshot: "/webtest/demo-cloud-scaling.jpg",
+    featured: false,
+    interactive: false
+  },
+  {
+    title: "Progressive Web App Builder",
+    description: "Build responsive, fast-loading web applications with offline capabilities and native-like experiences.",
+    category: "Web Applications",
+    complexity: "Beginner",
+    duration: "12-18 minutes",
+    features: ["Offline Support", "Push Notifications", "Responsive Design", "App-like Experience"],
+    demoUrl: "/demo/pwa-builder",
+    videoUrl: "/webtest/demo-pwa-builder.mp4",
+    screenshot: "/webtest/demo-pwa-builder.jpg",
+    featured: false,
+    interactive: true
+  },
+  {
+    title: "Automated Testing Pipeline",
+    description: "See how our CI/CD pipeline automatically runs tests, builds, and deploys applications with quality gates.",
+    category: "DevOps",
+    complexity: "Advanced",
+    duration: "10-15 minutes",
+    features: ["Automated Testing", "Quality Gates", "Deployment Automation", "Rollback Capabilities"],
+    demoUrl: "/demo/testing-pipeline",
+    videoUrl: "/webtest/demo-testing-pipeline.mp4",
+    screenshot: "/webtest/demo-testing-pipeline.jpg",
+    featured: false,
+    interactive: false
+  },
+  {
+    title: "Multi-Agent Collaboration System",
+    description: "Watch multiple AI agents work together to solve complex problems, sharing knowledge and coordinating actions.",
+    category: "AI Agents",
+    complexity: "Advanced",
+    duration: "15-25 minutes",
+    features: ["Agent Coordination", "Knowledge Sharing", "Task Distribution", "Conflict Resolution"],
+    demoUrl: "/demo/multi-agent",
+    videoUrl: "/webtest/demo-multi-agent.mp4",
+    screenshot: "/webtest/demo-multi-agent.jpg",
+    featured: false,
+    interactive: true
+  },
+  {
+    title: "Blockchain Smart Contract Deployment",
+    description: "Deploy and interact with smart contracts on various blockchain networks with our user-friendly interface.",
+    category: "Blockchain",
+    complexity: "Advanced",
+    duration: "20-30 minutes",
+    features: ["Multi-chain Support", "Contract Templates", "Gas Optimization", "Security Auditing"],
+    demoUrl: "/demo/smart-contracts",
+    videoUrl: "/webtest/demo-smart-contracts.mp4",
+    screenshot: "/webtest/demo-smart-contracts.jpg",
+    featured: false,
+    interactive: true
+  }
+];
+
+const categories = ["All", "AI Agents", "Data Engineering", "Machine Learning", "Cloud Architecture", "Web Applications", "DevOps", "Blockchain"];
+const complexityLevels = ["All", "Beginner", "Intermediate", "Advanced"];
+---
+
+<PageLayout 
+  title="Live Demos - Cloud Intelligence"
+  description="Experience our cutting-edge solutions firsthand with interactive demonstrations and live examples of AI, ML, and cloud technologies."
+  keywords="live demos, interactive demos, AI demonstration, machine learning examples, cloud solutions, software demos"
+>
+  <PageHero 
+    title="Live Demos"
+    subtitle="Experience Innovation in Action"
+    description="Explore our technology solutions through interactive demonstrations and see how they can transform your business operations."
+  />
+  
+  <section class="demos-section">
+    <div class="container">
+      <!-- Featured Demos -->
+      <div class="featured-section">
+        <h2>Featured Demonstrations</h2>
+        <div class="featured-grid">
+          {demos.filter(demo => demo.featured).map((demo) => (
+            <div class="featured-demo">
+              <div class="demo-preview">
+                <img src={demo.screenshot} alt={demo.title} />
+                <div class="play-overlay">
+                  <button class="play-button" data-video={demo.videoUrl}>▶</button>
+                </div>
+                <div class="demo-badges">
+                  <span class="category-badge">{demo.category}</span>
+                  <span class="complexity-badge complexity-{demo.complexity.toLowerCase()}">{demo.complexity}</span>
+                  {demo.interactive && <span class="interactive-badge">Interactive</span>}
+                </div>
+              </div>
+              <div class="demo-content">
+                <h3>{demo.title}</h3>
+                <p class="description">{demo.description}</p>
+                <div class="demo-meta">
+                  <span class="duration">⏱ {demo.duration}</span>
+                </div>
+                <div class="features">
+                  <h4>Key Features:</h4>
+                  <ul>
+                    {demo.features.map((feature) => (
+                      <li>{feature}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div class="demo-actions">
+                  {demo.interactive ? (
+                    <a href={demo.demoUrl} class="try-demo-button">Try Interactive Demo</a>
+                  ) : (
+                    <button class="watch-demo-button" data-video={demo.videoUrl}>Watch Demo Video</button>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters-section">
+        <h2>Explore All Demonstrations</h2>
+        <div class="filters">
+          <div class="filter-group">
+            <label>Category:</label>
+            <select class="filter-select" data-filter="category">
+              {categories.map((category) => (
+                <option value={category.toLowerCase().replace(' ', '-')}>{category}</option>
+              ))}
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Complexity:</label>
+            <select class="filter-select" data-filter="complexity">
+              {complexityLevels.map((level) => (
+                <option value={level.toLowerCase()}>{level}</option>
+              ))}
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Type:</label>
+            <select class="filter-select" data-filter="type">
+              <option value="all">All Types</option>
+              <option value="interactive">Interactive Only</option>
+              <option value="video">Video Only</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- All Demos Grid -->
+      <div class="demos-grid">
+        {demos.map((demo) => (
+          <div class="demo-card" 
+               data-category={demo.category.toLowerCase().replace(' ', '-')} 
+               data-complexity={demo.complexity.toLowerCase()}
+               data-type={demo.interactive ? 'interactive' : 'video'}>
+            <div class="demo-preview">
+              <img src={demo.screenshot} alt={demo.title} />
+              <div class="play-overlay">
+                <button class="play-button" data-video={demo.videoUrl}>▶</button>
+              </div>
+              <div class="demo-badges">
+                <span class="category-badge">{demo.category}</span>
+                <span class="complexity-badge complexity-{demo.complexity.toLowerCase()}">{demo.complexity}</span>
+                {demo.interactive && <span class="interactive-badge">Interactive</span>}
+              </div>
+            </div>
+            <div class="demo-content">
+              <h3>{demo.title}</h3>
+              <p class="description">{demo.description}</p>
+              <div class="demo-meta">
+                <span class="duration">⏱ {demo.duration}</span>
+              </div>
+              <div class="features">
+                <h4>Features:</h4>
+                <div class="feature-tags">
+                  {demo.features.slice(0, 3).map((feature) => (
+                    <span class="feature-tag">{feature}</span>
+                  ))}
+                  {demo.features.length > 3 && <span class="more-features">+{demo.features.length - 3} more</span>}
+                </div>
+              </div>
+              <div class="demo-actions">
+                {demo.interactive ? (
+                  <a href={demo.demoUrl} class="try-demo-button">Try Demo</a>
+                ) : (
+                  <button class="watch-demo-button" data-video={demo.videoUrl}>Watch Video</button>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Request Demo Section -->
+      <div class="request-demo-section">
+        <h2>Need a Custom Demo?</h2>
+        <p>Request a personalized demonstration tailored to your specific use case and requirements.</p>
+        <a href="#contact" class="request-demo-button">Request Custom Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Modal -->
+  <div class="video-modal" id="videoModal">
+    <div class="modal-content">
+      <button class="close-button">&times;</button>
+      <video controls id="demoVideo">
+        <source src="" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+  
+  <ContactSection />
+</PageLayout>
+
+<style lang="scss">
+  .demos-section {
+    background: #040913;
+    padding: 80px 0;
+    
+    @media (max-width: 768px) {
+      padding: 60px 0;
+    }
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    
+    @media (max-width: 768px) {
+      padding: 0 24px;
+    }
+  }
+
+  .featured-section {
+    margin-bottom: 80px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 40px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  .featured-demo {
+    background: linear-gradient(135deg, rgba(51, 102, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(51, 102, 255, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: linear-gradient(135deg, rgba(51, 102, 255, 0.15), rgba(255, 255, 255, 0.08));
+      border-color: rgba(51, 102, 255, 0.3);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(51, 102, 255, 0.2);
+    }
+  }
+
+  .filters-section {
+    margin-bottom: 48px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+  }
+
+  .filters {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    
+    @media (max-width: 768px) {
+      gap: 16px;
+    }
+  }
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    
+    label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.875rem;
+    }
+  }
+
+  .filter-select {
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    min-width: 150px;
+    
+    &:focus {
+      outline: none;
+      border-color: #3366FF;
+      box-shadow: 0 0 0 3px rgba(51, 102, 255, 0.1);
+    }
+    
+    option {
+      background: #040913;
+      color: #FFFFFF;
+    }
+  }
+
+  .demos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 32px;
+    margin-bottom: 80px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+
+  .demo-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .demo-preview {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .play-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      
+      .play-button {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: rgba(51, 102, 255, 0.9);
+        border: none;
+        color: #FFFFFF;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          background: #3366FF;
+          transform: scale(1.1);
+        }
+      }
+    }
+    
+    &:hover .play-overlay {
+      opacity: 1;
+    }
+  }
+
+  .demo-badges {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .category-badge, .complexity-badge, .interactive-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .category-badge {
+    background: rgba(51, 102, 255, 0.9);
+    color: #FFFFFF;
+  }
+
+  .complexity-badge {
+    &.complexity-beginner {
+      background: rgba(0, 212, 170, 0.9);
+      color: #FFFFFF;
+    }
+    
+    &.complexity-intermediate {
+      background: rgba(255, 193, 7, 0.9);
+      color: #000000;
+    }
+    
+    &.complexity-advanced {
+      background: rgba(220, 53, 69, 0.9);
+      color: #FFFFFF;
+    }
+  }
+
+  .interactive-badge {
+    background: rgba(255, 255, 255, 0.9);
+    color: #040913;
+  }
+
+  .demo-content {
+    padding: 24px;
+  }
+
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: #FFFFFF;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .description {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 16px;
+  }
+
+  .demo-meta {
+    margin-bottom: 16px;
+    
+    .duration {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.1);
+      padding: 4px 8px;
+      border-radius: 8px;
+    }
+  }
+
+  .features {
+    margin-bottom: 20px;
+    
+    h4 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+    
+    ul {
+      list-style: none;
+      padding: 0;
+      
+      li {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 4px;
+        padding-left: 16px;
+        position: relative;
+        
+        &::before {
+          content: "•";
+          position: absolute;
+          left: 0;
+          color: #3366FF;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .feature-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    
+    .feature-tag {
+      padding: 2px 6px;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.8);
+      border-radius: 8px;
+      font-size: 0.7rem;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    .more-features {
+      padding: 2px 6px;
+      background: rgba(51, 102, 255, 0.2);
+      color: #3366FF;
+      border-radius: 8px;
+      font-size: 0.7rem;
+      font-family: 'Inter', sans-serif;
+    }
+  }
+
+  .demo-actions {
+    display: flex;
+    gap: 12px;
+  }
+
+  .try-demo-button, .watch-demo-button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.875rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .try-demo-button {
+    background: #3366FF;
+    color: #FFFFFF;
+    
+    &:hover {
+      background: #2952CC;
+      transform: translateY(-1px);
+    }
+  }
+
+  .watch-demo-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  .request-demo-section {
+    text-align: center;
+    padding: 60px;
+    background: rgba(0, 212, 170, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 212, 170, 0.2);
+    border-radius: 24px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      color: #FFFFFF;
+      margin-bottom: 16px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 32px;
+    }
+    
+    .request-demo-button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: #00D4AA;
+      color: #040913;
+      text-decoration: none;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(0, 212, 170, 0.3);
+      
+      &:hover {
+        background: #00B896;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(0, 212, 170, 0.4);
+      }
+    }
+  }
+
+  .video-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    
+    .modal-content {
+      position: relative;
+      margin: 5% auto;
+      width: 80%;
+      max-width: 800px;
+      
+      video {
+        width: 100%;
+        height: auto;
+      }
+      
+      .close-button {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        color: #FFFFFF;
+        font-size: 2rem;
+        font-weight: bold;
+        background: none;
+        border: none;
+        cursor: pointer;
+        
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const filterSelects = document.querySelectorAll('.filter-select') as NodeListOf<HTMLSelectElement>;
+    const demoCards = document.querySelectorAll('.demo-card') as NodeListOf<HTMLElement>;
+    const playButtons = document.querySelectorAll('.play-button') as NodeListOf<HTMLButtonElement>;
+    const watchButtons = document.querySelectorAll('.watch-demo-button') as NodeListOf<HTMLButtonElement>;
+    const videoModal = document.getElementById('videoModal') as HTMLElement | null;
+    const demoVideo = document.getElementById('demoVideo') as HTMLVideoElement | null;
+    const closeButton = document.querySelector('.close-button') as HTMLButtonElement | null;
+    
+    // Filter functionality
+    filterSelects.forEach(select => {
+      select.addEventListener('change', function(this: HTMLSelectElement) {
+        const filterType = this.dataset.filter;
+        const filterValue = this.value;
+        
+        demoCards.forEach(card => {
+          let shouldShow = false;
+          
+          if (filterValue === 'all') {
+            shouldShow = true;
+          } else if (filterType === 'category') {
+            shouldShow = card.dataset.category === filterValue;
+          } else if (filterType === 'complexity') {
+            shouldShow = card.dataset.complexity === filterValue;
+          } else if (filterType === 'type') {
+            shouldShow = card.dataset.type === filterValue;
+          }
+          
+          card.style.display = shouldShow ? 'block' : 'none';
+        });
+      });
+    });
+    
+    // Video modal functionality
+    function openVideoModal(videoUrl: string) {
+      if (demoVideo && videoModal) {
+        demoVideo.src = videoUrl;
+        videoModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    
+    function closeVideoModal() {
+      if (videoModal && demoVideo) {
+        videoModal.style.display = 'none';
+        demoVideo.pause();
+        demoVideo.src = '';
+        document.body.style.overflow = 'auto';
+      }
+    }
+    
+    playButtons.forEach(button => {
+      button.addEventListener('click', function(this: HTMLButtonElement) {
+        const videoUrl = this.dataset.video;
+        if (videoUrl) {
+          openVideoModal(videoUrl);
+        }
+      });
+    });
+    
+    watchButtons.forEach(button => {
+      button.addEventListener('click', function(this: HTMLButtonElement) {
+        const videoUrl = this.dataset.video;
+        if (videoUrl) {
+          openVideoModal(videoUrl);
+        }
+      });
+    });
+    
+    closeButton?.addEventListener('click', closeVideoModal);
+    
+    videoModal?.addEventListener('click', function(e: Event) {
+      if (e.target === videoModal) {
+        closeVideoModal();
+      }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e: KeyboardEvent) {
+      if (e.key === 'Escape' && videoModal?.style.display === 'block') {
+        closeVideoModal();
+      }
+    });
+  });
+</script>

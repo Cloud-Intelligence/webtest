@@ -1,0 +1,380 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContactSection from '../../components/ContactSection.astro';
+
+// Get base path from Astro config and ensure proper path formatting
+const baseUrl = import.meta.env.BASE_URL;
+
+// Helper function to create proper URLs
+const createUrl = (path: string) => {
+  const cleanBase = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  return `${cleanBase}${cleanPath}`;
+};
+
+const resources = [
+  {
+    title: "Case Studies",
+    description: "Real-world success stories showcasing how we've helped businesses transform through cloud intelligence solutions.",
+    icon: "📈",
+    href: createUrl('/resources/case-studies'),
+    highlights: ["Fortune 500 Implementations", "ROI & Performance Metrics", "Technical Deep Dives", "Lessons Learned"],
+    badge: "Success Stories"
+  },
+  {
+    title: "Technical Blog", 
+    description: "In-depth articles, tutorials, and insights from our engineering team on the latest cloud technologies and best practices.",
+    icon: "📝",
+    href: createUrl('/resources/technical-blog'),
+    highlights: ["Architecture Patterns", "Code Examples", "Performance Optimization", "Industry Trends"],
+    badge: "Expert Insights"
+  },
+  {
+    title: "Live Demos",
+    description: "Interactive demonstrations of our solutions in action. See the technology work in real-time scenarios.",
+    icon: "🎮",
+    href: createUrl('/resources/live-demos'),
+    highlights: ["Interactive Experiences", "Real-time Processing", "AI in Action", "Feature Showcases"],
+    badge: "Try It Now"
+  },
+  {
+    title: "Documentation",
+    description: "Comprehensive technical documentation, API references, and implementation guides for our platform.",
+    icon: "📚",
+    href: createUrl('/resources/documentation'),
+    highlights: ["API References", "Integration Guides", "Best Practices", "Troubleshooting"],
+    badge: "Developer Resources"
+  }
+];
+---
+
+<PageLayout 
+  title="Resources - Cloud Intelligence"
+  description="Access our comprehensive resource library including case studies, technical blog, live demos, and developer documentation to accelerate your cloud intelligence journey."
+  keywords="cloud intelligence resources, case studies, technical blog, documentation, live demos, developer guides"
+>
+  <PageHero 
+    title="Resources"
+    subtitle="Learn, Explore, and Accelerate"
+    description="Access our comprehensive resource library to accelerate your cloud intelligence journey with real-world insights, technical expertise, and hands-on experiences."
+  />
+  
+  <section class="resources-section">
+    <div class="container">
+      <div class="resources-grid">
+        {resources.map((resource) => (
+          <a href={resource.href} class="resource-card">
+            <div class="card-badge">{resource.badge}</div>
+            <div class="card-icon">{resource.icon}</div>
+            <h3>{resource.title}</h3>
+            <p class="card-description">{resource.description}</p>
+            <div class="highlights-section">
+              <h4>What You'll Find:</h4>
+              <ul class="highlight-list">
+                {resource.highlights.map((highlight) => (
+                  <li>{highlight}</li>
+                ))}
+              </ul>
+            </div>
+            <div class="card-footer">
+              <span class="explore-text">Explore {resource.title}</span>
+              <svg class="card-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+      
+      <div class="newsletter-section">
+        <div class="newsletter-content">
+          <h2>Stay Updated</h2>
+          <p>Get the latest insights, case studies, and technical updates delivered to your inbox.</p>
+          <div class="newsletter-form">
+            <input type="email" placeholder="Enter your email address" class="newsletter-input" />
+            <button class="newsletter-button">Subscribe</button>
+          </div>
+          <p class="newsletter-disclaimer">Join 500+ professionals staying ahead of the curve. Unsubscribe anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <ContactSection />
+</PageLayout>
+
+<style lang="scss">
+  .resources-section {
+    background: #040913;
+    padding: 80px 0;
+    
+    @media (max-width: 768px) {
+      padding: 60px 0;
+    }
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    
+    @media (max-width: 768px) {
+      padding: 0 24px;
+    }
+  }
+  
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+    margin-bottom: 80px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+  }
+  
+  .resource-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 32px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 480px;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+      
+      .card-arrow {
+        transform: translateX(4px);
+      }
+      
+      .card-badge {
+        background: rgba(51, 102, 255, 0.9);
+      }
+    }
+    
+    // Subtle gradient overlay
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        transparent 100%
+      );
+      pointer-events: none;
+      border-radius: 20px 20px 0 0;
+    }
+    
+    .card-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(51, 102, 255, 0.7);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      transition: background 0.3s ease;
+      z-index: 2;
+    }
+    
+    .card-icon {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      display: block;
+      z-index: 1;
+      position: relative;
+    }
+    
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: #FFFFFF;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .card-description {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+      flex-grow: 1;
+    }
+    
+    .highlights-section {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 24px;
+      
+      h4 {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #3366FF;
+        margin-bottom: 12px;
+      }
+    }
+    
+    .highlight-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      
+      li {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.7);
+        padding: 4px 0;
+        position: relative;
+        padding-left: 16px;
+        
+        &::before {
+          content: '•';
+          position: absolute;
+          left: 0;
+          color: #3366FF;
+          font-weight: 600;
+        }
+      }
+    }
+    
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      position: relative;
+      z-index: 1;
+      
+      .explore-text {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #3366FF;
+      }
+      
+      .card-arrow {
+        color: #3366FF;
+        transition: transform 0.3s ease;
+      }
+    }
+  }
+  
+  .newsletter-section {
+    background: linear-gradient(135deg, rgba(51, 102, 255, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(51, 102, 255, 0.2);
+    border-radius: 24px;
+    padding: 60px 40px;
+    text-align: center;
+    
+    @media (max-width: 768px) {
+      padding: 40px 24px;
+    }
+    
+    .newsletter-content {
+      max-width: 600px;
+      margin: 0 auto;
+      
+      h2 {
+        font-family: 'Manrope', sans-serif;
+        font-weight: 600;
+        font-size: clamp(1.75rem, 3vw, 2.25rem);
+        color: #FFFFFF;
+        margin-bottom: 16px;
+      }
+      
+      p {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.125rem;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 32px;
+      }
+    }
+    
+    .newsletter-form {
+      display: flex;
+      gap: 12px;
+      max-width: 400px;
+      margin: 0 auto 16px;
+      
+      @media (max-width: 480px) {
+        flex-direction: column;
+      }
+    }
+    
+    .newsletter-input {
+      flex: 1;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
+      
+      &:focus {
+        outline: none;
+        border-color: rgba(255, 255, 255, 0.4);
+        background: rgba(255, 255, 255, 0.15);
+      }
+    }
+    
+    .newsletter-button {
+      padding: 14px 24px;
+      background: linear-gradient(135deg, #3366FF 0%, #6366F1 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      
+      &:hover {
+        background: linear-gradient(135deg, #2952CC 0%, #5B5CF6 100%);
+        transform: translateY(-1px);
+      }
+    }
+    
+    .newsletter-disclaimer {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.6);
+      margin: 0;
+    }
+  }
+</style>

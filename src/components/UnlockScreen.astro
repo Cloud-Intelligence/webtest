@@ -66,8 +66,8 @@ import UnlockSlider from './UnlockSlider.astro';
   });
 
   // Listen for unlock event
-  document.addEventListener('slider-unlock', (event: CustomEvent) => {
-    console.log('Slider unlocked!', event.detail);
+  document.addEventListener('slider-unlock', (event) => {
+    console.log('Slider unlocked!', (event as CustomEvent).detail);
     
     // GSAP unlock animation
     const unlockScreen = document.getElementById('unlockScreen');

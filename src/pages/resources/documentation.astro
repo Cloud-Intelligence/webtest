@@ -1,0 +1,769 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContactSection from '../../components/ContactSection.astro';
+
+const documentationSections = [
+  {
+    title: "Getting Started",
+    description: "Quick start guides and basic setup instructions for all our platforms and services.",
+    icon: "🚀",
+    docs: [
+      { title: "Platform Overview", url: "/docs/getting-started/overview", type: "guide", difficulty: "beginner" },
+      { title: "Quick Start Guide", url: "/docs/getting-started/quickstart", type: "guide", difficulty: "beginner" },
+      { title: "Environment Setup", url: "/docs/getting-started/setup", type: "guide", difficulty: "beginner" },
+      { title: "First API Call", url: "/docs/getting-started/first-api-call", type: "tutorial", difficulty: "beginner" }
+    ]
+  },
+  {
+    title: "API References",
+    description: "Complete API documentation with endpoints, parameters, and example responses.",
+    icon: "📚",
+    docs: [
+      { title: "AI Agents API", url: "/docs/api/ai-agents", type: "reference", difficulty: "intermediate" },
+      { title: "Machine Learning API", url: "/docs/api/ml", type: "reference", difficulty: "intermediate" },
+      { title: "Data Pipeline API", url: "/docs/api/data-pipeline", type: "reference", difficulty: "advanced" },
+      { title: "Authentication", url: "/docs/api/auth", type: "reference", difficulty: "beginner" },
+      { title: "Webhooks", url: "/docs/api/webhooks", type: "reference", difficulty: "intermediate" }
+    ]
+  },
+  {
+    title: "SDKs & Libraries",
+    description: "Language-specific SDKs and libraries to integrate with our services.",
+    icon: "📦",
+    docs: [
+      { title: "Python SDK", url: "/docs/sdks/python", type: "reference", difficulty: "intermediate" },
+      { title: "JavaScript SDK", url: "/docs/sdks/javascript", type: "reference", difficulty: "intermediate" },
+      { title: "Go SDK", url: "/docs/sdks/go", type: "reference", difficulty: "intermediate" },
+      { title: "Java SDK", url: "/docs/sdks/java", type: "reference", difficulty: "intermediate" },
+      { title: "CLI Tools", url: "/docs/sdks/cli", type: "reference", difficulty: "beginner" }
+    ]
+  },
+  {
+    title: "Tutorials & Guides",
+    description: "Step-by-step tutorials and comprehensive guides for common use cases.",
+    icon: "📖",
+    docs: [
+      { title: "Building Your First AI Agent", url: "/docs/tutorials/first-ai-agent", type: "tutorial", difficulty: "beginner" },
+      { title: "Setting Up Data Pipelines", url: "/docs/tutorials/data-pipelines", type: "tutorial", difficulty: "intermediate" },
+      { title: "ML Model Deployment", url: "/docs/tutorials/ml-deployment", type: "tutorial", difficulty: "advanced" },
+      { title: "Real-time Analytics Setup", url: "/docs/tutorials/realtime-analytics", type: "tutorial", difficulty: "intermediate" },
+      { title: "Multi-Agent Orchestration", url: "/docs/tutorials/multi-agent", type: "tutorial", difficulty: "advanced" }
+    ]
+  },
+  {
+    title: "Architecture & Design",
+    description: "System architecture, design patterns, and best practices documentation.",
+    icon: "🏗️",
+    docs: [
+      { title: "System Architecture", url: "/docs/architecture/system", type: "guide", difficulty: "advanced" },
+      { title: "Security Model", url: "/docs/architecture/security", type: "guide", difficulty: "advanced" },
+      { title: "Scalability Patterns", url: "/docs/architecture/scalability", type: "guide", difficulty: "advanced" },
+      { title: "Data Flow Design", url: "/docs/architecture/data-flow", type: "guide", difficulty: "intermediate" },
+      { title: "Best Practices", url: "/docs/architecture/best-practices", type: "guide", difficulty: "intermediate" }
+    ]
+  },
+  {
+    title: "Troubleshooting",
+    description: "Common issues, error codes, and solutions to help you resolve problems quickly.",
+    icon: "🔧",
+    docs: [
+      { title: "Common Issues", url: "/docs/troubleshooting/common-issues", type: "guide", difficulty: "beginner" },
+      { title: "Error Codes Reference", url: "/docs/troubleshooting/error-codes", type: "reference", difficulty: "beginner" },
+      { title: "Performance Optimization", url: "/docs/troubleshooting/performance", type: "guide", difficulty: "advanced" },
+      { title: "Debugging Guide", url: "/docs/troubleshooting/debugging", type: "guide", difficulty: "intermediate" },
+      { title: "Support Channels", url: "/docs/troubleshooting/support", type: "guide", difficulty: "beginner" }
+    ]
+  }
+];
+
+const recentUpdates = [
+  { title: "AI Agents API v2.1 Released", date: "2024-07-22", type: "API Update" },
+  { title: "New Python SDK Features", date: "2024-07-20", type: "SDK Update" },
+  { title: "Security Best Practices Guide", date: "2024-07-18", type: "New Guide" },
+  { title: "Performance Optimization Tutorial", date: "2024-07-15", type: "New Tutorial" },
+  { title: "Troubleshooting Section Enhanced", date: "2024-07-12", type: "Content Update" }
+];
+
+const docTypes = ["All", "Guide", "Tutorial", "Reference"];
+const difficulties = ["All", "Beginner", "Intermediate", "Advanced"];
+---
+
+<PageLayout 
+  title="Documentation - Cloud Intelligence"
+  description="Comprehensive technical documentation, API references, tutorials, and guides for all Cloud Intelligence services."
+  keywords="documentation, API reference, technical guides, tutorials, SDK documentation, developer resources"
+>
+  <PageHero 
+    title="Documentation"
+    subtitle="Your Complete Technical Resource"
+    description="Find everything you need to build, integrate, and optimize your solutions with our comprehensive documentation."
+  />
+  
+  <section class="documentation-section">
+    <div class="container">
+      <!-- Search Bar -->
+      <div class="search-section">
+        <div class="search-box">
+          <input type="text" placeholder="Search documentation..." class="search-input" />
+          <span class="search-icon">🔍</span>
+        </div>
+        <div class="search-filters">
+          <select class="filter-select" data-filter="type">
+            {docTypes.map((type) => (
+              <option value={type.toLowerCase()}>{type}</option>
+            ))}
+          </select>
+          <select class="filter-select" data-filter="difficulty">
+            {difficulties.map((difficulty) => (
+              <option value={difficulty.toLowerCase()}>{difficulty}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="quick-links-section">
+        <h2>Popular Resources</h2>
+        <div class="quick-links-grid">
+          <a href="/docs/getting-started/quickstart" class="quick-link-card">
+            <div class="icon">⚡</div>
+            <h3>Quick Start</h3>
+            <p>Get up and running in minutes</p>
+          </a>
+          <a href="/docs/api/ai-agents" class="quick-link-card">
+            <div class="icon">🤖</div>
+            <h3>AI Agents API</h3>
+            <p>Complete API reference</p>
+          </a>
+          <a href="/docs/tutorials/first-ai-agent" class="quick-link-card">
+            <div class="icon">🎯</div>
+            <h3>First AI Agent</h3>
+            <p>Step-by-step tutorial</p>
+          </a>
+          <a href="/docs/sdks/python" class="quick-link-card">
+            <div class="icon">🐍</div>
+            <h3>Python SDK</h3>
+            <p>Python integration guide</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Documentation Sections -->
+      <div class="docs-sections">
+        <h2>Documentation Sections</h2>
+        <div class="sections-grid">
+          {documentationSections.map((section) => (
+            <div class="section-card">
+              <div class="section-header">
+                <div class="section-icon">{section.icon}</div>
+                <div>
+                  <h3>{section.title}</h3>
+                  <p class="section-description">{section.description}</p>
+                </div>
+              </div>
+              <div class="docs-list">
+                {section.docs.map((doc) => (
+                  <a href={doc.url} class="doc-link" data-type={doc.type} data-difficulty={doc.difficulty}>
+                    <span class="doc-title">{doc.title}</span>
+                    <div class="doc-badges">
+                      <span class="type-badge {doc.type}">{doc.type}</span>
+                      <span class="difficulty-badge {doc.difficulty}">{doc.difficulty}</span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Recent Updates -->
+      <div class="updates-section">
+        <h2>Recent Updates</h2>
+        <div class="updates-list">
+          {recentUpdates.map((update) => (
+            <div class="update-item">
+              <div class="update-content">
+                <h4>{update.title}</h4>
+                <div class="update-meta">
+                  <span class="update-type">{update.type}</span>
+                  <span class="update-date">{new Date(update.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                </div>
+              </div>
+              <div class="update-indicator"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Support Section -->
+      <div class="support-section">
+        <div class="support-grid">
+          <div class="support-card">
+            <div class="support-icon">💬</div>
+            <h3>Community Forum</h3>
+            <p>Join our developer community for discussions and support</p>
+            <a href="#" class="support-link">Visit Forum</a>
+          </div>
+          <div class="support-card">
+            <div class="support-icon">📧</div>
+            <h3>Technical Support</h3>
+            <p>Get help from our technical support team</p>
+            <a href="#contact" class="support-link">Contact Support</a>
+          </div>
+          <div class="support-card">
+            <div class="support-icon">📞</div>
+            <h3>Enterprise Support</h3>
+            <p>Dedicated support for enterprise customers</p>
+            <a href="#contact" class="support-link">Learn More</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contribute Section -->
+      <div class="contribute-section">
+        <h2>Help Improve Our Documentation</h2>
+        <p>Found an error or want to contribute? We welcome feedback and contributions to make our documentation better.</p>
+        <div class="contribute-actions">
+          <a href="#" class="contribute-button">Report Issue</a>
+          <a href="#" class="contribute-button secondary">Suggest Improvement</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <ContactSection />
+</PageLayout>
+
+<style lang="scss">
+  .documentation-section {
+    background: #040913;
+    padding: 80px 0;
+    
+    @media (max-width: 768px) {
+      padding: 60px 0;
+    }
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    
+    @media (max-width: 768px) {
+      padding: 0 24px;
+    }
+  }
+
+  .search-section {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .search-box {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto 24px;
+    
+    .search-input {
+      width: 100%;
+      padding: 16px 56px 16px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.125rem;
+      
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+      
+      &:focus {
+        outline: none;
+        border-color: #3366FF;
+        box-shadow: 0 0 0 3px rgba(51, 102, 255, 0.1);
+        background: rgba(255, 255, 255, 0.15);
+      }
+    }
+    
+    .search-icon {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  .search-filters {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .filter-select {
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    min-width: 120px;
+    
+    &:focus {
+      outline: none;
+      border-color: #3366FF;
+      box-shadow: 0 0 0 3px rgba(51, 102, 255, 0.1);
+    }
+    
+    option {
+      background: #040913;
+      color: #FFFFFF;
+    }
+  }
+
+  .quick-links-section {
+    margin-bottom: 60px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+  }
+
+  .quick-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+  }
+
+  .quick-link-card {
+    background: linear-gradient(135deg, rgba(51, 102, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(51, 102, 255, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-align: center;
+    
+    &:hover {
+      background: linear-gradient(135deg, rgba(51, 102, 255, 0.15), rgba(255, 255, 255, 0.08));
+      border-color: rgba(51, 102, 255, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(51, 102, 255, 0.2);
+    }
+    
+    .icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+    
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.125rem;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0;
+    }
+  }
+
+  .docs-sections {
+    margin-bottom: 60px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+  }
+
+  .sections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 32px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+
+  .section-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 32px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .section-header {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    align-items: flex-start;
+    
+    .section-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+    
+    .section-description {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.5;
+      margin: 0;
+    }
+  }
+
+  .docs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .doc-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateX(4px);
+    }
+    
+    .doc-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: #FFFFFF;
+      font-weight: 500;
+    }
+  }
+
+  .doc-badges {
+    display: flex;
+    gap: 6px;
+  }
+
+  .type-badge, .difficulty-badge {
+    padding: 2px 6px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .type-badge {
+    &.guide {
+      background: rgba(0, 212, 170, 0.2);
+      color: #00D4AA;
+    }
+    
+    &.tutorial {
+      background: rgba(255, 193, 7, 0.2);
+      color: #FFC107;
+    }
+    
+    &.reference {
+      background: rgba(51, 102, 255, 0.2);
+      color: #3366FF;
+    }
+  }
+
+  .difficulty-badge {
+    &.beginner {
+      background: rgba(0, 212, 170, 0.2);
+      color: #00D4AA;
+    }
+    
+    &.intermediate {
+      background: rgba(255, 193, 7, 0.2);
+      color: #FFC107;
+    }
+    
+    &.advanced {
+      background: rgba(220, 53, 69, 0.2);
+      color: #DC3545;
+    }
+  }
+
+  .updates-section {
+    margin-bottom: 60px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+  }
+
+  .updates-list {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .update-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    .update-indicator {
+      width: 8px;
+      height: 8px;
+      background: #3366FF;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    
+    .update-content {
+      flex: 1;
+      
+      h4 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 0.975rem;
+        color: #FFFFFF;
+        margin-bottom: 4px;
+      }
+      
+      .update-meta {
+        display: flex;
+        gap: 12px;
+        font-size: 0.75rem;
+        
+        .update-type {
+          color: #3366FF;
+          font-weight: 500;
+        }
+        
+        .update-date {
+          color: rgba(255, 255, 255, 0.6);
+        }
+      }
+    }
+  }
+
+  .support-section {
+    margin-bottom: 60px;
+  }
+
+  .support-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .support-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 32px;
+    text-align: center;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+    
+    .support-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+    
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.125rem;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    
+    .support-link {
+      display: inline-block;
+      color: #3366FF;
+      text-decoration: none;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.875rem;
+      padding: 8px 0;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        border-bottom-color: #3366FF;
+      }
+    }
+  }
+
+  .contribute-section {
+    text-align: center;
+    padding: 60px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      color: #FFFFFF;
+      margin-bottom: 16px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .contribute-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .contribute-button {
+    display: inline-block;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    
+    &:not(.secondary) {
+      background: #3366FF;
+      color: #FFFFFF;
+      box-shadow: 0 4px 16px rgba(51, 102, 255, 0.3);
+      
+      &:hover {
+        background: #2952CC;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(51, 102, 255, 0.4);
+      }
+    }
+    
+    &.secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+      }
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.querySelector('.search-input') as HTMLInputElement | null;
+    const filterSelects = document.querySelectorAll('.filter-select') as NodeListOf<HTMLSelectElement>;
+    const docLinks = document.querySelectorAll('.doc-link') as NodeListOf<HTMLElement>;
+    
+    // Search functionality
+    searchInput?.addEventListener('input', function(this: HTMLInputElement) {
+      const searchTerm = this.value.toLowerCase();
+      
+      docLinks.forEach(link => {
+        const titleElement = link.querySelector('.doc-title') as HTMLElement | null;
+        const title = titleElement?.textContent?.toLowerCase() || '';
+        const shouldShow = title.includes(searchTerm);
+        
+        link.style.display = shouldShow ? 'flex' : 'none';
+      });
+    });
+    
+    // Filter functionality
+    filterSelects.forEach(select => {
+      select.addEventListener('change', function(this: HTMLSelectElement) {
+        const filterType = this.dataset.filter;
+        const filterValue = this.value;
+        
+        docLinks.forEach(link => {
+          const shouldShow = filterValue === 'all' || link.dataset[filterType!] === filterValue;
+          link.style.display = shouldShow ? 'flex' : 'none';
+        });
+      });
+    });
+  });
+</script>
