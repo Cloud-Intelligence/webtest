@@ -2,3 +2,6 @@ node_modules
 .astro
 .claude
 
+# Feature flags local override
+feature-flags.local.json
+

@@ -54,12 +54,7 @@ export function trackWebVitals() {
   });
   clsObserver.observe({ entryTypes: ['layout-shift'] });
 
-  // Send vitals to analytics (you can replace with your analytics service)
-  window.addEventListener('beforeunload', () => {
-    if (navigator.sendBeacon) {
-      navigator.sendBeacon('/analytics', JSON.stringify(vitals));
-    }
-  });
+  // Analytics tracking removed
 }
 
 // Resource loading performance

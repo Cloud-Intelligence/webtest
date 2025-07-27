@@ -14,9 +14,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm ci` - Install dependencies (production builds)
 - `npm install` - Install dependencies (development)
 
+
+
+### Type Checking & Linting
+- `npm run build` - Runs Astro type checking and builds for production
+- `astro check` - Run Astro type checking only
+
 ## Architecture
 
-This is an Astro-based website for Cloud Intelligence with a unique unlock screen interaction pattern, built for scalability across multiple pages and blog functionality.
+This is a full-stack application with an Astro-based frontend website and a FastAPI backend API.
+
+### Frontend Architecture
+Astro-based website for Cloud Intelligence with a unique unlock screen interaction pattern, built for scalability across multiple pages and blog functionality.
+
+
 
 ## Philosophy
 the goal is to create a highly performant mobile first marketing website for a professional software engineering company.
@@ -86,3 +97,78 @@ following of figma designs must be pixel perfect.
 - **Animations**: GSAP for custom animations and transitions
 - **Build Optimization**: astro-compressor, @playform/compress for production builds
 - **Utilities**: clsx, tailwind-merge, class-variance-authority
+
+## Feature Flags
+
+The application includes a build-time feature flag system for controlling feature visibility.
+
+### Configuration
+- **TypeScript Config**: `src/config/feature-flags.ts` - Feature flag system
+- **JSON Config**: `feature-flags.json` - Main configuration file (committed)
+- **Local Override**: `feature-flags.local.json` - Local overrides (gitignored)
+- **Type**: Build-time evaluation (not runtime) - flags are baked into the build
+
+### Configuration Priority (highest to lowest)
+1. Environment variables (`FEATURE_<FLAG_NAME>`)
+2. Local override file (`feature-flags.local.json`)
+3. Default config file (`feature-flags.json`)
+4. Code defaults
+
+### Available Flags
+- `CHAT_WIDGET` - AI chat widget in bottom-right corner (default: true)
+- `PRODUCTS_SECTION` - Products navigation and pages (default: true)
+- `AI_CHAT_DEMO` - AI chat demo on product page (default: true)
+- `ANALYTICS_DASHBOARD` - Analytics dashboard feature (default: false)
+- `BETA_FEATURES` - Enable beta/experimental features (default: false)
+- `MAINTENANCE_MODE` - Show maintenance message (default: false)
+
+### Usage
+
+#### Via JSON Configuration (Recommended)
+```bash
+# Edit feature-flags.json
+{
+  "CHAT_WIDGET": false,
+  "BETA_FEATURES": true
+}
+
+# Or create local override
+echo '{"CHAT_WIDGET": false}' > feature-flags.local.json
+
+# Build
+npm run build
+```
+
+#### Via Environment Variables
+```bash
+# Disable chat widget
+FEATURE_CHAT_WIDGET=false npm run build
+
+# Multiple flags
+FEATURE_CHAT_WIDGET=false FEATURE_BETA_FEATURES=true npm run build
+```
+
+#### In Code
+```typescript
+import { isFeatureEnabled } from '../config/feature-flags';
+
+// In Astro components
+{isFeatureEnabled('CHAT_WIDGET') && <ChatWidget client:load />}
+
+// In TypeScript/React
+if (isFeatureEnabled('CHAT_WIDGET')) {
+  // Feature-specific code
+}
+```
+
+### Adding New Feature Flags
+1. Update the `FeatureFlags` interface in `src/config/feature-flags.ts`
+2. Add the default value to `defaultFlags` object
+3. Use `isFeatureEnabled('YOUR_FLAG_NAME')` in components
+
+### Important Notes
+- Feature flags are evaluated at BUILD TIME, not runtime
+- Environment variables override default values
+- Accepted values: 'true', 'false', '1', '0'
+- Flag names are case-sensitive
+- Environment variable format: `FEATURE_<FLAG_NAME>`

@@ -1,0 +1,277 @@
+---
+// Maintenance page - shown when MAINTENANCE_MODE is enabled
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maintenance - Cloud Intelligence</title>
+    <meta name="description" content="Cloud Intelligence is currently undergoing maintenance. We'll be back shortly." />
+    <meta name="robots" content="noindex, nofollow" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/webtest/ci-fav-icon.svg" />
+    <link rel="icon" type="image/png" href="/webtest/logo.png" />
+    
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: #040913;
+        color: #ffffff;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+      }
+      
+      /* Animated background gradient */
+      .background {
+        position: fixed;
+        inset: 0;
+        background: 
+          radial-gradient(circle at 20% 50%, rgba(51, 102, 255, 0.3) 0%, transparent 50%),
+          radial-gradient(circle at 80% 50%, rgba(99, 102, 241, 0.2) 0%, transparent 50%),
+          radial-gradient(circle at 50% 100%, rgba(56, 123, 246, 0.2) 0%, transparent 50%),
+          #040913;
+        animation: backgroundShift 20s ease-in-out infinite;
+        z-index: 0;
+      }
+      
+      @keyframes backgroundShift {
+        0%, 100% { transform: scale(1) rotate(0deg); }
+        50% { transform: scale(1.1) rotate(1deg); }
+      }
+      
+      .container {
+        max-width: 600px;
+        text-align: center;
+        padding: 40px;
+        position: relative;
+        z-index: 1;
+      }
+      
+      .logo {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 32px;
+        animation: logoFloat 4s ease-in-out infinite;
+      }
+      
+      @keyframes logoFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+      
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+        background: linear-gradient(135deg, #3366FF 0%, #6366F1 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      
+      .subtitle {
+        font-size: 1.25rem;
+        font-weight: 500;
+        margin-bottom: 24px;
+        opacity: 0.9;
+      }
+      
+      .message {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 40px;
+        opacity: 0.8;
+      }
+      
+      .progress-bar {
+        width: 100%;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 2px;
+        overflow: hidden;
+        margin-bottom: 40px;
+      }
+      
+      .progress-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #3366FF 0%, #6366F1 100%);
+        width: 30%;
+        animation: progressAnimation 2s ease-in-out infinite;
+      }
+      
+      @keyframes progressAnimation {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(400%); }
+      }
+      
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+        margin-bottom: 40px;
+      }
+      
+      .feature {
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .feature-icon {
+        font-size: 2rem;
+        margin-bottom: 8px;
+      }
+      
+      .feature-text {
+        font-size: 0.875rem;
+        opacity: 0.8;
+      }
+      
+      .contact {
+        font-size: 0.875rem;
+        opacity: 0.7;
+      }
+      
+      .contact a {
+        color: #3366FF;
+        text-decoration: none;
+      }
+      
+      .contact a:hover {
+        text-decoration: underline;
+      }
+      
+      /* Floating particles animation */
+      .particles {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        z-index: 0;
+      }
+      
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: rgba(99, 102, 241, 0.5);
+        border-radius: 50%;
+        animation: float 20s infinite;
+      }
+      
+      @keyframes float {
+        0% {
+          transform: translateY(100vh) translateX(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh) translateX(100px);
+          opacity: 0;
+        }
+      }
+      
+      .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 15s; }
+      .particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 18s; }
+      .particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 20s; }
+      .particle:nth-child(4) { left: 40%; animation-delay: 6s; animation-duration: 16s; }
+      .particle:nth-child(5) { left: 50%; animation-delay: 8s; animation-duration: 22s; }
+      .particle:nth-child(6) { left: 60%; animation-delay: 10s; animation-duration: 19s; }
+      .particle:nth-child(7) { left: 70%; animation-delay: 12s; animation-duration: 17s; }
+      .particle:nth-child(8) { left: 80%; animation-delay: 14s; animation-duration: 21s; }
+      .particle:nth-child(9) { left: 90%; animation-delay: 16s; animation-duration: 15s; }
+      .particle:nth-child(10) { left: 95%; animation-delay: 18s; animation-duration: 18s; }
+      
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2rem;
+        }
+        
+        .subtitle {
+          font-size: 1.125rem;
+        }
+        
+        .container {
+          padding: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background"></div>
+    
+    <div class="particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+    
+    <div class="container">
+      <img src="/webtest/logo.png" alt="Cloud Intelligence" class="logo" />
+      
+      <h1>Under Maintenance</h1>
+      <p class="subtitle">We're upgrading our systems</p>
+      
+      <p class="message">
+        Cloud Intelligence is currently undergoing scheduled maintenance to bring you new features 
+        and improved performance. We'll be back online shortly.
+      </p>
+      
+      <div class="progress-bar">
+        <div class="progress-bar-fill"></div>
+      </div>
+      
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">🚀</div>
+          <div class="feature-text">Performance Upgrades</div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">✨</div>
+          <div class="feature-text">New Features</div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🔒</div>
+          <div class="feature-text">Security Updates</div>
+        </div>
+      </div>
+      
+      <div class="contact">
+        <p>Need immediate assistance?</p>
+        <p>Contact us at <a href="mailto:support@cloudintelligence.com">support@cloudintelligence.com</a></p>
+      </div>
+    </div>
+    
+    <script>
+      // Auto-refresh every 30 seconds to check if maintenance is over
+      setTimeout(() => {
+        window.location.reload();
+      }, 30000);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "_comment": "Copy this file to feature-flags.local.json to override feature flags locally",
+  "_comment2": "This local file is gitignored and won't be committed",
+  "_example": "Set any flag to true/false to override the default",
+  
+  "CHAT_WIDGET": false,
+  "BETA_FEATURES": true,
+  "ANALYTICS_DASHBOARD": true
+}

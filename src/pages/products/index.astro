@@ -1,0 +1,422 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContactSection from '../../components/ContactSection.astro';
+import ProductAccessCheck from '../../components/ProductAccessCheck.astro';
+
+// Get base path from Astro config and ensure proper path formatting
+const baseUrl = import.meta.env.BASE_URL;
+
+// Helper function to create proper URLs
+const createUrl = (path: string) => {
+  const cleanBase = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  return `${cleanBase}${cleanPath}`;
+};
+
+const products = [
+  {
+    title: "AI Chat Widget",
+    description: "Deploy an intelligent chat widget on your website that knows everything about your company. Perfect for sales, marketing, and customer support automation.",
+    icon: "💬",
+    href: createUrl('/products/ai-chat-widget'),
+    features: ["Instant Deployment", "Company Knowledge AI", "Sales & Lead Generation", "Self-Hosted or Cloud"],
+    badges: ["Popular", "New"]
+  }
+];
+---
+
+<PageLayout 
+  title="Products - Cloud Intelligence"
+  description="Discover our AI-powered products including the intelligent chat widget for sales and marketing automation. Self-hosted or cloud solutions available."
+  keywords="AI chat widget, sales automation, marketing chatbot, customer support AI, lead generation"
+>
+  <!-- Check if products section is enabled -->
+  <ProductAccessCheck />
+  
+  <PageHero 
+    title="Our Products"
+    subtitle="AI-Powered Solutions for Modern Business"
+    description="Ready-to-deploy AI products that transform how you engage with customers and automate business processes."
+  />
+  
+  <section class="products-section">
+    <div class="container">
+      <div class="products-grid">
+        {products.map((product) => (
+          <a href={product.href} class="product-card">
+            <div class="card-header">
+              <div class="card-icon">{product.icon}</div>
+              {product.badges && product.badges.length > 0 && (
+                <div class="badges">
+                  {product.badges.map((badge) => (
+                    <span class={`badge badge-${badge.toLowerCase()}`}>{badge}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+            <h3>{product.title}</h3>
+            <p class="card-description">{product.description}</p>
+            <ul class="feature-list">
+              {product.features.map((feature) => (
+                <li>{feature}</li>
+              ))}
+            </ul>
+            <div class="card-footer">
+              <span class="cta-text">Learn More & Purchase</span>
+              <div class="card-arrow">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+      
+      <div class="coming-soon-section">
+        <h2>More Products Coming Soon</h2>
+        <p>We're continuously developing new AI-powered products to help businesses automate and scale. Stay tuned for our upcoming releases including:</p>
+        <div class="upcoming-products">
+          <div class="upcoming-item">
+            <span class="upcoming-icon">🤖</span>
+            <span>AI Sales Assistant</span>
+          </div>
+          <div class="upcoming-item">
+            <span class="upcoming-icon">📊</span>
+            <span>Analytics Dashboard</span>
+          </div>
+          <div class="upcoming-item">
+            <span class="upcoming-icon">🔧</span>
+            <span>API Management Platform</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="cta-section">
+        <h2>Ready to Transform Your Business?</h2>
+        <p>Start with our AI Chat Widget and see immediate results in customer engagement</p>
+        <div class="cta-buttons">
+          <a href={createUrl('/products/ai-chat-widget')} class="cta-button primary">View AI Chat Widget</a>
+          <a href={createUrl('/book-a-call')} class="cta-button secondary">Schedule a Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <ContactSection />
+</PageLayout>
+
+<style lang="scss">
+  .products-section {
+    background: #040913;
+    padding: 80px 0;
+    
+    @media (max-width: 768px) {
+      padding: 60px 0;
+    }
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    
+    @media (max-width: 768px) {
+      padding: 0 24px;
+    }
+  }
+  
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 32px;
+    margin-bottom: 80px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+  }
+  
+  .product-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px 32px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+      
+      .card-arrow {
+        transform: translateX(4px);
+      }
+    }
+    
+    // Enhanced gradient overlay for product cards
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(
+        180deg,
+        rgba(51, 102, 255, 0.1) 0%,
+        transparent 100%
+      );
+      pointer-events: none;
+      border-radius: 20px 20px 0 0;
+    }
+    
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .card-icon {
+      font-size: 4rem;
+      display: block;
+    }
+    
+    .badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .badge {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      
+      &.badge-popular {
+        background: linear-gradient(45deg, #3366FF, #6366F1);
+        color: white;
+      }
+      
+      &.badge-new {
+        background: linear-gradient(45deg, #10B981, #34D399);
+        color: white;
+      }
+    }
+    
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.75rem;
+      color: #FFFFFF;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .card-description {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+      flex-grow: 1;
+    }
+    
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px 0;
+      position: relative;
+      z-index: 1;
+      
+      li {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.7);
+        padding: 6px 0;
+        position: relative;
+        padding-left: 20px;
+        
+        &::before {
+          content: '✓';
+          position: absolute;
+          left: 0;
+          color: #3366FF;
+          font-weight: 600;
+        }
+      }
+    }
+    
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      margin-top: auto;
+    }
+    
+    .cta-text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: #3366FF;
+    }
+    
+    .card-arrow {
+      color: #3366FF;
+      transition: transform 0.3s ease;
+    }
+  }
+  
+  .coming-soon-section {
+    text-align: center;
+    margin-bottom: 80px;
+    padding: 60px 40px;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    
+    @media (max-width: 768px) {
+      padding: 40px 24px;
+      margin-bottom: 60px;
+    }
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      color: #FFFFFF;
+      margin-bottom: 16px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .upcoming-products {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      
+      @media (max-width: 768px) {
+        gap: 24px;
+      }
+    }
+    
+    .upcoming-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+      
+      .upcoming-icon {
+        font-size: 1.2rem;
+      }
+    }
+  }
+  
+  .cta-section {
+    text-align: center;
+    padding: 60px 40px;
+    background: rgba(51, 102, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(51, 102, 255, 0.2);
+    border-radius: 24px;
+    
+    @media (max-width: 768px) {
+      padding: 40px 24px;
+    }
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      color: #FFFFFF;
+      margin-bottom: 16px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 32px;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 16px 32px;
+      text-decoration: none;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      
+      &.primary {
+        background: linear-gradient(135deg, #3366FF 0%, #6366F1 100%);
+        color: white;
+        box-shadow: 0 8px 32px rgba(51, 102, 255, 0.3);
+        
+        &:hover {
+          background: linear-gradient(135deg, #2952CC 0%, #5B5CF6 100%);
+          transform: translateY(-2px);
+          box-shadow: 0 12px 40px rgba(51, 102, 255, 0.4);
+        }
+      }
+      
+      &.secondary {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.15);
+          border-color: rgba(255, 255, 255, 0.3);
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+</style>

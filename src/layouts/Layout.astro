@@ -19,6 +19,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://cloud-in
 import '../styles/main.scss';
 import '../styles/globals.css';
 import NavbarEnhanced from '../components/NavbarEnhanced.astro';
+import ChatWidget from '../components/ChatWidget.tsx';
+import MaintenanceCheck from '../components/MaintenanceCheck.astro';
+import { isFeatureEnabled } from '../config/feature-flags';
 ---
 
 <!DOCTYPE html>
@@ -369,11 +372,15 @@ import NavbarEnhanced from '../components/NavbarEnhanced.astro';
     </script>
   </head>
   <body>
+    <!-- Maintenance Mode Check -->
+    <MaintenanceCheck />
+    
     <!-- Skip Links -->
     <a href="#main" class="skip-link">Skip to main content</a>
     <a href="#navbar-container" class="skip-link">Skip to navigation</a>
     
     {showNavbar && <NavbarEnhanced />}
     <slot />
+    {isFeatureEnabled('CHAT_WIDGET') && <ChatWidget client:load />}
   </body>
 </html>

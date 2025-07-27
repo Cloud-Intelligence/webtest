@@ -1,0 +1,262 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Get base path from Astro config and ensure proper path formatting
+const baseUrl = import.meta.env.BASE_URL;
+
+// Helper function to create proper URLs
+const createUrl = (path: string) => {
+  const cleanBase = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  return `${cleanBase}${cleanPath}`;
+};
+---
+
+<Layout 
+  title="404 - Page Not Found | Cloud Intelligence"
+  description="The page you're looking for doesn't exist."
+  showNavbar={true}
+>
+  <main class="error-page">
+    <div class="error-container">
+      <div class="error-content">
+        <div class="error-code">404</div>
+        <h1>Page Not Found</h1>
+        <p class="error-message">
+          Oops! The page you're looking for seems to have wandered off into the cloud.
+        </p>
+        
+        <div class="error-animation">
+          <div class="cloud cloud-1"></div>
+          <div class="cloud cloud-2"></div>
+          <div class="cloud cloud-3"></div>
+        </div>
+        
+        <div class="suggestions">
+          <p>Here are some helpful links:</p>
+          <div class="link-grid">
+            <a href={createUrl('/')} class="suggestion-link">
+              <span class="link-icon">🏠</span>
+              <span>Home</span>
+            </a>
+            <a href={createUrl('/solutions')} class="suggestion-link">
+              <span class="link-icon">💡</span>
+              <span>Solutions</span>
+            </a>
+            <a href={createUrl('/about')} class="suggestion-link">
+              <span class="link-icon">👥</span>
+              <span>About</span>
+            </a>
+            <a href={createUrl('/book-a-call')} class="suggestion-link">
+              <span class="link-icon">📞</span>
+              <span>Contact</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style lang="scss">
+  .error-page {
+    min-height: 100vh;
+    background: #040913;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    
+    // Background gradient animation
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(51, 102, 255, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at 80% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 50% 100%, rgba(56, 123, 246, 0.1) 0%, transparent 40%);
+      animation: gradientShift 20s ease-in-out infinite;
+    }
+    
+    @keyframes gradientShift {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.2) rotate(2deg); }
+    }
+  }
+  
+  .error-container {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .error-content {
+    text-align: center;
+    
+    .error-code {
+      font-family: 'Manrope', sans-serif;
+      font-size: clamp(6rem, 15vw, 10rem);
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #3366FF 0%, #6366F1 50%, #8B5CF6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: pulse 3s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(0.98); }
+    }
+    
+    h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 600;
+      color: #FFFFFF;
+      margin-bottom: 16px;
+    }
+    
+    .error-message {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+  }
+  
+  .error-animation {
+    position: relative;
+    height: 120px;
+    margin: 40px 0;
+    
+    .cloud {
+      position: absolute;
+      width: 80px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 100px;
+      opacity: 0.6;
+      
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 100px;
+      }
+      
+      &::before {
+        width: 50px;
+        height: 50px;
+        top: -25px;
+        left: 10px;
+      }
+      
+      &::after {
+        width: 60px;
+        height: 40px;
+        top: -20px;
+        right: 10px;
+      }
+      
+      &.cloud-1 {
+        left: 10%;
+        animation: floatCloud 15s infinite ease-in-out;
+      }
+      
+      &.cloud-2 {
+        left: 40%;
+        top: 30px;
+        animation: floatCloud 20s infinite ease-in-out reverse;
+        animation-delay: -5s;
+      }
+      
+      &.cloud-3 {
+        right: 10%;
+        top: 10px;
+        animation: floatCloud 18s infinite ease-in-out;
+        animation-delay: -10s;
+      }
+    }
+    
+    @keyframes floatCloud {
+      0%, 100% { transform: translateX(0) translateY(0); }
+      25% { transform: translateX(20px) translateY(-10px); }
+      50% { transform: translateX(-10px) translateY(5px); }
+      75% { transform: translateX(15px) translateY(-5px); }
+    }
+  }
+  
+  .suggestions {
+    margin-top: 60px;
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 24px;
+    }
+  }
+  
+  .link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .suggestion-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(51, 102, 255, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(51, 102, 255, 0.2);
+      
+      .link-icon {
+        transform: scale(1.2);
+      }
+    }
+    
+    .link-icon {
+      font-size: 2rem;
+      transition: transform 0.3s ease;
+    }
+    
+    span:not(.link-icon) {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .error-page {
+      padding-top: 100px; // Account for navbar
+    }
+    
+    .link-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

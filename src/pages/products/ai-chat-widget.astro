@@ -1,0 +1,842 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import ContactSection from '../../components/ContactSection.astro';
+import ProductAccessCheck from '../../components/ProductAccessCheck.astro';
+
+// Get base path from Astro config and ensure proper path formatting
+const baseUrl = import.meta.env.BASE_URL;
+
+// Helper function to create proper URLs
+const createUrl = (path: string) => {
+  const cleanBase = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  return `${cleanBase}${cleanPath}`;
+};
+
+const features = [
+  {
+    title: "Instant Deployment",
+    description: "Add our chat widget to any website with just a single line of code. No complex setup or technical knowledge required.",
+    icon: "⚡"
+  },
+  {
+    title: "Company Knowledge AI",
+    description: "The AI learns everything about your company, products, and services to provide accurate, contextual responses.",
+    icon: "🧠"
+  },
+  {
+    title: "Sales & Lead Generation",
+    description: "Automatically qualify leads, answer product questions, and guide visitors toward conversion.",
+    icon: "💰"
+  },
+  {
+    title: "24/7 Customer Support",
+    description: "Provide instant customer support around the clock, handling common queries and escalating when needed.",
+    icon: "🕐"
+  },
+  {
+    title: "Custom Branding",
+    description: "Fully customize the appearance, colors, and messaging to match your brand identity perfectly.",
+    icon: "🎨"
+  },
+  {
+    title: "Analytics & Insights",
+    description: "Track conversations, measure performance, and gain insights into customer behavior and preferences.",
+    icon: "📊"
+  },
+  {
+    title: "Multi-Language Support",
+    description: "Communicate with customers in their preferred language with automatic translation capabilities.",
+    icon: "🌍"
+  },
+  {
+    title: "CRM Integration",
+    description: "Seamlessly integrate with popular CRM systems to automatically capture and sync lead information.",
+    icon: "🔧"
+  }
+];
+
+const pricingPlans = [
+  {
+    name: "Starter",
+    description: "Perfect for small businesses and startups",
+    price: "$49",
+    period: "/month",
+    features: [
+      "Up to 1,000 conversations/month",
+      "1 website domain",
+      "Basic customization",
+      "Email support",
+      "Standard analytics"
+    ],
+    popular: false
+  },
+  {
+    name: "Professional",
+    description: "Ideal for growing businesses",
+    price: "$149",
+    period: "/month",
+    features: [
+      "Up to 5,000 conversations/month",
+      "3 website domains",
+      "Advanced customization",
+      "Priority support",
+      "Advanced analytics",
+      "CRM integration",
+      "Custom branding"
+    ],
+    popular: true
+  },
+  {
+    name: "Enterprise",
+    description: "For large organizations",
+    price: "Custom",
+    period: "pricing",
+    features: [
+      "Unlimited conversations",
+      "Unlimited domains",
+      "White-label solution",
+      "Dedicated support",
+      "Custom integrations",
+      "On-premise deployment",
+      "SLA guarantee"
+    ],
+    popular: false
+  }
+];
+
+const deploymentOptions = [
+  {
+    title: "Cloud Hosted",
+    description: "We handle all the infrastructure, updates, and maintenance. Just add the widget code to your site.",
+    icon: "☁️",
+    benefits: ["No server management", "Automatic updates", "Global CDN", "99.9% uptime SLA"]
+  },
+  {
+    title: "Self-Hosted",
+    description: "Deploy on your own infrastructure for maximum control and data privacy.",
+    icon: "🏢",
+    benefits: ["Full data control", "Custom security", "No monthly fees", "Complete ownership"]
+  }
+];
+---
+
+<PageLayout 
+  title="AI Chat Widget - Cloud Intelligence"
+  description="Deploy an intelligent AI chat widget that knows everything about your company. Perfect for sales, marketing, and customer support automation."
+  keywords="AI chat widget, sales automation, chatbot, customer support AI, lead generation, website chat"
+>
+  <!-- Check if products section is enabled -->
+  <ProductAccessCheck />
+  
+  <PageHero 
+    title="AI Chat Widget"
+    subtitle="The Intelligent Chat Widget That Actually Knows Your Business"
+    description="Deploy an AI-powered chat widget that understands your company inside and out. Convert more visitors, support customers 24/7, and automate lead qualification with intelligent conversations."
+  />
+  
+  <section class="content-section">
+    <div class="container">
+      <!-- Demo Section -->
+      <div class="demo-section">
+        <div class="demo-content">
+          <h2>See It In Action</h2>
+          <p>
+            The chat widget you're using on this very website is our AI Chat Widget in action! 
+            Try it out in the bottom right corner to experience how it understands our business 
+            and provides intelligent, contextual responses.
+          </p>
+          <div class="demo-callout">
+            <div class="demo-icon">💬</div>
+            <div class="demo-text">
+              <strong>Live Demo:</strong> The chat widget on this page is the actual product. 
+              Click the chat icon to experience its capabilities firsthand!
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Features Grid -->
+      <div class="features-grid">
+        {features.map((feature) => (
+          <div class="feature-card">
+            <div class="feature-icon">{feature.icon}</div>
+            <h3>{feature.title}</h3>
+            <p>{feature.description}</p>
+          </div>
+        ))}
+      </div>
+      
+      <!-- Deployment Options -->
+      <div class="deployment-section">
+        <h2>Choose Your Deployment Option</h2>
+        <div class="deployment-grid">
+          {deploymentOptions.map((option) => (
+            <div class="deployment-card">
+              <div class="deployment-icon">{option.icon}</div>
+              <h3>{option.title}</h3>
+              <p class="deployment-description">{option.description}</p>
+              <ul class="benefit-list">
+                {option.benefits.map((benefit) => (
+                  <li>{benefit}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <!-- Pricing Section -->
+      <div class="pricing-section">
+        <h2>Simple, Transparent Pricing</h2>
+        <p class="pricing-subtitle">Choose the plan that fits your business needs. All plans include core AI functionality.</p>
+        <div class="pricing-grid">
+          {pricingPlans.map((plan) => (
+            <div class={`pricing-card ${plan.popular ? 'popular' : ''}`}>
+              {plan.popular && <div class="popular-badge">Most Popular</div>}
+              <h3>{plan.name}</h3>
+              <p class="plan-description">{plan.description}</p>
+              <div class="price">
+                <span class="price-amount">{plan.price}</span>
+                <span class="price-period">{plan.period}</span>
+              </div>
+              <ul class="feature-list">
+                {plan.features.map((feature) => (
+                  <li>{feature}</li>
+                ))}
+              </ul>
+              <a href={createUrl('/book-a-call')} class="plan-button">
+                {plan.name === 'Enterprise' ? 'Contact Sales' : 'Start Free Trial'}
+              </a>
+            </div>
+          ))}
+        </div>
+        <div class="pricing-note">
+          <p>🎯 <strong>14-day free trial</strong> on all plans. No credit card required. Cancel anytime.</p>
+        </div>
+      </div>
+      
+      <div class="cta-section">
+        <h2>Ready to Transform Your Website?</h2>
+        <p>Join hundreds of businesses using our AI Chat Widget to increase conversions and improve customer experience</p>
+        <div class="cta-buttons">
+          <a href={createUrl('/book-a-call')} class="cta-button primary">Start Free Trial</a>
+          <a href={createUrl('/book-a-call')} class="cta-button secondary">Schedule Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>How quickly can I deploy the chat widget?</h3>
+          <p>Deployment takes less than 5 minutes. Simply add one line of JavaScript code to your website, and the widget is live. We provide detailed integration guides for popular platforms like WordPress, Shopify, and custom websites.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How does the AI learn about my company?</h3>
+          <p>During setup, you provide information about your company, products, services, and common questions. The AI also learns from your website content, documentation, and FAQ pages. You can continuously train it with new information as your business evolves.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What kind of analytics do I get?</h3>
+          <p>Comprehensive analytics including conversation volume, response accuracy, lead generation metrics, customer satisfaction scores, common questions, and conversion tracking. All data is presented in an easy-to-understand dashboard.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Can it integrate with my existing CRM?</h3>
+          <p>Yes! We support integrations with popular CRM systems including Salesforce, HubSpot, Pipedrive, and Zoho. Leads and conversation data are automatically synced to your CRM with all relevant context and contact information.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is my data secure and private?</h3>
+          <p>Absolutely. We use enterprise-grade security including end-to-end encryption, SOC 2 compliance, and GDPR compliance. For self-hosted deployments, all data remains on your infrastructure under your complete control.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What customization options are available?</h3>
+          <p>Full customization including colors, fonts, positioning, messaging, conversation flows, and branding. You can match your exact brand guidelines and create a seamless experience that looks native to your website.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Can I try it before purchasing?</h3>
+          <p>Yes! We offer a 14-day free trial with full access to all features. No credit card required. You can test the widget on your website and see the results before making any commitment.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What support do you provide?</h3>
+          <p>We provide comprehensive support including setup assistance, training materials, video tutorials, and ongoing technical support. Professional and Enterprise plans include priority support with guaranteed response times.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ContactSection />
+</PageLayout>
+
+<!-- Product Schema for AI Chat Widget -->
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "AI Chat Widget",
+  "description": "Deploy an intelligent AI chat widget that knows everything about your company. Perfect for sales, marketing, and customer support automation.",
+  "brand": {
+    "@type": "Organization",
+    "name": "Cloud Intelligence"
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Starter Plan",
+      "price": "49",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "RecurringCharge",
+        "price": "49",
+        "priceCurrency": "USD",
+        "billingPeriod": "Month"
+      },
+      "availability": "InStock"
+    },
+    {
+      "@type": "Offer", 
+      "name": "Professional Plan",
+      "price": "149",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "RecurringCharge",
+        "price": "149",
+        "priceCurrency": "USD",
+        "billingPeriod": "Month"
+      },
+      "availability": "InStock"
+    }
+  ],
+  "category": "Software",
+  "audience": {
+    "@type": "BusinessAudience",
+    "audienceType": "Businesses looking for customer engagement solutions"
+  }
+}
+</script>
+
+<!-- FAQ Schema for AI Chat Widget -->
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How quickly can I deploy the chat widget?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Deployment takes less than 5 minutes. Simply add one line of JavaScript code to your website, and the widget is live. We provide detailed integration guides for popular platforms like WordPress, Shopify, and custom websites."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the AI learn about my company?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "During setup, you provide information about your company, products, services, and common questions. The AI also learns from your website content, documentation, and FAQ pages. You can continuously train it with new information as your business evolves."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What kind of analytics do I get?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Comprehensive analytics including conversation volume, response accuracy, lead generation metrics, customer satisfaction scores, common questions, and conversion tracking. All data is presented in an easy-to-understand dashboard."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can it integrate with my existing CRM?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! We support integrations with popular CRM systems including Salesforce, HubSpot, Pipedrive, and Zoho. Leads and conversation data are automatically synced to your CRM with all relevant context and contact information."
+      }
+    }
+  ]
+}
+</script>
+
+<style lang="scss">
+  .content-section {
+    background: #040913;
+    padding: 80px 0;
+    
+    @media (max-width: 768px) {
+      padding: 60px 0;
+    }
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    
+    @media (max-width: 768px) {
+      padding: 0 24px;
+    }
+  }
+  
+  // Demo Section
+  .demo-section {
+    text-align: center;
+    margin-bottom: 80px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      color: #FFFFFF;
+      margin-bottom: 24px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+    
+    .demo-callout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 24px;
+      background: rgba(51, 102, 255, 0.1);
+      border: 1px solid rgba(51, 102, 255, 0.2);
+      border-radius: 16px;
+      
+      @media (max-width: 768px) {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .demo-icon {
+        font-size: 2rem;
+        flex-shrink: 0;
+      }
+      
+      .demo-text {
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.9);
+        
+        strong {
+          color: #3366FF;
+        }
+      }
+    }
+  }
+  
+  // Features Grid
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    margin-bottom: 80px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+  
+  .feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 32px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+    
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.975rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+  
+  // Deployment Section
+  .deployment-section {
+    margin-bottom: 80px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 48px;
+    }
+  }
+  
+  .deployment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 32px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .deployment-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    
+    .deployment-icon {
+      font-size: 4rem;
+      margin-bottom: 24px;
+    }
+    
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: #FFFFFF;
+      margin-bottom: 16px;
+    }
+    
+    .deployment-description {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 24px;
+    }
+    
+    .benefit-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      
+      li {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
+        padding: 8px 0;
+        position: relative;
+        padding-left: 24px;
+        text-align: left;
+        
+        &::before {
+          content: '✓';
+          position: absolute;
+          left: 0;
+          color: #3366FF;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+  
+  // Pricing Section
+  .pricing-section {
+    margin-bottom: 80px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    
+    .pricing-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      margin-bottom: 48px;
+    }
+  }
+  
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    margin-bottom: 32px;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .pricing-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px 32px;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s ease;
+    
+    &.popular {
+      border-color: #3366FF;
+      background: rgba(51, 102, 255, 0.1);
+      transform: scale(1.05);
+      
+      .popular-badge {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #3366FF 0%, #6366F1 100%);
+        color: white;
+        padding: 8px 24px;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+    }
+    
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+    
+    .plan-description {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 24px;
+    }
+    
+    .price {
+      margin-bottom: 32px;
+      
+      .price-amount {
+        font-family: 'Manrope', sans-serif;
+        font-weight: 700;
+        font-size: 3rem;
+        color: #FFFFFF;
+      }
+      
+      .price-period {
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+    
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 32px 0;
+      text-align: left;
+      
+      li {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+        padding: 8px 0;
+        position: relative;
+        padding-left: 24px;
+        
+        &::before {
+          content: '✓';
+          position: absolute;
+          left: 0;
+          color: #3366FF;
+          font-weight: 600;
+        }
+      }
+    }
+    
+    .plan-button {
+      display: block;
+      width: 100%;
+      padding: 14px 24px;
+      background: #3366FF;
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: #2952CC;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(51, 102, 255, 0.3);
+      }
+    }
+  }
+  
+  .pricing-note {
+    text-align: center;
+    padding: 24px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0;
+    }
+  }
+  
+  // CTA Section
+  .cta-section {
+    text-align: center;
+    padding: 60px 40px;
+    background: rgba(51, 102, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(51, 102, 255, 0.2);
+    border-radius: 24px;
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: clamp(1.75rem, 3vw, 2.25rem);
+      color: #FFFFFF;
+      margin-bottom: 16px;
+    }
+    
+    p {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 32px;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 16px 32px;
+      text-decoration: none;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      
+      &.primary {
+        background: linear-gradient(135deg, #3366FF 0%, #6366F1 100%);
+        color: white;
+        box-shadow: 0 8px 32px rgba(51, 102, 255, 0.3);
+        
+        &:hover {
+          background: linear-gradient(135deg, #2952CC 0%, #5B5CF6 100%);
+          transform: translateY(-2px);
+          box-shadow: 0 12px 40px rgba(51, 102, 255, 0.4);
+        }
+      }
+      
+      &.secondary {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.15);
+          border-color: rgba(255, 255, 255, 0.3);
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+
+  // FAQ Section
+  .faq-section {
+    background: #FFFFFF;
+    padding: 80px 0;
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    h2 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 60px;
+      color: #1a1a1a;
+    }
+    
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+    
+    .faq-item {
+      background: #f8f9fa;
+      padding: 30px;
+      border-radius: 12px;
+      border-left: 4px solid #3366FF;
+      
+      h3 {
+        font-family: 'Manrope', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #3366FF;
+        margin-bottom: 16px;
+        line-height: 1.4;
+      }
+      
+      p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #4a4a4a;
+        margin: 0;
+      }
+    }
+  }
+</style>

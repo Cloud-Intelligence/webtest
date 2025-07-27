@@ -10,6 +10,8 @@ export interface Props {
 
 const { currentPage = '' } = Astro.props;
 
+import { isFeatureEnabled } from '../config/feature-flags';
+
 // Get base path from Astro config and ensure proper path formatting
 const baseUrl = import.meta.env.BASE_URL;
 
@@ -20,7 +22,7 @@ const createUrl = (path: string) => {
   return `${cleanBase}${cleanPath}`;
 };
 
-const navLinks = [
+const allNavLinks = [
   {
     label: 'About',
     href: createUrl('/about'),
@@ -40,6 +42,14 @@ const navLinks = [
     ]
   },
   {
+    label: 'Products',
+    href: createUrl('/products'),
+    submenu: [
+      { label: 'AI Chat Widget', href: createUrl('/products/ai-chat-widget') },
+    ],
+    featureFlag: 'PRODUCTS_SECTION'
+  },
+  {
     label: 'Resources',
     href: createUrl('/resources'),
     submenu: [
@@ -50,6 +60,14 @@ const navLinks = [
     ]
   }
 ];
+
+// Filter nav links based on feature flags
+const navLinks = allNavLinks.filter(link => {
+  if (link.featureFlag) {
+    return isFeatureEnabled(link.featureFlag);
+  }
+  return true;
+});
 ---
 
 <nav class="navbar" role="navigation" aria-label="Main navigation">
@@ -366,16 +384,16 @@ const navLinks = [
     position: relative;
     overflow: visible;
     
-    // Enhanced liquid glass base with darker background
-    background: rgba(0, 0, 0, 0.18);
+    // Enhanced liquid glass base with white background
+    background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(10px) saturate(180%);
     -webkit-backdrop-filter: blur(10px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 16px;
     box-shadow: 
       0px 8px 32px rgba(0, 0, 0, 0.12),
       0px 1px 4px rgba(0, 0, 0, 0.06),
-      inset 0px 1px 0px rgba(255, 255, 255, 0.25);
+      inset 0px 1px 0px rgba(255, 255, 255, 0.8);
     
     // Liquid shine effect
     &::before {
@@ -387,8 +405,8 @@ const navLinks = [
       height: 40%;
       background: linear-gradient(
         180deg,
-        rgba(255, 255, 255, 0.3) 0%,
-        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.8) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
         transparent 100%
       );
       pointer-events: none;
@@ -434,7 +452,7 @@ const navLinks = [
       font-weight: 700;
       font-size: 20px;
       line-height: 1.4;
-      color: #FFFFFF;
+      color: #000000;
       display: none;
       
       @media (max-width: 768px) {
@@ -464,7 +482,7 @@ const navLinks = [
     font-size: 13px;
     line-height: 1.1;
     letter-spacing: -0.02em;
-    color: #FFFFFF;
+    color: #000000;
     text-decoration: none;
     transition: all 0.2s ease;
     position: relative;
@@ -477,11 +495,11 @@ const navLinks = [
     padding: 8px 0;
     
     &:hover {
-      color: rgba(255, 255, 255, 0.8);
+      color: rgba(0, 0, 0, 0.7);
     }
     
     &.active {
-      color: #FFFFFF;
+      color: #000000;
       
       &::after {
         content: '';
@@ -490,7 +508,7 @@ const navLinks = [
         left: 0;
         right: 0;
         height: 2px;
-        background: #FFFFFF;
+        background: #3366FF;
         border-radius: 1px;
       }
     }
@@ -498,7 +516,7 @@ const navLinks = [
   
   .nav-dropdown-trigger {
     &:hover {
-      color: #FFFFFF;
+      color: rgba(0, 0, 0, 0.7);
     }
   }
   
@@ -517,10 +535,10 @@ const navLinks = [
     transform: translateX(-50%);
     margin-top: 16px;
     min-width: 220px;
-    background: rgba(0, 0, 0, 0.18);
+    background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(10px) saturate(180%);
     -webkit-backdrop-filter: blur(10px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 16px;
     padding: 8px;
     opacity: 0;
@@ -529,7 +547,7 @@ const navLinks = [
     box-shadow: 
       0px 8px 32px rgba(0, 0, 0, 0.12),
       0px 1px 4px rgba(0, 0, 0, 0.06),
-      inset 0px 1px 0px rgba(255, 255, 255, 0.25);
+      inset 0px 1px 0px rgba(255, 255, 255, 0.8);
     overflow: hidden;
     
     &.active {
@@ -547,8 +565,8 @@ const navLinks = [
       height: 50%;
       background: linear-gradient(
         180deg,
-        rgba(255, 255, 255, 0.25) 0%,
-        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0.8) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
         transparent 100%
       );
       pointer-events: none;
@@ -565,11 +583,11 @@ const navLinks = [
       transform: translateX(-50%);
       width: 12px;
       height: 12px;
-      background: rgba(0, 0, 0, 0.18);
+      background: rgba(255, 255, 255, 0.75);
       backdrop-filter: blur(10px) saturate(180%);
       -webkit-backdrop-filter: blur(10px) saturate(180%);
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
-      border-left: 1px solid rgba(255, 255, 255, 0.2);
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      border-left: 1px solid rgba(0, 0, 0, 0.1);
       transform: translateX(-50%) rotate(45deg);
     }
   }
@@ -580,7 +598,7 @@ const navLinks = [
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 13px;
-    color: #FFFFFF;
+    color: #000000;
     text-decoration: none;
     border-radius: 10px;
     transition: all 0.2s ease;
@@ -588,17 +606,17 @@ const navLinks = [
     z-index: 1;
     
     &:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.1);
       backdrop-filter: blur(10px);
-      color: #FFFFFF;
+      color: #000000;
       transform: translateX(2px);
       box-shadow: 
         0px 2px 8px rgba(0, 0, 0, 0.05),
-        inset 0px 1px 0px rgba(255, 255, 255, 0.2);
+        inset 0px 1px 0px rgba(255, 255, 255, 0.8);
     }
     
     &:active {
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(0, 0, 0, 0.15);
       transform: translateX(1px);
     }
   }
@@ -655,7 +673,7 @@ const navLinks = [
     span {
       width: 24px;
       height: 2px;
-      background: #FFFFFF;
+      background: #000000;
       border-radius: 1px;
       transition: all 0.3s ease;
     }
