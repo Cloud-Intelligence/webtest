@@ -14,27 +14,17 @@
  */
 
 // Import JSON config files
-import defaultConfig from "../../feature-flags.json";
+import defaultConfig from "./feature-flags.json";
 // Try to import local override (this file is gitignored)
 let localConfig: Partial<FeatureFlags> = {};
-try {
-  localConfig = await import("../../feature-flags.local.json")
-    .then((m) => m.default)
-    .catch(() => ({}));
-} catch {
-  // Local config doesn't exist, that's fine
-}
 
 // Feature flag type definition
 export interface FeatureFlags {
   // UI Features
   CHAT_WIDGET: boolean;
   PRODUCTS_SECTION: boolean;
-  AI_CHAT_DEMO: boolean;
 
   // Feature Toggles
-  ANALYTICS_DASHBOARD: boolean;
-  BETA_FEATURES: boolean;
   MAINTENANCE_MODE: boolean;
 
   // Add more feature flags here as needed
@@ -62,11 +52,6 @@ function loadFeatureFlags(): FeatureFlags {
   // Apply default JSON config
   if (defaultConfig) {
     flags = { ...flags, ...defaultConfig };
-  }
-
-  // Apply local JSON override (if exists)
-  if (localConfig && Object.keys(localConfig).length > 0) {
-    flags = { ...flags, ...localConfig };
   }
 
   // Check environment variables (highest priority)

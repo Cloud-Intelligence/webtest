@@ -14,7 +14,7 @@ export default function ChatWidget() {
   const [sessionHash, setSessionHash] = useState('');
   const [emailValidating, setEmailValidating] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  
+
   const {
     messages,
     isTyping,
@@ -38,12 +38,12 @@ export default function ChatWidget() {
     const savedEmail = localStorage.getItem('chat-email');
     const savedJwtToken = localStorage.getItem('chat-session-hash'); // Now contains JWT token
     const savedChatOpenState = localStorage.getItem('chat-window-open');
-    
+
     // Restore chat window open state
     if (savedChatOpenState === 'true') {
       setIsOpen(true);
     }
-    
+
     if (savedEmail && savedJwtToken) {
       setEmail(savedEmail);
       setSessionHash(savedJwtToken);
@@ -78,7 +78,7 @@ export default function ChatWidget() {
       const ctx = canvas.getContext('2d');
       ctx?.fillText('Browser fingerprint fallback', 10, 10);
       const canvasHash = canvas.toDataURL();
-      
+
       const fingerprint = [
         navigator.userAgent,
         navigator.language,
@@ -88,13 +88,13 @@ export default function ChatWidget() {
         navigator.hardwareConcurrency || '0',
         canvasHash
       ].join('|');
-      
+
       const encoder = new TextEncoder();
       const data = encoder.encode(fingerprint);
       const hashBuffer = await crypto.subtle.digest('SHA-256', data);
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-      
+
       return hashHex.substring(0, 32);
     }
   };
@@ -102,11 +102,11 @@ export default function ChatWidget() {
   // Validate email with API and get JWT token
   const validateEmailWithAPI = async (emailToValidate: string) => {
     if (!isValidEmail(emailToValidate)) return;
-    
+
     setEmailValidating(true);
     try {
       const browserHash = await generateBrowserHash();
-      
+
       const response = await fetch('http://localhost:8001/auth/session', {
         method: 'POST',
         headers: {
@@ -124,7 +124,7 @@ export default function ChatWidget() {
       }
 
       const data = await response.json();
-      
+
       // Store JWT token and email
       setSessionHash(data.access_token); // Now storing JWT token instead of session hash
       localStorage.setItem('chat-email', emailToValidate.trim());
@@ -132,7 +132,7 @@ export default function ChatWidget() {
       localStorage.setItem('chat-email-hash', data.email_hash); // Store email hash for session tracking
       resetMessageCount(); // Reset message count for new session
       setShowEmailInput(false);
-      
+
     } catch (error: any) {
       console.error('Email validation error:', error);
       // Show error in the main chat error area
@@ -149,17 +149,17 @@ export default function ChatWidget() {
 
   const sendMessage = async () => {
     if (!inputValue.trim()) return;
-    
+
     // Check if JWT token is available
     if (!sessionHash.trim()) {
       setShowEmailInput(true);
       return;
     }
-    
+
     // Clear input immediately before sending
     const messageToSend = inputValue;
     setInputValue('');
-    
+
     await sendApiMessage(messageToSend, sessionHash);
   };
 
@@ -172,7 +172,7 @@ export default function ChatWidget() {
   const handleStartNewSession = () => {
     // Clear chat and session data but keep email if it exists
     clearChatAndStartFresh();
-    
+
     // Load saved email if available, otherwise clear
     const savedEmail = localStorage.getItem('chat-email');
     if (savedEmail) {
@@ -180,7 +180,7 @@ export default function ChatWidget() {
     } else {
       setEmail('');
     }
-    
+
     setSessionHash('');
     setShowEmailInput(true);
   };
@@ -267,7 +267,7 @@ export default function ChatWidget() {
       setShowEmailInput(true);
       return;
     }
-    
+
     // Clear any existing input and send the suggestion text
     setInputValue('');
     await sendApiMessage(suggestion.text, sessionHash);
@@ -369,7 +369,7 @@ export default function ChatWidget() {
             )}
 
             {/* Messages Area */}
-            <div className="overflow-y-auto p-4 space-y-3" style={{height: 'calc(100% - 125px)'}}>
+            <div className="overflow-y-auto p-4 space-y-3" style={{ height: 'calc(100% - 125px)' }}>
               {/* Show suggestion buttons when no messages */}
               {messages.length === 0 && !showEmailInput && (
                 <div className="space-y-4">
@@ -400,22 +400,20 @@ export default function ChatWidget() {
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`flex ${
-                    message.sender === 'user' ? 'justify-end' : 'justify-start'
-                  }`}
+                  className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'
+                    }`}
                 >
                   <div
-                    className={`max-w-[80%] rounded-lg px-3 py-2 text-sm ${
-                      message.sender === 'user'
-                        ? 'bg-brand-primary text-white'
-                        : 'bg-muted text-muted-foreground'
-                    }`}
+                    className={`max-w-[80%] rounded-lg px-3 py-2 text-sm ${message.sender === 'user'
+                      ? 'bg-brand-primary text-white'
+                      : 'bg-muted text-muted-foreground'
+                      }`}
                   >
                     {message.sender === 'user' ? (
                       <p>{message.text}</p>
                     ) : (
                       <div className="prose prose-sm max-w-none prose-p:my-2 prose-headings:my-2 prose-ul:my-2 prose-ol:my-2 prose-li:my-1 prose-strong:text-inherit prose-code:text-inherit [&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
-                        <ReactMarkdown 
+                        <ReactMarkdown
                           components={{
                             // Customize link rendering to open in new tab
                             a: ({ node, ...props }) => (
@@ -426,8 +424,8 @@ export default function ChatWidget() {
                               <pre {...props} className="bg-black/10 p-2 rounded text-xs overflow-x-auto my-2" />
                             ),
                             // Customize inline code
-                            code: ({ node, inline, ...props }) => (
-                              inline ? 
+                            code: ({ node, inline, ...props }: any) => (
+                              inline ?
                                 <code {...props} className="bg-black/10 px-1 py-0.5 rounded text-xs" /> :
                                 <code {...props} />
                             ),
@@ -470,11 +468,10 @@ export default function ChatWidget() {
                     )}
                     {/* Show attribution and timestamp for each message */}
                     {email && !showEmailInput && (
-                      <div className={`text-xs mt-1 flex ${
-                        message.sender === 'user' 
-                          ? 'justify-end text-white/60' 
-                          : 'justify-between text-muted-foreground/60'
-                      }`}>
+                      <div className={`text-xs mt-1 flex ${message.sender === 'user'
+                        ? 'justify-end text-white/60'
+                        : 'justify-between text-muted-foreground/60'
+                        }`}>
                         {message.sender === 'support' && (
                           <span>☁️🧠 cloudy</span>
                         )}
@@ -528,13 +525,13 @@ export default function ChatWidget() {
                         {email ? 'Start New Session' : 'Email Required'}
                       </h3>
                       <p className="text-sm text-muted-foreground">
-                        {email 
+                        {email
                           ? 'Confirm your email to start a new chat session.'
                           : 'Please enter your email address for attribution and security purposes.'
                         }
                       </p>
                     </div>
-                    
+
                     <div className="space-y-3">
                       <Label htmlFor="chat-email" className="text-sm font-medium">
                         Email Address
@@ -559,7 +556,7 @@ export default function ChatWidget() {
                         <p className="text-xs text-destructive">Please enter a valid email address</p>
                       )}
                     </div>
-                    
+
                     <Button
                       onClick={handleEmailSubmit}
                       disabled={!isValidEmail(email) || emailValidating}
@@ -609,7 +606,7 @@ export default function ChatWidget() {
                         Your chat session has expired for security reasons. Please start a new conversation.
                       </p>
                     </div>
-                    
+
                     <Button
                       onClick={handleStartNewSession}
                       className="w-full bg-brand-primary hover:bg-brand-secondary"
@@ -634,17 +631,17 @@ export default function ChatWidget() {
                   </p>
                 </div>
               )}
-              
+
               <div className="flex space-x-2">
                 <Input
                   placeholder={
-                    showEmailInput 
-                      ? "Enter email first" 
+                    showEmailInput
+                      ? "Enter email first"
                       : isSessionExpired
                         ? "Session expired"
-                      : isLimitReached 
-                        ? "Message limit reached" 
-                        : "Type your message..."
+                        : isLimitReached
+                          ? "Message limit reached"
+                          : "Type your message..."
                   }
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
