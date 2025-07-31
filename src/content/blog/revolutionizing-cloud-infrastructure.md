@@ -35,4 +35,4 @@ Every component is designed with security as a foundation, not an afterthought. 
 
 The future of cloud infrastructure lies in seamless integration between human expertise and artificial intelligence. As we continue to innovate, we're building systems that don't just respond to change—they anticipate it.
 
-Ready to transform your cloud infrastructure? [Contact our team](/webtest/contact) to learn how Cloud Intelligence can revolutionize your operations.
+Ready to transform your cloud infrastructure? [Contact our team](https://cloudintelligence.africa/book-a-call) to learn how Cloud Intelligence can revolutionize your operations.
