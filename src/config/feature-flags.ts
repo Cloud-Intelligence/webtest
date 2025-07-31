@@ -21,7 +21,6 @@ let localConfig: Partial<FeatureFlags> = {};
 // Feature flag type definition
 export interface FeatureFlags {
   // UI Features
-  CHAT_WIDGET: boolean;
   PRODUCTS_SECTION: boolean;
 
   // Feature Toggles
@@ -33,7 +32,6 @@ export interface FeatureFlags {
 
 // Fallback default values (used if not in JSON)
 const fallbackDefaults: FeatureFlags = {
-  CHAT_WIDGET: true,
   PRODUCTS_SECTION: true,
   MAINTENANCE_MODE: false,
 };
@@ -108,4 +106,3 @@ export function getDisabledFeatures(): string[] {
     .filter(([_, enabled]) => !enabled)
     .map(([name]) => name);
 }
-

@@ -19,7 +19,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://cloud-in
 import '../styles/main.scss';
 import '../styles/globals.css';
 import NavbarEnhanced from '../components/NavbarEnhanced.astro';
-import ChatWidget from '../components/ChatWidget.tsx';
 import MaintenanceCheck from '../components/MaintenanceCheck.astro';
 import { isFeatureEnabled } from '../config/feature-flags';
 ---
@@ -381,6 +380,5 @@ import { isFeatureEnabled } from '../config/feature-flags';
     
     {showNavbar && <NavbarEnhanced />}
     <slot />
-    {isFeatureEnabled('CHAT_WIDGET') && <ChatWidget client:load />}
   </body>
 </html>
