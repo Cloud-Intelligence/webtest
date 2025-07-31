@@ -5,3 +5,4 @@ node_modules
 # Feature flags local override
 feature-flags.local.json
 
+dist
