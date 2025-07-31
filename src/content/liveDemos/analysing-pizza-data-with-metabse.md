@@ -57,4 +57,4 @@ If you’re looking to transform your data into a competitive advantage, we’re
 
 ---
 
-*Ready to benchmark your pizza franchise performance? [Contact our team](/webtest/contact) to discuss how we can create a customized analytics solution that drives your business growth.*
+*Ready to benchmark your pizza franchise performance? [Contact our team](https://cloudintelligence.africa/book-a-call) to discuss how we can create a customized analytics solution that drives your business growth.*
