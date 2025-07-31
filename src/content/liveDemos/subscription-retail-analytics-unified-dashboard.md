@@ -62,7 +62,7 @@ By combining these powerful [Metabase](https://www.metabase.com/) visualisations
 
 
 
-### Rapid, Reliable Insights with Metabase.
+## Rapid, Reliable Insights with Metabase.
 
 [Metabase](https://www.metabase.com/) is a powerful, open-source analytics platform that enables rapid dashboard development and intuitive data exploration. Its flexibility in unifying different datasets and ease of use make it an ideal choice for organisations seeking to quickly turn complex data into actionable insights.
 
