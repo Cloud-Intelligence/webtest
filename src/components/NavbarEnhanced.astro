@@ -355,6 +355,7 @@ const navLinks = allNavLinks.filter(link => {
 
 <style lang="scss">
   @use '../styles/base/variables' as vars;
+  @use '../styles/components/liquid-glass' as glass;
   
   .navbar {
     position: fixed;
@@ -383,35 +384,11 @@ const navLinks = allNavLinks.filter(link => {
     padding: 12px 24px;
     position: relative;
     overflow: visible;
-    
-    // Enhanced liquid glass base with white background
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(10px) saturate(180%);
-    -webkit-backdrop-filter: blur(10px) saturate(180%);
-    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 16px;
-    box-shadow: 
-      0px 8px 32px rgba(0, 0, 0, 0.12),
-      0px 1px 4px rgba(0, 0, 0, 0.06),
-      inset 0px 1px 0px rgba(255, 255, 255, 0.8);
     
-    // Liquid shine effect
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 40%;
-      background: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.8) 0%,
-        rgba(255, 255, 255, 0.3) 50%,
-        transparent 100%
-      );
-      pointer-events: none;
-      border-radius: 16px 16px 0 0;
-    }
+    // Use liquid glass mixins
+    @include glass.liquid-glass-base();
+    @include glass.liquid-shine();
     
     @media (max-width: 768px) {
       width: 100%;
@@ -535,27 +512,23 @@ const navLinks = allNavLinks.filter(link => {
     transform: translateX(-50%);
     margin-top: 16px;
     min-width: 220px;
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(10px) saturate(180%);
-    -webkit-backdrop-filter: blur(10px) saturate(180%);
-    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 16px;
     padding: 8px;
     opacity: 0;
     visibility: hidden;
     transition: all 0.2s ease;
-    box-shadow: 
-      0px 8px 32px rgba(0, 0, 0, 0.12),
-      0px 1px 4px rgba(0, 0, 0, 0.06),
-      inset 0px 1px 0px rgba(255, 255, 255, 0.8);
     overflow: hidden;
+    
+    // Use liquid glass mixins
+    @include glass.liquid-glass-base();
+    @include glass.liquid-glass-arrow();
     
     &.active {
       opacity: 1;
       visibility: visible;
     }
     
-    // Liquid shine effect for dropdown
+    // Liquid shine effect for dropdown (using ::after to avoid conflict with arrow)
     &::after {
       content: '';
       position: absolute;
@@ -573,23 +546,6 @@ const navLinks = allNavLinks.filter(link => {
       border-radius: 16px 16px 0 0;
       z-index: 0;
     }
-    
-    // Arrow pointing up
-    &::before {
-      content: '';
-      position: absolute;
-      top: -6px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 12px;
-      height: 12px;
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(10px) saturate(180%);
-      -webkit-backdrop-filter: blur(10px) saturate(180%);
-      border-top: 1px solid rgba(0, 0, 0, 0.1);
-      border-left: 1px solid rgba(0, 0, 0, 0.1);
-      transform: translateX(-50%) rotate(45deg);
-    }
   }
   
   .dropdown-item {
@@ -606,18 +562,12 @@ const navLinks = allNavLinks.filter(link => {
     z-index: 1;
     
     &:hover {
-      background: rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
+      @include glass.liquid-glass-hover();
       color: #000000;
-      transform: translateX(2px);
-      box-shadow: 
-        0px 2px 8px rgba(0, 0, 0, 0.05),
-        inset 0px 1px 0px rgba(255, 255, 255, 0.8);
     }
     
     &:active {
-      background: rgba(0, 0, 0, 0.15);
-      transform: translateX(1px);
+      @include glass.liquid-glass-active();
     }
   }
   
@@ -764,9 +714,9 @@ const navLinks = allNavLinks.filter(link => {
     padding: 16px 24px;
     margin: 8px 0;
     border-radius: 16px;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    
+    // Use mobile liquid glass mixin
+    @include glass.liquid-glass-mobile();
     
     &:hover {
       background: rgba(255, 255, 255, 0.25);
@@ -780,14 +730,14 @@ const navLinks = allNavLinks.filter(link => {
   
   .mobile-dropdown-trigger {
     width: 100%;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     cursor: pointer;
+    
+    // Use mobile liquid glass mixin
+    @include glass.liquid-glass-mobile();
     
     &:hover {
       background: rgba(255, 255, 255, 0.25);
@@ -830,9 +780,9 @@ const navLinks = allNavLinks.filter(link => {
     text-align: center;
     transition: all 0.2s ease;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    
+    // Use mobile liquid glass mixin with lower opacity
+    @include glass.liquid-glass-mobile(0.1);
     
     &:hover {
       background: rgba(255, 255, 255, 0.2);
@@ -846,10 +796,7 @@ const navLinks = allNavLinks.filter(link => {
   
   .mobile-cta-button {
     padding: 16px 40px;
-    background: rgba(51, 102, 255, 0.9);
-    backdrop-filter: blur(10px);
     color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 16px;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
@@ -857,9 +804,9 @@ const navLinks = allNavLinks.filter(link => {
     cursor: pointer;
     margin-top: 24px;
     transition: all 0.2s ease;
-    box-shadow: 
-      0px 8px 32px rgba(51, 102, 255, 0.3),
-      inset 0px 1px 0px rgba(255, 255, 255, 0.3);
+    
+    // Use tinted liquid glass mixin
+    @include glass.liquid-glass-tinted(#3366FF, 0.9);
     
     &:hover {
       background: rgba(41, 82, 204, 0.95);

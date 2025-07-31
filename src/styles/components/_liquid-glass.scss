@@ -1,0 +1,163 @@
+// Liquid Glass Effect Module
+// A reusable module for creating glassmorphic effects with liquid shine
+
+// Mixins for liquid glass effects
+@mixin liquid-glass-base($opacity: 0.75, $blur: 10px, $saturation: 180%) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur($blur) saturate($saturation);
+  -webkit-backdrop-filter: blur($blur) saturate($saturation);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0px 8px 32px rgba(0, 0, 0, 0.12),
+    0px 1px 4px rgba(0, 0, 0, 0.06),
+    inset 0px 1px 0px rgba(255, 255, 255, 0.8);
+}
+
+// Liquid shine effect overlay
+@mixin liquid-shine($height: 40%, $top-opacity: 0.8, $mid-opacity: 0.3) {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: $height;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, $top-opacity) 0%,
+      rgba(255, 255, 255, $mid-opacity) 50%,
+      transparent 100%
+    );
+    pointer-events: none;
+    border-radius: inherit;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+// Hover effect for liquid glass elements
+@mixin liquid-glass-hover($bg-opacity: 0.1) {
+  background: rgba(0, 0, 0, $bg-opacity);
+  backdrop-filter: blur(10px);
+  transform: translateX(2px);
+  box-shadow: 
+    0px 2px 8px rgba(0, 0, 0, 0.05),
+    inset 0px 1px 0px rgba(255, 255, 255, 0.8);
+}
+
+// Active/pressed effect
+@mixin liquid-glass-active($bg-opacity: 0.15) {
+  background: rgba(0, 0, 0, $bg-opacity);
+  transform: translateX(1px);
+}
+
+// Glass card variant with colored tint
+@mixin liquid-glass-tinted($color, $opacity: 0.15) {
+  background: rgba($color, $opacity);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  border: 1px solid rgba($color, 0.2);
+  box-shadow: 
+    0px 8px 32px rgba($color, 0.3),
+    inset 0px 1px 0px rgba(255, 255, 255, 0.3);
+}
+
+// Mobile glass variant (lighter backdrop filter for performance)
+@mixin liquid-glass-mobile($opacity: 0.15, $blur: 5px) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+// Utility classes for direct use
+.liquid-glass {
+  @include liquid-glass-base();
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass-light {
+  @include liquid-glass-base(0.6, 8px, 150%);
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass-heavy {
+  @include liquid-glass-base(0.9, 15px, 200%);
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass-with-shine {
+  @include liquid-glass-base();
+  @include liquid-shine();
+  position: relative;
+  overflow: hidden;
+}
+
+// Interactive states
+.liquid-glass-interactive {
+  @include liquid-glass-base();
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    @include liquid-glass-hover();
+  }
+  
+  &:active {
+    @include liquid-glass-active();
+  }
+}
+
+// Preset liquid glass components
+.liquid-glass-card {
+  @include liquid-glass-base();
+  @include liquid-shine();
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.liquid-glass-button {
+  @include liquid-glass-base(0.85);
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  padding: 12px 24px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 
+      0px 12px 40px rgba(0, 0, 0, 0.15),
+      inset 0px 1px 0px rgba(255, 255, 255, 0.9);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Dropdown arrow for liquid glass menus
+@mixin liquid-glass-arrow($size: 12px) {
+  &::before {
+    content: '';
+    position: absolute;
+    top: -($size / 2);
+    left: 50%;
+    transform: translateX(-50%);
+    width: $size;
+    height: $size;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    transform: translateX(-50%) rotate(45deg);
+  }
+}
