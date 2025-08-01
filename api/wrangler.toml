@@ -1,0 +1,4 @@
+name = "ci-api-backend"
+compatibility_date = "2025-07-31"
+account_id = "3313c43f8de986d6c7468be645fbb215"
+main = "src/index.ts"
