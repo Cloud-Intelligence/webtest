@@ -1,37 +1,108 @@
+/// <reference types="@cloudflare/workers-types" />
 import { Hono } from 'hono'
-import { createCors } from './middleware'
+import { cors } from 'hono/cors'
+import { rateLimitMiddleware } from './middleware'
 
 type Bindings = {
   DISCORD_WEBHOOK_URL: string
   ALLOWED_ORIGINS?: string
+  ci_api_storage: KVNamespace
 }
 
 const app = new Hono<{ Bindings: Bindings }>()
 
+app.use('*', cors({
+  origin: (origin, c) => c.env?.ALLOWED_ORIGINS || '*',
+  allowMethods: ['POST', 'OPTIONS', 'GET'],
+  allowHeaders: ['Content-Type'],
+  maxAge: 86400,
+}))
 
-app.use('*', (c, next) => {
-  const corsMiddleware = createCors(c.env)
-  return corsMiddleware(c, next)
-})
-
-
-app.options('*', (c) => {
-  return new Response(null, { status: 204 })
-})
-
+app.use('/book-call', rateLimitMiddleware())
+app.use('/contact', rateLimitMiddleware())
 
 app.get('/health', (c) => c.json({ status: 'ok' }))
 
+const escapeDiscordMarkdown = (text: string): string => {
+  return text.replace(/[\\`*_{}[\]()~>#+=|.!-]/g, '\\$&')
+}
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+const validateBookCall = (data: any) => {
+  const errors: string[] = []
+  
+  if (!data.name || typeof data.name !== 'string' || data.name.trim().length < 2) {
+    errors.push('Name must be at least 2 characters')
+  }
+  
+  if (!data.contact || typeof data.contact !== 'string' || data.contact.trim().length < 5) {
+    errors.push('Contact must be at least 5 characters')
+  }
+  
+  if (data.contact && data.contact.includes('@') && !emailRegex.test(data.contact.trim())) {
+    errors.push('Please provide a valid email address')
+  }
+  
+  if (data.company && typeof data.company !== 'string') {
+    errors.push('Company must be a string')
+  }
+  
+  if (data.message && typeof data.message !== 'string') {
+    errors.push('Message must be a string')
+  }
+  
+  const serialized = {
+    name: escapeDiscordMarkdown(data.name?.toString().trim().slice(0, 100) || ''),
+    contact: escapeDiscordMarkdown(data.contact?.toString().trim().slice(0, 100) || ''),
+    company: data.company ? escapeDiscordMarkdown(data.company.toString().trim().slice(0, 100)) : undefined,
+    projectType: data.projectType ? escapeDiscordMarkdown(data.projectType.toString().trim().slice(0, 50)) : undefined,
+    timeframe: data.timeframe ? escapeDiscordMarkdown(data.timeframe.toString().trim().slice(0, 50)) : undefined,
+    budget: data.budget ? escapeDiscordMarkdown(data.budget.toString().trim().slice(0, 50)) : undefined,
+    message: data.message ? escapeDiscordMarkdown(data.message.toString().trim().slice(0, 1000)) : undefined,
+  }
+  
+  return { errors, data: serialized }
+}
+
+const validateContact = (data: any) => {
+  const errors: string[] = []
+  
+  if (!data.name || typeof data.name !== 'string' || data.name.trim().length < 2) {
+    errors.push('Name must be at least 2 characters')
+  }
+  
+  if (!data.contact || typeof data.contact !== 'string' || data.contact.trim().length < 5) {
+    errors.push('Contact must be at least 5 characters')
+  }
+  
+  if (data.contact && data.contact.includes('@') && !emailRegex.test(data.contact.trim())) {
+    errors.push('Please provide a valid email address')
+  }
+  
+  if (data.message && typeof data.message !== 'string') {
+    errors.push('Message must be a string')
+  }
+  
+  const serialized = {
+    name: escapeDiscordMarkdown(data.name?.toString().trim().slice(0, 100) || ''),
+    contact: escapeDiscordMarkdown(data.contact?.toString().trim().slice(0, 100) || ''),
+    message: data.message ? escapeDiscordMarkdown(data.message.toString().trim().slice(0, 1000)) : undefined,
+  }
+  
+  return { errors, data: serialized }
+}
+
 app.post('/book-call', async (c) => {
   try {
-    const data = await c.req.json()
+    const rawData = await c.req.json()
+    const { errors, data } = validateBookCall(rawData)
     
-    if (!data.name || !data.contact) {
-      return c.json({ error: 'Name and contact required' }, 400)
+    if (errors.length > 0) {
+      return c.json({ error: errors.join(', ') }, 400)
     }
 
     if (!c.env.DISCORD_WEBHOOK_URL) {
-      console.error('Discord webhook URL not configured')
       return c.json({ error: 'Server configuration error' }, 500)
     }
 
@@ -55,10 +126,7 @@ app.post('/book-call', async (c) => {
 
     const response = await fetch(c.env.DISCORD_WEBHOOK_URL, {
       method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json',
-        'User-Agent': 'Contact-Form-Bot'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         content: "New consultation request!",
         embeds: [embed]
@@ -66,7 +134,6 @@ app.post('/book-call', async (c) => {
     })
 
     if (!response.ok) {
-      console.error('Discord webhook failed:', response.status, await response.text())
       return c.json({ error: 'Failed to send message' }, 500)
     }
 
@@ -76,21 +143,20 @@ app.post('/book-call', async (c) => {
     })
     
   } catch (error) {
-    console.error('Error processing request:', error)
     return c.json({ error: 'Invalid request data' }, 400)
   }
 })
 
 app.post('/contact', async (c) => {
   try {
-    const data = await c.req.json()
+    const rawData = await c.req.json()
+    const { errors, data } = validateContact(rawData)
 
-    if (!data.name || !data.contact) {
-      return c.json({ error: 'Name and contact required' }, 400)
+    if (errors.length > 0) {
+      return c.json({ error: errors.join(', ') }, 400)
     }
 
     if (!c.env.DISCORD_WEBHOOK_URL) {
-      console.error('Discord webhook URL not configured')
       return c.json({ error: 'Server configuration error' }, 500)
     }
 
@@ -104,12 +170,13 @@ app.post('/contact', async (c) => {
       timestamp: new Date().toISOString(),
     }
 
+    if (data.message) {
+      embed.fields.push({ name: "Details", value: data.message, inline: false })
+    }
+
     const response = await fetch(c.env.DISCORD_WEBHOOK_URL, {
       method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json',
-        'User-Agent': 'Contact-Form-Bot'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         content: "New contact message!",
         embeds: [embed]
@@ -117,7 +184,6 @@ app.post('/contact', async (c) => {
     })
 
     if (!response.ok) {
-      console.error('Discord webhook failed:', response.status, await response.text())
       return c.json({ error: 'Failed to send message' }, 500)
     }
 
@@ -127,7 +193,6 @@ app.post('/contact', async (c) => {
     })
 
   } catch (error) {
-    console.error('Error processing contact request:', error)
     return c.json({ error: 'Invalid request data' }, 400)
   }
 })
