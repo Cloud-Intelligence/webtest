@@ -12,12 +12,36 @@ npm install -g wrangler
 
 ```bash
 npm install
+npm install hono
 ```
 
-### 3. connect to cloudflare npx wrangler login can verify your account with npx wrangler whoami
+### 3. Login to Cloudflare with Wrangler
 
+```bash
+npx wrangler login
+```
 
-### 4. Set environment secret (Discord webhook URL)
+Verify your login:
+
+```bash
+npx wrangler whoami
+```
+
+### 4. Set up KV Namespace and Secrets
+
+Create KV namespace for production:
+
+```bash
+wrangler kv:namespace create "ci_api_storage"
+```
+
+Create KV namespace for preview/development:
+
+```bash
+wrangler kv:namespace create "ci_api_storage" --preview
+```
+
+Set your Discord webhook URL as a secret:
 
 ```bash
 npx wrangler secret put DISCORD_WEBHOOK_URL
@@ -39,8 +63,24 @@ npx wrangler deploy
 
 ---
 
-## Notes
+## Features
 
-- The Worker source code is in `src/index.ts`.
-- Environment secrets like `DISCORD_WEBHOOK_URL` are injected securely during runtime.
-- Ensure `wrangler.toml` contains your Cloudflare account ID and main script path.
+- **Rate limiting** per IP with short window (default 3 requests per minute).
+- **Discord alerts** when abuse is detected (requests exceeding limit).
+- **Blacklist middleware** for denying specific IPs.
+
+---
+
+## Configuration
+
+- `DISCORD_WEBHOOK_URL` secret holds the Discord webhook URL for alerts.
+- `ci_api_storage` is the KV namespace used for rate limiting counters.
+- You can add IPs to the blacklist in `blacklistMiddleware` by updating the IP set.
+
+---
+
+## Source Files
+
+- Main code: `src/index.ts`
+- Discord alert helper: `src/discord.ts`
+- Middleware for rate limiting and blacklist implemented in `src/index.ts`

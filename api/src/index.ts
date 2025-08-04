@@ -1,7 +1,8 @@
 /// <reference types="@cloudflare/workers-types" />
 import { Hono } from 'hono'
+import type { Context } from 'hono'
 import { cors } from 'hono/cors'
-import { rateLimitMiddleware } from './middleware'
+import { rateLimitMiddleware,blacklistMiddleware } from './middleware'
 
 type Bindings = {
   DISCORD_WEBHOOK_URL: string
@@ -18,8 +19,8 @@ app.use('*', cors({
   maxAge: 86400,
 }))
 
-app.use('/book-call', rateLimitMiddleware())
-app.use('/contact', rateLimitMiddleware())
+app.use('/book-call', blacklistMiddleware(), rateLimitMiddleware())
+app.use('/contact', blacklistMiddleware(), rateLimitMiddleware())
 
 app.get('/health', (c) => c.json({ status: 'ok' }))
 
@@ -93,6 +94,25 @@ const validateContact = (data: any) => {
   return { errors, data: serialized }
 }
 
+const logRequest = async (c: Context<{ Bindings: Bindings }>, endpoint: string, data: any) => {
+  try {
+    const ip = c.req.header('cf-connecting-ip') || 'unknown'
+    const timestamp = new Date().toISOString()
+    const randomSuffix = Math.random().toString(36).substring(2, 8)
+    const key = `log:${endpoint}:${Date.now()}-${randomSuffix}`
+
+    const logEntry = {
+      timestamp,
+      ip,
+      endpoint,
+      data,
+    }
+
+    await c.env.ci_api_storage.put(key, JSON.stringify(logEntry), { expirationTtl: 60 * 60 * 24 * 7 }) // Keep logs 7 days
+  } catch (e) {
+  }
+}
+
 app.post('/book-call', async (c) => {
   try {
     const rawData = await c.req.json()
@@ -101,6 +121,8 @@ app.post('/book-call', async (c) => {
     if (errors.length > 0) {
       return c.json({ error: errors.join(', ') }, 400)
     }
+
+     await logRequest(c, 'book-call', data)
 
     if (!c.env.DISCORD_WEBHOOK_URL) {
       return c.json({ error: 'Server configuration error' }, 500)
@@ -155,6 +177,8 @@ app.post('/contact', async (c) => {
     if (errors.length > 0) {
       return c.json({ error: errors.join(', ') }, 400)
     }
+
+    await logRequest(c, 'contact', data)
 
     if (!c.env.DISCORD_WEBHOOK_URL) {
       return c.json({ error: 'Server configuration error' }, 500)
