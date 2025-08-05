@@ -6,6 +6,7 @@ import { rateLimitMiddleware,blacklistMiddleware } from './middleware'
 
 type Bindings = {
   DISCORD_WEBHOOK_URL: string
+  DISCORD_WEBHOOK_ALERT: string
   ALLOWED_ORIGINS?: string
   ci_api_storage: KVNamespace
 }
@@ -13,16 +14,14 @@ type Bindings = {
 const app = new Hono<{ Bindings: Bindings }>()
 
 app.use('*', cors({
-  origin: (origin, c) => c.env?.ALLOWED_ORIGINS || '*',
-  allowMethods: ['POST', 'OPTIONS', 'GET'],
+  origin: (origin, c) => c.env?.ALLOWED_ORIGIN ,
+  allowMethods: ['POST', 'OPTIONS'],
   allowHeaders: ['Content-Type'],
   maxAge: 86400,
 }))
 
 app.use('/book-call', blacklistMiddleware(), rateLimitMiddleware())
 app.use('/contact', blacklistMiddleware(), rateLimitMiddleware())
-
-app.get('/health', (c) => c.json({ status: 'ok' }))
 
 const escapeDiscordMarkdown = (text: string): string => {
   return text.replace(/[\\`*_{}[\]()~>#+=|.!-]/g, '\\$&')
@@ -186,37 +185,44 @@ app.post('/contact', async (c) => {
 
     const embed = {
       title: "New Contact Message",
-      color: 0x10b981, 
+      color: 0x3b82f6, // Same color as book-call
       fields: [
         { name: "Name", value: data.name, inline: true },
         { name: "Contact", value: data.contact, inline: true },
+        { name: "Type", value: "General Inquiry", inline: true },
       ],
       timestamp: new Date().toISOString(),
     }
 
     if (data.message) {
-      embed.fields.push({ name: "Details", value: data.message, inline: false })
+      embed.fields.push({
+        name: "Message",
+        value: data.message.length > 1000 ? data.message.substring(0, 1000) + "..." : data.message,
+        inline: false
+      })
     }
 
     const response = await fetch(c.env.DISCORD_WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        content: "New contact message!",
+        content: "New contact form submission!",
         embeds: [embed]
       })
     })
 
     if (!response.ok) {
-      return c.json({ error: 'Failed to send message' }, 500)
+      console.error('Discord webhook failed:', await response.text())
+      return c.json({ error: 'Failed to send message to Discord' }, 500)
     }
 
-    return c.json({ 
-      success: true, 
-      message: 'Thank you! Your contact message has been submitted successfully.' 
+    return c.json({
+      success: true,
+      message: 'Thank you! We have received your message and will respond soon.'
     })
 
   } catch (error) {
+    console.error('Contact endpoint error:', error)
     return c.json({ error: 'Invalid request data' }, 400)
   }
 })

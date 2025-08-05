@@ -7,6 +7,7 @@ const ALERT_COOLDOWN_TTL = 60 * 5;
 
 type Bindings = {
   ci_api_storage: KVNamespace;
+  DISCORD_WEBHOOK_ALERT: string;
 };
 
 export const rateLimitMiddleware = () => {
@@ -28,7 +29,7 @@ export const rateLimitMiddleware = () => {
       const cooldown = await kv.get(alertCooldownKey);
 
       if (newCount > RATE_LIMIT && !cooldown) {
-        await sendAbuseAlert(ip); 
+        await sendAbuseAlert(ip, c.env.DISCORD_WEBHOOK_ALERT);
         await kv.put(alertCooldownKey, '1', { expirationTtl: ALERT_COOLDOWN_TTL });
       }
 

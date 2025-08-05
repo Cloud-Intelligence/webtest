@@ -1,5 +1,5 @@
-export const sendAbuseAlert = async (ip: string) => {
-  const webhookUrl = 'https://discord.com/api/webhooks/1401937316208972030/wMPXMEoNeoU3c7y_RbndqFD15N2tQkokyFpw3eTy2GfBbskcUytNUR5FDxfEGpt6JZ1Z';
+export const sendAbuseAlert = async (ip: string, webhookUrl: string) => {
+  if (!webhookUrl) return;
 
   const embed = {
     title: 'Rate Limit Warning',
