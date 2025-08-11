@@ -14,7 +14,7 @@ type Bindings = {
 const app = new Hono<{ Bindings: Bindings }>()
 
 app.use('*', cors({
-  origin: (origin, c) => c.env?.ALLOWED_ORIGIN ,
+  origin: (origin, c) => c.env?.ALLOWED_ORIGINS ,
   allowMethods: ['POST', 'OPTIONS'],
   allowHeaders: ['Content-Type'],
   maxAge: 86400,
