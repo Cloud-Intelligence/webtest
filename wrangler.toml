@@ -1,0 +1,11 @@
+name = "ci-api-backend"
+compatibility_date = "2025-07-31"
+account_id = "0f5edd90adb522480d73f555347bee73"
+main = "src/index.ts"
+
+[vars]
+ALLOWED_ORIGINS = "https://cloudintellligence.africa"
+
+[[kv_namespaces]]
+binding = "cloud-intelligence-website-kv"
+id = "d8d3d88bca56443fad0f6337e5746d73"
