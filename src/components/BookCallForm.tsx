@@ -9,6 +9,7 @@ import { useState } from "react"
 export default function BookCallForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState('')
   const [formData, setFormData] = useState({
     name: '',
     contact: '',
@@ -19,33 +20,56 @@ export default function BookCallForm() {
     message: ''
   })
 
+  const API_URL = 'https://cloudintellligence.africa'
+
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleSubmit = async () => {
+    if (!formData.name.trim() || !formData.contact.trim()) {
+      setError('Name and contact information are required')
+      return
+    }
+
     setIsSubmitting(true)
+    setError('')
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    
-    setIsSubmitting(false)
-    setSubmitted(true)
-    
-    // Reset form after 5 seconds
-    setTimeout(() => {
-      setSubmitted(false)
-      setFormData({
-        name: '',
-        contact: '',
-        company: '',
-        timeframe: '',
-        projectType: '',
-        budget: '',
-        message: ''
+    try {
+      const response = await fetch(`${API_URL}/book-call`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
       })
-    }, 5000)
+
+      const result = await response.json() as { error?: string; success?: boolean; message?: string }
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Something went wrong')
+      }
+
+      setSubmitted(true)
+      
+      setTimeout(() => {
+        setSubmitted(false)
+        setFormData({
+          name: '',
+          contact: '',
+          company: '',
+          timeframe: '',
+          projectType: '',
+          budget: '',
+          message: ''
+        })
+      }, 5000)
+
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to submit form')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -69,7 +93,13 @@ export default function BookCallForm() {
             <p className="text-white/70 text-sm">We'll contact you within 24 hours to schedule your consultation call.</p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-5 dark-form">
+          <div className="space-y-5 dark-form">
+            {error && (
+              <div className="p-4 bg-red-500/20 border border-red-500/30 rounded-lg">
+                <p className="text-red-200 text-sm">{error}</p>
+              </div>
+            )}
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-white font-medium text-sm">Name *</Label>
@@ -113,7 +143,7 @@ export default function BookCallForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="projectType" className="text-white font-medium text-sm">Project Type</Label>
-                <Select onValueChange={(value) => handleInputChange('projectType', value)}>
+                <Select onValueChange={(value) => handleInputChange('projectType', value)} value={formData.projectType}>
                   <SelectTrigger className="bg-black/40 border-white/40 text-white focus:border-white/60 focus:bg-black/50 focus:ring-white/20">
                     <SelectValue placeholder="Select project type" className="text-white/70" />
                   </SelectTrigger>
@@ -130,7 +160,7 @@ export default function BookCallForm() {
               
               <div className="space-y-2">
                 <Label htmlFor="timeframe" className="text-white font-medium text-sm">Timeframe</Label>
-                <Select onValueChange={(value) => handleInputChange('timeframe', value)}>
+                <Select onValueChange={(value) => handleInputChange('timeframe', value)} value={formData.timeframe}>
                   <SelectTrigger className="bg-black/40 border-white/40 text-white focus:border-white/60 focus:bg-black/50 focus:ring-white/20">
                     <SelectValue placeholder="Project timeline" className="text-white/70" />
                   </SelectTrigger>
@@ -147,7 +177,7 @@ export default function BookCallForm() {
             
             <div className="space-y-2">
               <Label htmlFor="budget" className="text-white font-medium text-sm">Budget Range</Label>
-              <Select onValueChange={(value) => handleInputChange('budget', value)}>
+              <Select onValueChange={(value) => handleInputChange('budget', value)} value={formData.budget}>
                 <SelectTrigger className="bg-black/40 border-white/40 text-white focus:border-white/60 focus:bg-black/50 focus:ring-white/20">
                   <SelectValue placeholder="Select budget range" className="text-white/70" />
                 </SelectTrigger>
@@ -176,7 +206,7 @@ export default function BookCallForm() {
             </div>
             
             <Button 
-              type="submit" 
+              onClick={handleSubmit}
               className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 text-base transition-all duration-200 transform hover:scale-[1.02]"
               disabled={isSubmitting}
             >
@@ -196,7 +226,7 @@ export default function BookCallForm() {
             <p className="text-white/60 text-xs text-center mt-4">
               By submitting this form, you agree to be contacted by our team regarding your project inquiry.
             </p>
-          </form>
+          </div>
         )}
       </CardContent>
     </Card>
