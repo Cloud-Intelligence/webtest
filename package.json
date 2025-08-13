@@ -8,12 +8,10 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
-  },
-  "devDependencies": {
-    "@playform/compress": "^0.2.0",
-    "astro-compressor": "^1.0.0",
-    "sass": "^1.89.2"
+    "astro": "astro",
+    "worker:dev": "wrangler dev",
+    "worker:deploy": "wrangler deploy",
+    "worker:types": "wrangler types"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -30,6 +28,9 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "gsap": "^3.13.0",
+    "hono": "^4.8.12",
+    "hono-rate-limiter": "^0.4.2",
+    "@hono-rate-limiter/cloudflare": "^0.2.2",
     "lucide-react": "^0.525.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -38,6 +39,14 @@
     "remark-gfm": "^4.0.1",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.3",
+    "zod": "^4.0.14"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250803.0",
+    "@playform/compress": "^0.2.0",
+    "astro-compressor": "^1.0.0",
+    "sass": "^1.89.2",
     "typescript": "^5.8.3"
   }
 }
