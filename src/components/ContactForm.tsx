@@ -14,7 +14,7 @@ export default function ContactForm() {
     contact: ''
   })
 
-  const API_URL = 'https://cloudintellligence.africa'
+  const API_URL = 'https://cloudintelligence.africa'
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
