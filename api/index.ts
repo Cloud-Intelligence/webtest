@@ -8,7 +8,7 @@ type Bindings = {
   DISCORD_WEBHOOK_URL: string
   DISCORD_WEBHOOK_ALERT: string
   ALLOWED_ORIGINS?: string
-  ci_api_storage: KVNamespace
+  "cloud-intelligence-website-kv": KVNamespace
 }
 
 const app = new Hono<{ Bindings: Bindings }>()
@@ -107,7 +107,8 @@ const logRequest = async (c: Context<{ Bindings: Bindings }>, endpoint: string, 
       data,
     }
 
-    await c.env.ci_api_storage.put(key, JSON.stringify(logEntry), { expirationTtl: 60 * 60 * 24 * 7 }) // Keep logs 7 days
+  await c.env["cloud-intelligence-website-kv"].put(key, JSON.stringify(logEntry), { expirationTtl: 60 * 60 * 24 * 7 })
+ // Keep logs 7 days
   } catch (e) {
   }
 }
