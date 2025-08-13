@@ -8,19 +8,57 @@ import { useState } from "react"
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState('')
+  const [formData, setFormData] = useState({
+    name: '',
+    contact: ''
+  })
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const API_URL = 'https://cloudintellligence.africa'
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }))
+  }
+
+  const handleSubmit = async () => {
+    if (!formData.name.trim() || !formData.contact.trim()) {
+      setError('Name and contact information are required')
+      return
+    }
+
     setIsSubmitting(true)
+    setError('')
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    setIsSubmitting(false)
-    setSubmitted(true)
-    
-    // Reset form after 3 seconds
-    setTimeout(() => setSubmitted(false), 3000)
+    try {
+      const response = await fetch(`${API_URL}/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+
+      const result = await response.json() as { error?: string; success?: boolean; message?: string }
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Something went wrong')
+      }
+
+      setSubmitted(true)
+      
+      setTimeout(() => {
+        setSubmitted(false)
+        setFormData({
+          name: '',
+          contact: ''
+        })
+      }, 3000)
+
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to submit form')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -43,12 +81,20 @@ export default function ContactForm() {
             <p className="text-white/80 text-sm">We'll get back to you soon.</p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-4 dark-form">
+          <div className="space-y-4 dark-form">
+            {error && (
+              <div className="p-3 bg-red-500/20 border border-red-500/30 rounded-lg">
+                <p className="text-red-200 text-sm">{error}</p>
+              </div>
+            )}
+
             <div className="space-y-2">
               <Label htmlFor="name" className="text-white font-medium text-sm">Name</Label>
               <Input
                 id="name"
                 name="name"
+                value={formData.name}
+                onChange={(e) => handleInputChange('name', e.target.value)}
                 required
                 className="bg-black/40 border-white/40 text-white placeholder:text-white/70 focus:border-white/60 focus:bg-black/50 focus:ring-white/20"
                 placeholder="Enter your name"
@@ -60,6 +106,8 @@ export default function ContactForm() {
               <Input
                 id="contact"
                 name="contact"
+                value={formData.contact}
+                onChange={(e) => handleInputChange('contact', e.target.value)}
                 required
                 className="bg-black/40 border-white/40 text-white placeholder:text-white/70 focus:border-white/60 focus:bg-black/50 focus:ring-white/20"
                 placeholder="Enter your email or phone number"
@@ -67,8 +115,8 @@ export default function ContactForm() {
             </div>
             
             <Button 
-              type="submit" 
-              className="w-full bg-brand-primary hover:bg-brand-secondary text-white"
+              onClick={handleSubmit}
+              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-2 transition-all duration-200 transform hover:scale-[1.02]"
               disabled={isSubmitting}
             >
               {isSubmitting ? (
@@ -83,7 +131,7 @@ export default function ContactForm() {
                 'Send Message'
               )}
             </Button>
-          </form>
+          </div>
         )}
       </CardContent>
     </Card>

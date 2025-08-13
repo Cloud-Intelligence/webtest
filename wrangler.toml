@@ -3,6 +3,9 @@ compatibility_date = "2025-07-31"
 account_id = "0f5edd90adb522480d73f555347bee73"
 main = "src/index.ts"
 
+[assets]
+directory = "./dist"
+
 [vars]
 ALLOWED_ORIGINS = "https://cloudintellligence.africa"
 

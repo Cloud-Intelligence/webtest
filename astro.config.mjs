@@ -7,8 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://cloud-intelligence.github.io',
-  base: '/webtest',
+  site: 'https://cloudintellligence.africa',
   output: 'static',
   compressHTML: true,
   build: {
