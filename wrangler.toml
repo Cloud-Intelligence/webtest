@@ -7,7 +7,7 @@ main = "api/index.ts"
 directory = "./dist"
 
 [vars]
-ALLOWED_ORIGINS = "https://cloudintellligence.africa"
+ALLOWED_ORIGINS = "https://cloudintelligence.africa"
 
 [[kv_namespaces]]
 binding = "cloud-intelligence-website-kv"
