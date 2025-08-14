@@ -148,7 +148,7 @@
   &::before {
     content: '';
     position: absolute;
-    top: -($size / 2);
+    top: calc(-#{$size} / 2);
     left: 50%;
     transform: translateX(-50%);
     width: $size;

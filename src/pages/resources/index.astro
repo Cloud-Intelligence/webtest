@@ -1,7 +1,6 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
+import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
-import ContactSection from '../../components/ContactSection.astro';
 
 // Get base path from Astro config and ensure proper path formatting
 const baseUrl = import.meta.env.BASE_URL;
@@ -49,7 +48,7 @@ const resources = [
 ];
 ---
 
-<PageLayout 
+<Layout 
   title="Resources - Cloud Intelligence"
   description="Access our comprehensive resource library including case studies, technical blog, live demos, and developer documentation to accelerate your cloud intelligence journey."
   keywords="cloud intelligence resources, case studies, technical blog, documentation, live demos, developer guides"
@@ -101,8 +100,7 @@ const resources = [
     </div>
   </section>
   
-  <ContactSection />
-</PageLayout>
+</Layout>
 
 <style lang="scss">
   .resources-section {

@@ -1,10 +1,9 @@
 // Base styles
-@use './base/variables';
-@use './base/reset';
+@use "./base/variables";
+@use "./base/reset";
 
 // Components
-@use './components/gradient';
-@use './components/clouds';
-@use './components/liquid-glass';
-@use './components/screens';
-@use './components/landing';
+@use "./components/liquid-glass";
+@use "./components/common";
+@use "./components/forms";
+

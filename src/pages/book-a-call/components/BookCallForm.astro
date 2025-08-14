@@ -1,0 +1,212 @@
+---
+// Simple HTML book call form
+---
+
+<div class="book-call-form-container">
+  <div class="book-call-form-card">
+    <div class="form-header">
+      <h3>Schedule Your Call</h3>
+      <p>Tell us about your project and we'll schedule a consultation call within 24 hours.</p>
+    </div>
+    <form class="book-call-form" action="#" method="post">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="name">Name *</label>
+          <input type="text" id="name" name="name" required placeholder="Your full name">
+        </div>
+        
+        <div class="form-group">
+          <label for="contact">Email or Phone *</label>
+          <input type="text" id="contact" name="contact" required placeholder="Best way to reach you">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="company">Company</label>
+        <input type="text" id="company" name="company" placeholder="Your company name">
+      </div>
+      
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="projectType">Project Type</label>
+          <select id="projectType" name="projectType">
+            <option value="">Select project type</option>
+            <option value="ai-agents">AI Agents</option>
+            <option value="machine-learning">Machine Learning</option>
+            <option value="web-applications">Web Applications</option>
+            <option value="data-engineering">Data Engineering</option>
+            <option value="cloud-architecture">Cloud Architecture</option>
+            <option value="consultation">General Consultation</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="timeframe">Timeframe</label>
+          <select id="timeframe" name="timeframe">
+            <option value="">Project timeline</option>
+            <option value="asap">ASAP</option>
+            <option value="1-month">Within 1 month</option>
+            <option value="3-months">Within 3 months</option>
+            <option value="6-months">Within 6 months</option>
+            <option value="planning">Just planning</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="budget">Budget Range</label>
+        <select id="budget" name="budget">
+          <option value="">Select budget range</option>
+          <option value="under-10k">Under $10K</option>
+          <option value="10k-50k">$10K - $50K</option>
+          <option value="50k-100k">$50K - $100K</option>
+          <option value="100k-500k">$100K - $500K</option>
+          <option value="500k-plus">$500K+</option>
+          <option value="discuss">Prefer to discuss</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="message">Project Details</label>
+        <textarea id="message" name="message" rows="4" placeholder="Tell us about your project goals, challenges, and what you'd like to discuss during the call..."></textarea>
+      </div>
+      
+      <button type="submit" class="submit-btn">Schedule My Call</button>
+      
+      <p class="disclaimer">
+        By submitting this form, you agree to be contacted by our team regarding your project inquiry.
+      </p>
+    </form>
+  </div>
+</div>
+
+<style lang="scss">
+@use '@/styles/components/liquid-glass' as *;
+
+.book-call-form-container {
+  width: 100%;
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+.book-call-form-card {
+  @include liquid-glass-base(0.3, 10px, 180%);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.form-header {
+  padding: 1.5rem 1.5rem 0;
+  
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 0.5rem 0;
+  }
+  
+  p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+.book-call-form {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+label {
+  color: white;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+input, select, textarea {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  width: 100%;
+  font-family: inherit;
+  
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+  }
+}
+
+select {
+  cursor: pointer;
+  
+  option {
+    background: #1a1a1a;
+    color: white;
+  }
+}
+
+textarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, #3366ff 0%, #2952cc 100%);
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  
+  &:hover {
+    background: linear-gradient(135deg, #2952cc 0%, #1e3a8a 100%);
+    transform: scale(1.02);
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.disclaimer {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+</style>

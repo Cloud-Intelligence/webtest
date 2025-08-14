@@ -1,8 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import PageLayout from '../../layouts/PageLayout.astro';
+import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
-import ContactSection from '../../components/ContactSection.astro';
 
 // Get blog posts from content collections
 const allBlogPosts = await getCollection('blog');
@@ -26,7 +25,7 @@ const categories = ["All", "AI/ML", "Data Engineering", "Machine Learning", "Arc
 const tags = ["All", "AI Agents", "Cloud Architecture", "MLOps", "Microservices", "Security", "Kubernetes", "PWA"];
 ---
 
-<PageLayout 
+<Layout 
   title="Technical Blog - Cloud Intelligence"
   description="Stay updated with the latest insights on AI, ML, cloud architecture, and software development from our expert team."
   keywords="technical blog, AI articles, machine learning, cloud architecture, software development, data engineering"
@@ -137,8 +136,7 @@ const tags = ["All", "AI Agents", "Cloud Architecture", "MLOps", "Microservices"
     </div>
   </section>
   
-  <ContactSection />
-</PageLayout>
+</Layout>
 
 <style lang="scss">
   .blog-section {

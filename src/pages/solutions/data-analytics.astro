@@ -1,7 +1,6 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
+import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
-import ContactSection from '../../components/ContactSection.astro';
 
 const features = [
   {
@@ -91,7 +90,7 @@ const useCases = [
 ];
 ---
 
-<PageLayout 
+<Layout 
   title="Data Analytics - Cloud Intelligence"
   description="Transform your business data into actionable insights with comprehensive analytics, real-time dashboards, and predictive intelligence."
   keywords="data analytics, business intelligence, data visualization, predictive analytics, real-time dashboards, KPI tracking"
@@ -223,8 +222,7 @@ const useCases = [
     </div>
   </section>
 
-  <ContactSection />
-</PageLayout>
+</Layout>
 
 <!-- Service Schema for Data Analytics -->
 <script type="application/ld+json" is:inline>

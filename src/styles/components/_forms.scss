@@ -1,0 +1,16 @@
+// Global form utilities - only truly shared styles
+// Component-specific styles have been moved to their respective component files
+
+// Legacy support for any remaining global form classes
+// These can be removed once all components are migrated to CSS modules
+
+// Global animation keyframes (shared by all components)
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+

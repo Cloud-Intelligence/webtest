@@ -1,7 +1,6 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
+import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
-import ContactSection from '../../components/ContactSection.astro';
 
 const features = [
   {
@@ -37,7 +36,7 @@ const features = [
 ];
 ---
 
-<PageLayout 
+<Layout 
   title="Data Engineering - Cloud Intelligence"
   description="Build scalable data infrastructure and pipelines that transform raw data into valuable business insights."
   keywords="data engineering, data pipelines, ETL, data lakes, data warehousing, real-time streaming"
@@ -110,8 +109,7 @@ const features = [
     </div>
   </section>
 
-  <ContactSection />
-</PageLayout>
+</Layout>
 
 <!-- Service Schema for Data Engineering -->
 <script type="application/ld+json" is:inline>

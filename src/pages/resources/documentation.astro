@@ -1,7 +1,6 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
+import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
-import ContactSection from '../../components/ContactSection.astro';
 
 const documentationSections = [
   {
@@ -89,7 +88,7 @@ const docTypes = ["All", "Guide", "Tutorial", "Reference"];
 const difficulties = ["All", "Beginner", "Intermediate", "Advanced"];
 ---
 
-<PageLayout 
+<Layout 
   title="Resources - Cloud Intelligence"
   description="Curated collection of technical resources, API references, tutorials, and guides for developers and engineers."
   keywords="developer resources, API reference, technical guides, tutorials, documentation, tools"
@@ -236,8 +235,7 @@ const difficulties = ["All", "Beginner", "Intermediate", "Advanced"];
     </div>
   </section>
   
-  <ContactSection />
-</PageLayout>
+</Layout>
 
 <style lang="scss">
   .documentation-section {

@@ -1,7 +1,6 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
+import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
-import ContactSection from '../../components/ContactSection.astro';
 
 const features = [
   {
@@ -37,7 +36,7 @@ const features = [
 ];
 ---
 
-<PageLayout 
+<Layout 
   title="AI Agents - Cloud Intelligence"
   description="Build and deploy intelligent AI agents that automate tasks, make decisions, and learn from experience."
   keywords="AI agents, artificial intelligence, automation, machine learning, enterprise AI"
@@ -110,8 +109,7 @@ const features = [
     </div>
   </section>
 
-  <ContactSection />
-</PageLayout>
+</Layout>
 
 <!-- Service Schema for AI Agents -->
 <script type="application/ld+json" is:inline>

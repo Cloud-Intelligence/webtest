@@ -1,7 +1,6 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
+import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
-import ContactSection from '../../components/ContactSection.astro';
 
 const features = [
   {
@@ -37,7 +36,7 @@ const features = [
 ];
 ---
 
-<PageLayout 
+<Layout 
   title="Machine Learning - Cloud Intelligence"
   description="Harness the power of machine learning to transform data into actionable insights and intelligent predictions."
   keywords="machine learning, ML platform, predictive analytics, computer vision, NLP, AutoML"
@@ -140,8 +139,7 @@ const features = [
     </div>
   </section>
 
-  <ContactSection />
-</PageLayout>
+</Layout>
 
 <!-- Service Schema for Machine Learning -->
 <script type="application/ld+json" is:inline>

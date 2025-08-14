@@ -1,8 +1,7 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
+import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
-import ContactSection from '../../components/ContactSection.astro';
-import ProductAccessCheck from '../../components/ProductAccessCheck.astro';
+import ProductAccessCheck from '../../components/feature-flags/ProductAccessCheck.astro';
 
 // Get base path from Astro config and ensure proper path formatting
 const baseUrl = import.meta.env.BASE_URL;
@@ -122,7 +121,7 @@ const deploymentOptions = [
 ];
 ---
 
-<PageLayout 
+<Layout 
   title="AI Chat Widget - Cloud Intelligence"
   description="Deploy an intelligent AI chat widget that knows everything about your company. Perfect for sales, marketing, and customer support automation."
   keywords="AI chat widget, sales automation, chatbot, customer support AI, lead generation, website chat"
@@ -269,8 +268,7 @@ const deploymentOptions = [
     </div>
   </section>
 
-  <ContactSection />
-</PageLayout>
+</Layout>
 
 <!-- Product Schema for AI Chat Widget -->
 <script type="application/ld+json" is:inline>

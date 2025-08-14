@@ -1,8 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import PageLayout from '../../layouts/PageLayout.astro';
+import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
-import ContactSection from '../../components/ContactSection.astro';
 
 // Get demos from content collections
 const allDemos = await getCollection('liveDemos');
@@ -91,7 +90,7 @@ const categories = ["All", "AI Agents", "Data Engineering", "Machine Learning", 
 const complexityLevels = ["All", "Beginner", "Intermediate", "Advanced"];
 ---
 
-<PageLayout 
+<Layout 
   title="Live Demos - Cloud Intelligence"
   description="Experience our cutting-edge solutions firsthand with interactive demonstrations and live examples of AI, ML, and cloud technologies."
   keywords="live demos, interactive demos, AI demonstration, machine learning examples, cloud solutions, software demos"
@@ -250,8 +249,7 @@ const complexityLevels = ["All", "Beginner", "Intermediate", "Advanced"];
     </div>
   </div>
   
-  <ContactSection />
-</PageLayout>
+</Layout>
 
 <style lang="scss">
   .demos-section {

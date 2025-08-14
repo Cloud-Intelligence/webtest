@@ -1,0 +1,121 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  keywords?: string;
+}
+
+const { 
+  title = "Cloud Intelligence Blog", 
+  description = "Technical insights, best practices, and industry analysis from Cloud Intelligence",
+  keywords = "cloud computing, technical blog, software development, AI, machine learning, data engineering"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://cloud-intelligence.github.io');
+
+// Import styles
+import '../styles/main.scss';
+import '../styles/globals.css';
+import MaintenanceCheck from 'src/components/feature-flags/MaintenanceCheck.astro';
+import { isFeatureEnabled } from 'src/config/feature-flags';
+---
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <!-- JavaScript Detection - MUST be first to prevent flash -->
+    <script is:inline>
+      // Immediately remove no-js and add js class to prevent flash
+      (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);
+    </script>
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no, shrink-to-fit=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <!-- Performance hints -->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#3366FF" />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL('/logo.png', Astro.site || 'https://cloud-intelligence.github.io')} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL('/logo.png', Astro.site || 'https://cloud-intelligence.github.io')} />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="/webtest/favicon.webp" />
+    <link rel="icon" type="image/svg+xml" href="/webtest/ci-fav-icon.svg" />
+    <link rel="icon" type="image/png" href="/webtest/logo.png" />
+    <link rel="apple-touch-icon" href="/webtest/favicon.webp" />
+    <link rel="shortcut icon" href="/webtest/favicon.webp" />
+    
+    <!-- Fonts - Non-blocking Loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Preload critical font files first -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/manrope/v15/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk59FO_F87jxeN7B.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Load fonts asynchronously to prevent render blocking -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Manrope:wght@500;700&family=Press+Start+2P&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Manrope:wght@500;700&family=Press+Start+2P&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- DNS prefetch for external resources -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    
+    <!-- Critical CSS (Inlined) -->
+    <style>
+      /* Critical above-the-fold styles */
+      *, *::before, *::after { box-sizing: border-box; }
+      html { line-height: 1.15; -webkit-text-size-adjust: 100%; }
+      body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-display: swap; }
+      
+      /* Skip Links */
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 6px;
+        background: #000;
+        color: #fff;
+        padding: 8px;
+        text-decoration: none;
+        border-radius: 0 0 4px 4px;
+        z-index: 2000;
+        font-size: 14px;
+        font-weight: 600;
+        transition: top 0.3s;
+      }
+      
+      .skip-link:focus {
+        top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Maintenance Mode Check -->
+    <MaintenanceCheck />
+    
+    <!-- Skip Links -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+    
+    <main id="main">
+      <slot />
+    </main>
+  </body>
+</html>

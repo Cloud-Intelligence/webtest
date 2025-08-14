@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    
+    "build": "node --max-old-space-size=8192 ./node_modules/.bin/astro build",
     "preview": "astro preview",
     "astro": "astro",
     "worker:dev": "wrangler dev",
@@ -16,17 +17,9 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/node": "^9.3.0",
-    "@astrojs/react": "^4.3.0",
     "@astrojs/sitemap": "^3.4.1",
-    "@astrojs/tailwind": "^6.0.2",
     "@fingerprintjs/fingerprintjs": "^4.6.2",
-    "@radix-ui/react-label": "^2.1.7",
-    "@radix-ui/react-select": "^2.2.5",
-    "@radix-ui/react-slot": "^1.2.3",
-    "@tailwindcss/typography": "^0.5.16",
     "astro": "^5.12.3",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
     "gsap": "^3.13.0",
     "hono": "^4.8.12",
     "hono-rate-limiter": "^0.4.2",

@@ -1,0 +1,16 @@
+---
+import { isFeatureEnabled } from '@/config/feature-flags';
+
+const isProductsEnabled = isFeatureEnabled('PRODUCTS_SECTION');
+const baseUrl = import.meta.env.BASE_URL || '/';
+const notFoundUrl = baseUrl.endsWith('/') 
+  ? `${baseUrl}404` 
+  : `${baseUrl}/404`;
+---
+
+{!isProductsEnabled && (
+  <script define:vars={{ notFoundUrl }}>
+    // Redirect to 404 page if products section is disabled
+    window.location.replace(notFoundUrl);
+  </script>
+)}

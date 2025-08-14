@@ -1,7 +1,6 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
+import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
-import ContactSection from '../../components/ContactSection.astro';
 
 const features = [
   {
@@ -64,7 +63,7 @@ const rescueScenarios = [
 ];
 ---
 
-<PageLayout 
+<Layout 
   title="Enterprise Software - Cloud Intelligence"
   description="When prototype solutions fail and you need enterprise-grade software that scales, performs, and complies with regulations."
   keywords="enterprise software, legacy modernization, performance engineering, compliance, scalability, technical rescue"
@@ -209,8 +208,7 @@ const rescueScenarios = [
     </div>
   </section>
 
-  <ContactSection />
-</PageLayout>
+</Layout>
 
 <!-- Service Schema for Enterprise Software -->
 <script type="application/ld+json" is:inline>

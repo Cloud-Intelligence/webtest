@@ -1,7 +1,6 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
+import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
-import ContactSection from '../../components/ContactSection.astro';
 
 const features = [
   {
@@ -37,7 +36,7 @@ const features = [
 ];
 ---
 
-<PageLayout 
+<Layout 
   title="Web Applications - Cloud Intelligence"
   description="Build modern, scalable web applications with cutting-edge technologies and user-centric design."
   keywords="web applications, progressive web apps, e-commerce, SaaS, API development, mobile-first"
@@ -110,8 +109,7 @@ const features = [
     </div>
   </section>
 
-  <ContactSection />
-</PageLayout>
+</Layout>
 
 <!-- Service Schema for Web Applications -->
 <script type="application/ld+json" is:inline>

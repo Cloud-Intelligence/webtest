@@ -1,8 +1,7 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
+import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
-import ContactSection from '../../components/ContactSection.astro';
-import ProductAccessCheck from '../../components/ProductAccessCheck.astro';
+import ProductAccessCheck from '../../components/feature-flags/ProductAccessCheck.astro';
 
 // Get base path from Astro config and ensure proper path formatting
 const baseUrl = import.meta.env.BASE_URL;
@@ -26,7 +25,7 @@ const products = [
 ];
 ---
 
-<PageLayout 
+<Layout 
   title="Products - Cloud Intelligence"
   description="Discover our AI-powered products including the intelligent chat widget for sales and marketing automation. Self-hosted or cloud solutions available."
   keywords="AI chat widget, sales automation, marketing chatbot, customer support AI, lead generation"
@@ -104,8 +103,7 @@ const products = [
     </div>
   </section>
   
-  <ContactSection />
-</PageLayout>
+</Layout>
 
 <style lang="scss">
   .products-section {

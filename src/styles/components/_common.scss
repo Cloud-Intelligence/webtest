@@ -1,0 +1,108 @@
+@use '../base/variables' as vars;
+
+// Common utility styles
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  font-size: clamp(28px, 4vw, 48px);
+  font-family: vars.$pixel-font;
+  color: vars.$primary-blue;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+// Button utilities  
+.btn {
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-block;
+  
+  &.btn-primary {
+    background: vars.$primary-blue;
+    color: white;
+    border-color: vars.$primary-blue;
+    
+    &:hover {
+      background: vars.$dark-blue;
+      border-color: vars.$dark-blue;
+    }
+  }
+  
+  &.btn-secondary {
+    background: transparent;
+    color: vars.$primary-blue;
+    border-color: vars.$primary-blue;
+    
+    &:hover {
+      background: vars.$primary-blue;
+      color: white;
+    }
+  }
+  
+  &.btn-outline {
+    background: transparent;
+    color: vars.$primary-blue;
+    border-color: vars.$primary-blue;
+    
+    &:hover {
+      background: vars.$primary-blue;
+      color: white;
+    }
+  }
+}
+
+// Common page component styles (for pages that don't have their own scoped styles)
+.hero-subtitle {
+  font-size: clamp(16px, 2vw, 24px);
+  color: #666;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+  
+  &:hover {
+    transform: translateY(-5px);
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    color: vars.$primary-blue;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    color: #666;
+    line-height: 1.6;
+  }
+}
+
+// Mobile responsiveness
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+}

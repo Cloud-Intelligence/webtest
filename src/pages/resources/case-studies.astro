@@ -1,8 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import PageLayout from '../../layouts/PageLayout.astro';
+import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
-import ContactSection from '../../components/ContactSection.astro';
 
 // Get case studies from content collections
 const allCaseStudies = await getCollection('caseStudies');
@@ -91,7 +90,7 @@ const industries = ["All", "Retail", "Healthcare", "Finance", "Manufacturing", "
 const solutions = ["All", "AI Agents", "Machine Learning", "Data Engineering", "Cloud Architecture", "Web Applications"];
 ---
 
-<PageLayout 
+<Layout 
   title="Case Studies - Cloud Intelligence"
   description="Explore our client success stories across different industries and discover how our solutions deliver real business results."
   keywords="case studies, client success, AI solutions, cloud architecture, data engineering, machine learning"
@@ -185,8 +184,7 @@ const solutions = ["All", "AI Agents", "Machine Learning", "Data Engineering", "
     </div>
   </section>
   
-  <ContactSection />
-</PageLayout>
+</Layout>
 
 <style lang="scss">
   .case-studies-section {

@@ -174,3 +174,79 @@ When styles aren't working as expected:
 - [ ] Look for conflicting inline styles
 - [ ] Check browser console for 404 errors on assets
 - [ ] Verify the build process completed successfully
+
+---
+
+# NEXT PLAN: Remove Tailwind CSS
+
+## Analysis Summary
+
+After comprehensive analysis of the codebase, **Tailwind CSS usage is minimal and can be safely removed** for significant performance and maintenance benefits.
+
+### Current Tailwind Usage (Minimal)
+
+**Only 3 components use Tailwind:**
+- `BookCallForm.tsx` - Uses shadcn/ui components (Button, Card, Input, Label, Textarea, Select)
+- `ContactForm.tsx` - Uses shadcn/ui components (Button, Card, Input, Label, Textarea)  
+- `HeroButton.tsx` - Uses shadcn/ui Button component
+
+**Additional usage:**
+- 5 `@apply` directives in `globals.css` for shadcn/ui theming
+- 47 minimal utility class occurrences across 24 files (mostly `visually-hidden`, `sr-only`)
+- CSS custom properties for design tokens
+
+### Benefits of Removal
+
+- **Bundle Size Reduction**: ~50KB+ CSS elimination
+- **Faster Build Times**: Remove CSS processing overhead  
+- **Simpler Architecture**: One less dependency to maintain
+- **Better Performance**: Less CSS parsing for browsers
+- **Cleaner Codebase**: 95% of styling is already custom SCSS
+
+### Migration Strategy
+
+#### Phase 1: Replace shadcn/ui Components
+1. **Create custom Button component** using existing liquid glass styles
+2. **Create custom Card component** with glassmorphic design
+3. **Create custom Input/Textarea components** matching current form styling
+4. **Create custom Label component** with consistent typography
+5. **Create custom Select component** with brand styling
+
+#### Phase 2: Convert Remaining Utilities
+1. **Replace `@apply` directives** with standard CSS (5 instances)
+2. **Convert utility classes** to semantic class names
+3. **Update CSS custom properties** to use standard values
+
+#### Phase 3: Remove Dependencies
+1. **Remove Tailwind packages** from package.json:
+   - `@astrojs/tailwind`
+   - `tailwindcss` 
+   - `@tailwindcss/typography`
+   - `tailwind-merge`
+   - `class-variance-authority`
+2. **Update astro.config.mjs** to remove Tailwind integration
+3. **Clean up globals.css** to remove Tailwind imports
+4. **Update component imports** to use new custom components
+
+#### Phase 4: Testing & Optimization
+1. **Visual regression testing** on all pages
+2. **Bundle size analysis** (expected 20-30% CSS reduction)
+3. **Performance testing** (faster page loads)
+4. **Build verification** (faster build times)
+
+### Risk Assessment
+
+- **Low Risk**: Only 3 components need migration
+- **High Reward**: Significant performance and maintenance benefits
+- **Easy Rollback**: Changes are isolated and reversible
+- **Future-Proof**: Reduces dependency burden
+
+### Implementation Priority
+
+**High Priority** - This change will:
+1. Improve site performance significantly
+2. Simplify the build process
+3. Reduce maintenance overhead
+4. Align with the project's custom design approach (95% already custom SCSS)
+
+**Recommendation**: Proceed with Tailwind removal as next major architectural improvement.

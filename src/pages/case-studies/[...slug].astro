@@ -1,6 +1,6 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
+import ContentLayout from '../../layouts/ContentLayout.astro';
 
 export async function getStaticPaths() {
   const caseStudies = await getCollection('caseStudies');
@@ -16,447 +16,134 @@ const caseStudy = Astro.props;
 const { Content } = await caseStudy.render();
 ---
 
-<Layout title={`${caseStudy.data.title} - Cloud Intelligence`} showNavbar={false}>
-  <main class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-    <article class="container mx-auto px-8 py-20 max-w-6xl font-serif">
-      <header class="mb-16">
-        <div class="mb-12">
-          <a 
-            href="/webtest/resources/case-studies"
-            class="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium transition-colors mb-8 text-lg"
-          >
-            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-            </svg>
-            Return to Case Studies
-          </a>
-        </div>
+<ContentLayout title={`${caseStudy.data.title} - Cloud Intelligence`} contentType="case-study">
+  <main class="min-h-screen bg-white">
+    <article class="max-w-4xl mx-auto px-6 py-12">
+      <!-- Navigation -->
+      <nav class="mb-12">
+        <a 
+          href="/webtest/resources/case-studies"
+          class="inline-flex items-center text-gray-600 hover:text-gray-900 font-sans text-sm font-medium transition-colors"
+        >
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Case Studies
+        </a>
+      </nav>
+
+      <!-- Article Header -->
+      <header class="mb-12 max-w-3xl">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight font-sans tracking-tight">
+          {caseStudy.data.title}
+        </h1>
         
-        <div class="grid lg:grid-cols-3 gap-12 mb-12">
-          <div class="lg:col-span-2">
-            <div class="flex items-center gap-6 text-sm text-gray-400 mb-6">
-              <span class="px-4 py-2 bg-blue-900/30 text-blue-300 rounded border border-blue-700/30 font-semibold uppercase tracking-wider">
-                {caseStudy.data.industry}
-              </span>
-              <time datetime={caseStudy.data.pubDate.toISOString()} class="text-gray-300">
-                {caseStudy.data.pubDate.toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
-              </time>
-            </div>
-            
-            <h1 class="text-5xl md:text-6xl font-bold text-white mb-8 leading-tight font-serif tracking-tight">
-              {caseStudy.data.title}
-            </h1>
-            
-            <p class="text-xl text-gray-300 mb-10 leading-relaxed font-serif">
-              {caseStudy.data.description}
-            </p>
-          </div>
-          
-          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-8">
-            <h3 class="font-bold text-white mb-6 text-lg uppercase tracking-wider">Project Overview</h3>
-            <div class="space-y-6 text-sm">
-              <div>
-                <span class="font-semibold text-gray-300 uppercase tracking-wide">Client:</span>
-                <p class="text-white mt-1 font-serif">{caseStudy.data.client}</p>
-              </div>
-              <div>
-                <span class="font-semibold text-gray-300 uppercase tracking-wide">Industry:</span>
-                <p class="text-white mt-1 font-serif">{caseStudy.data.industry}</p>
-              </div>
-              <div>
-                <span class="font-semibold text-gray-300 uppercase tracking-wide">Technologies:</span>
-                <div class="flex flex-wrap gap-2 mt-2">
-                  {caseStudy.data.technologies.map((tech) => (
-                    <span class="px-3 py-1 bg-gray-700/50 text-gray-200 text-xs rounded border border-gray-600/30 font-mono">
-                      {tech}
-                    </span>
-                  ))}
+        <p class="text-xl text-gray-600 leading-relaxed mb-8 font-sans">
+          {caseStudy.data.description}
+        </p>
+        
+        <!-- Project Meta Info -->
+        <div class="py-6 border-y border-gray-200">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-3 font-sans">Project Details</h3>
+              <div class="space-y-2">
+                <div class="flex items-center text-sm">
+                  <span class="text-gray-600 font-sans w-20">Client:</span>
+                  <span class="text-gray-900 font-medium font-sans">{caseStudy.data.client}</span>
+                </div>
+                <div class="flex items-center text-sm">
+                  <span class="text-gray-600 font-sans w-20">Industry:</span>
+                  <span class="text-gray-900 font-medium font-sans">{caseStudy.data.industry}</span>
+                </div>
+                <div class="flex items-center text-sm">
+                  <span class="text-gray-600 font-sans w-20">Date:</span>
+                  <time datetime={caseStudy.data.pubDate.toISOString()} class="text-gray-900 font-medium font-sans">
+                    {caseStudy.data.pubDate.toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long'
+                    })}
+                  </time>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        
-        <!-- Challenge, Solution, Results Overview -->
-        <div class="grid md:grid-cols-3 gap-8 mb-16">
-          <div class="bg-red-900/20 border border-red-700/30 rounded-lg p-8 backdrop-blur-sm">
-            <h3 class="font-bold text-red-300 mb-4 flex items-center text-lg uppercase tracking-wider">
-              <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
-              </svg>
-              Challenge
-            </h3>
-            <p class="text-red-100 leading-relaxed font-serif">{caseStudy.data.challenge}</p>
-          </div>
-          
-          <div class="bg-blue-900/20 border border-blue-700/30 rounded-lg p-8 backdrop-blur-sm">
-            <h3 class="font-bold text-blue-300 mb-4 flex items-center text-lg uppercase tracking-wider">
-              <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-              </svg>
-              Solution
-            </h3>
-            <p class="text-blue-100 leading-relaxed font-serif">{caseStudy.data.solution}</p>
-          </div>
-          
-          <div class="bg-green-900/20 border border-green-700/30 rounded-lg p-8 backdrop-blur-sm">
-            <h3 class="font-bold text-green-300 mb-4 flex items-center text-lg uppercase tracking-wider">
-              <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              Key Results
-            </h3>
-            <ul class="text-green-100 space-y-2">
-              {caseStudy.data.results.slice(0, 3).map((result) => (
-                <li class="flex items-start font-serif">
-                  <svg class="w-4 h-4 mr-3 mt-1 flex-shrink-0 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                  </svg>
-                  {result}
-                </li>
-              ))}
-            </ul>
+            
+            <div>
+              <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wide mb-3 font-sans">Technologies</h3>
+              <div class="flex flex-wrap gap-2">
+                {caseStudy.data.technologies.map((tech) => (
+                  <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full font-sans font-medium">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </header>
       
-      <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-12 md:p-16">
-        <div class="case-study-content max-w-none font-serif">
-          <Content />
+      <!-- Quick Summary Cards -->
+      <div class="grid md:grid-cols-3 gap-6 mb-12">
+        <div class="p-6 bg-gray-50 rounded-lg">
+          <h3 class="font-semibold text-gray-900 mb-2 font-sans">Challenge</h3>
+          <p class="text-sm text-gray-600 leading-relaxed font-sans">{caseStudy.data.challenge}</p>
+        </div>
+        
+        <div class="p-6 bg-gray-50 rounded-lg">
+          <h3 class="font-semibold text-gray-900 mb-2 font-sans">Solution</h3>
+          <p class="text-sm text-gray-600 leading-relaxed font-sans">{caseStudy.data.solution}</p>
+        </div>
+        
+        <div class="p-6 bg-gray-50 rounded-lg">
+          <h3 class="font-semibold text-gray-900 mb-2 font-sans">Key Results</h3>
+          <ul class="text-sm text-gray-600 space-y-1">
+            {caseStudy.data.results.slice(0, 2).map((result) => (
+              <li class="flex items-start font-sans">
+                <span class="text-green-600 mr-2">•</span>
+                {result}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
       
-      <footer class="mt-20 text-center">
-        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <a 
-            href="/webtest/resources/case-studies"
-            class="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 uppercase tracking-wider"
-          >
-            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-            </svg>
-            More Case Studies
-          </a>
+      <!-- Article Content -->
+      <div class="case-study-content">
+        <Content />
+      </div>
+      
+      <!-- Article Footer -->
+      <footer class="mt-16 pt-8 border-t border-gray-200">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-6">
+            <button class="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors font-sans">
+              <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+              <span class="text-sm font-medium text-gray-700">Share</span>
+            </button>
+          </div>
           
-          <a 
-            href="/webtest/contact"
-            class="inline-flex items-center px-8 py-4 border-2 border-blue-400 text-blue-400 font-semibold rounded-lg hover:bg-blue-400 hover:text-slate-900 transition-all duration-300 uppercase tracking-wider"
-          >
-            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-            </svg>
-            Start Your Project
-          </a>
+          <div class="flex items-center gap-3">
+            <a 
+              href="/webtest/resources/case-studies"
+              class="px-6 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors font-sans"
+            >
+              More Case Studies
+            </a>
+            <a 
+              href="/webtest/contact"
+              class="px-6 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors font-sans"
+            >
+              Start Your Project
+            </a>
+          </div>
         </div>
       </footer>
     </article>
   </main>
-</Layout>
+</ContentLayout>
 
-<style is:global>
-  @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Source+Serif+Pro:ital,wght@0,400;0,600;1,400&display=swap');
-  
-  .font-serif {
-    font-family: 'Source Serif Pro', serif;
-  }
-  
-  .case-study-content {
-    color: #e2e8f0;
-    font-family: 'Source Serif Pro', serif;
-    line-height: 1.8;
-  }
-  
-  .case-study-content :is(h1, h2, h3, h4, h5, h6) {
-    color: #ffffff !important;
-    font-weight: 700 !important;
-    font-family: 'Crimson Text', serif !important;
-    letter-spacing: -0.025em !important;
-    margin-top: 3rem !important;
-    margin-bottom: 1.5rem !important;
-    display: block !important;
-  }
-  
-  .case-study-content h1 {
-    font-size: 3rem !important;        /* 64px - Main title */
-    line-height: 1.1 !important;
-    margin-top: 0 !important;
-  }
-  
-  .case-study-content h2 {
-    font-size: 2.5rem !important;        /* 48px - Section headers */
-    line-height: 1.15 !important;
-    border-bottom: 2px solid rgba(59, 130, 246, 0.3) !important;
-    padding-bottom: 0.75rem !important;
-  }
-  
-  .case-study-content h3 {
-    font-size: 2.25rem !important;     /* 36px - Subsection headers */
-    line-height: 1.2 !important;
-    color: #93c5fd !important;
-  }
-  
-  .case-study-content h4 {
-    font-size: 1.75rem !important;     /* 28px - Minor headers */
-    line-height: 1.3 !important;
-    color: #cbd5e1 !important;
-    text-transform: none !important;
-    letter-spacing: -0.01em !important;
-  }
-  
-  .case-study-content h5 {
-    font-size: 1.375rem !important;    /* 22px - Small headers */
-    line-height: 1.4 !important;
-    color: #e2e8f0 !important;
-    font-weight: 600 !important;
-  }
-  
-  .case-study-content h6 {
-    font-size: 1.125rem !important;    /* 18px - Tiny headers */
-    line-height: 1.5 !important;
-    color: #cbd5e1 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.05em !important;
-    font-weight: 600 !important;
-  }
-  
-  .case-study-content p {
-    margin-top: 1.25rem !important;
-    margin-bottom: 1.5rem !important;
-    font-size: 1rem !important;        /* 16px - Body text */
-    line-height: 1.75 !important;
-    color: #e2e8f0 !important;
-  }
-  
-  .case-study-content .lead {
-    font-size: 1.25rem !important;     /* 20px - Lead paragraphs */
-    line-height: 1.6 !important;
-    color: #f1f5f9 !important;
-    font-weight: 400 !important;
-  }
-  
-  .case-study-content small {
-    font-size: 0.875rem !important;    /* 14px - Small text */
-    line-height: 1.6 !important;
-    color: #cbd5e1 !important;
-  }
-  
-  .case-study-content > * + * {
-    margin-top: 1.5rem !important;
-  }
-  
-  .case-study-content > h2 + *,
-  .case-study-content > h3 + *,
-  .case-study-content > h4 + * {
-    margin-top: 1rem !important;
-  }
-  
-  .case-study-content a {
-    color: #60a5fa;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(96, 165, 250, 0.3);
-    transition: all 0.3s ease;
-  }
-  
-  .case-study-content a:hover {
-    color: #93c5fd;
-    border-bottom-color: #93c5fd;
-  }
-  
-  .case-study-content ul {
-    list-style: none !important;
-    padding-left: 0 !important;
-    margin: 2rem 0 !important;
-  }
-  
-  .case-study-content li {
-    margin: 1rem 0 !important;
-    padding-left: 2rem !important;
-    position: relative !important;
-    font-size: 1rem !important;        /* 16px - Same as body text */
-    line-height: 1.7 !important;
-    display: block !important;
-    color: #e2e8f0 !important;
-  }
-  
-  .case-study-content ul li::before {
-    content: "▸" !important;
-    position: absolute !important;
-    left: 0 !important;
-    color: #60a5fa !important;
-    font-weight: bold !important;
-    font-size: 1.25rem !important;
-  }
-  
-  .case-study-content ol {
-    counter-reset: item !important;
-    padding-left: 0 !important;
-    list-style: none !important;
-    margin: 2rem 0 !important;
-  }
-  
-  .case-study-content ol li {
-    display: block !important;
-    margin: 1rem 0 !important;
-    padding-left: 2.5rem !important;
-    position: relative !important;
-  }
-  
-  .case-study-content ol li::before {
-    content: counter(item, decimal) "." !important;
-    counter-increment: item !important;
-    position: absolute !important;
-    left: 0 !important;
-    color: #60a5fa !important;
-    font-weight: bold !important;
-    font-size: 1.125rem !important;
-  }
-  
-  .case-study-content strong {
-    font-weight: 600 !important;
-    color: #ffffff !important;
-  }
-  
-  .case-study-content em {
-    font-style: italic !important;
-    color: #cbd5e1 !important;
-  }
-  
-  .case-study-content code {
-    background-color: rgba(30, 41, 59, 0.5) !important;
-    color: #fbbf24 !important;
-    padding: 0.25rem 0.5rem !important;
-    border-radius: 0.375rem !important;
-    font-size: 0.9em !important;
-    font-family: 'Monaco', 'Menlo', monospace !important;
-    border: 1px solid rgba(59, 130, 246, 0.2) !important;
-  }
-  
-  .case-study-content pre {
-    background-color: rgba(15, 23, 42, 0.8) !important;
-    border: 1px solid rgba(59, 130, 246, 0.2) !important;
-    border-radius: 0.5rem !important;
-    padding: 1.5rem !important;
-    overflow-x: auto !important;
-    margin: 2rem 0 !important;
-  }
-  
-  .case-study-content pre code {
-    background: none !important;
-    border: none !important;
-    padding: 0 !important;
-    color: #e2e8f0 !important;
-  }
-  
-  .case-study-content blockquote {
-    border-left: 4px solid #60a5fa !important;
-    margin: 2rem 0 !important;
-    font-style: italic !important;
-    color: #cbd5e1 !important;
-    background-color: rgba(59, 130, 246, 0.05) !important;
-    padding: 1.5rem !important;
-    border-radius: 0 0.5rem 0.5rem 0 !important;
-    font-size: 1.125rem !important;    /* 18px - Slightly larger for quotes */
-    line-height: 1.6 !important;
-  }
-  
-  .case-study-content blockquote p {
-    margin: 0 !important;
-    font-size: inherit !important;
-  }
-  
-  .case-study-content figcaption,
-  .case-study-content caption {
-    font-size: 0.875rem !important;    /* 14px - Caption text */
-    line-height: 1.5 !important;
-    color: #94a3b8 !important;
-    font-style: italic !important;
-    text-align: center !important;
-    margin-top: 0.5rem !important;
-  }
-  
-  .case-study-content table {
-    width: 100% !important;
-    border-collapse: collapse !important;
-    margin: 2rem 0 !important;
-    background-color: rgba(30, 41, 59, 0.3) !important;
-    border-radius: 0.5rem !important;
-    overflow: hidden !important;
-  }
-  
-  .case-study-content th,
-  .case-study-content td {
-    padding: 1rem !important;
-    text-align: left !important;
-    border-bottom: 1px solid rgba(59, 130, 246, 0.2) !important;
-  }
-  
-  .case-study-content th {
-    background-color: rgba(59, 130, 246, 0.1) !important;
-    font-weight: 600 !important;
-    color: #ffffff !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.05em !important;
-    font-size: 0.875rem !important;    /* 14px - Table headers */
-    line-height: 1.4 !important;
-  }
-  
-  .case-study-content td {
-    color: #e2e8f0 !important;
-    font-size: 0.9375rem !important;   /* 15px - Table data */
-    line-height: 1.5 !important;
-  }
-  
-  .case-study-content hr {
-    border: none !important;
-    height: 2px !important;
-    background: linear-gradient(90deg, transparent, #60a5fa, transparent) !important;
-    margin: 3rem 0 !important;
-  }
-  
-  /* Responsive font sizes for mobile */
-  @media (max-width: 768px) {
-    .case-study-content h1 {
-      font-size: 2.5rem !important;    /* 40px on mobile */
-    }
-    
-    .case-study-content h2 {
-      font-size: 2rem !important;      /* 32px on mobile */
-    }
-    
-    .case-study-content h3 {
-      font-size: 1.5rem !important;    /* 24px on mobile */
-    }
-    
-    .case-study-content h4 {
-      font-size: 1.25rem !important;   /* 20px on mobile */
-    }
-    
-    .case-study-content h5 {
-      font-size: 1.125rem !important;  /* 18px on mobile */
-    }
-    
-    .case-study-content h6 {
-      font-size: 1rem !important;      /* 16px on mobile */
-    }
-    
-    .case-study-content blockquote {
-      font-size: 1rem !important;      /* 16px on mobile */
-    }
-  }
-  
-  /* Text utility classes */
-  .case-study-content .text-xs { font-size: 0.75rem !important; }      /* 12px */
-  .case-study-content .text-sm { font-size: 0.875rem !important; }     /* 14px */
-  .case-study-content .text-base { font-size: 1rem !important; }       /* 16px */
-  .case-study-content .text-lg { font-size: 1.125rem !important; }     /* 18px */
-  .case-study-content .text-xl { font-size: 1.25rem !important; }      /* 20px */
-  .case-study-content .text-2xl { font-size: 1.5rem !important; }      /* 24px */
-  .case-study-content .text-3xl { font-size: 1.875rem !important; }    /* 30px */
-  .case-study-content .text-4xl { font-size: 2.25rem !important; }     /* 36px */
-  .case-study-content .text-5xl { font-size: 3rem !important; }        /* 48px */
-  .case-study-content .text-6xl { font-size: 4rem !important; }        /* 64px */
+<style>
+  @import '@/styles/shared/content-pages.scss';
 </style>

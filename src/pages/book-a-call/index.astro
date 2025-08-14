@@ -1,0 +1,82 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import PageHero from '@/components/PageHero.astro';
+import BookCallForm from './components/BookCallForm.astro';
+---
+
+<!-- Critical CSS inlined for performance -->
+<style is:inline>
+  .form-section { background: #040913; padding: 40px 0 80px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+  .form-container { display: flex; justify-content: center; margin-bottom: 80px; }
+  @media (max-width: 768px) {
+    .form-section { padding: 20px 0 60px; }
+    .container { padding: 0 24px; }
+    .form-container { margin-bottom: 60px; }
+  }
+</style>
+
+<Layout 
+  title="Book a Call - Cloud Intelligence"
+  description="Schedule a consultation call with our experts to discuss your cloud intelligence needs and discover how we can help transform your business."
+  keywords="book call, consultation, cloud intelligence, schedule meeting, expert advice"
+  showFooter={false}
+>
+  <PageHero 
+    title="Book a Call"
+    subtitle="Let's Discuss Your Project"
+    description="Schedule a consultation with our experts to explore how Cloud Intelligence can transform your business operations and drive growth."
+  />
+  
+  <section class="form-section">
+    <div class="container">
+      <div class="form-container">
+        <BookCallForm />
+      </div>
+      
+      <div class="info-section">
+        <h2>What to Expect</h2>
+        <div class="expectations-grid">
+          <div class="expectation-item">
+            <div class="expectation-icon">🎯</div>
+            <h3>Personalized Discussion</h3>
+            <p>We'll learn about your specific challenges and goals to provide tailored recommendations.</p>
+          </div>
+          
+          <div class="expectation-item">
+            <div class="expectation-icon">🔍</div>
+            <h3>Technical Assessment</h3>
+            <p>Our experts will evaluate your current setup and identify optimization opportunities.</p>
+          </div>
+          
+          <div class="expectation-item">
+            <div class="expectation-icon">📋</div>
+            <h3>Custom Roadmap</h3>
+            <p>Receive a detailed plan outlining next steps and implementation strategies.</p>
+          </div>
+          
+          <div class="expectation-item">
+            <div class="expectation-icon">⚡</div>
+            <h3>Quick Turnaround</h3>
+            <p>We'll follow up within 24 hours with actionable insights and proposals.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<!-- Non-critical CSS loaded asynchronously -->
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="data:text/css,.info-section h2{font-family:'Manrope',sans-serif;font-weight:600;font-size:clamp(2rem,4vw,2.5rem);color:#fff;text-align:center;margin-bottom:48px}.expectations-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px}@media (max-width:768px){.expectations-grid{grid-template-columns:1fr;gap:24px}}.expectation-item{background:rgba(255,255,255,.05);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:32px;text-align:center;transition:all .3s ease}.expectation-item:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,.2)}.expectation-item .expectation-icon{font-size:3rem;margin-bottom:16px}.expectation-item h3{font-family:'Inter',sans-serif;font-weight:600;font-size:1.25rem;color:#fff;margin-bottom:12px}.expectation-item p{font-family:'Inter',sans-serif;font-size:.975rem;line-height:1.6;color:rgba(255,255,255,.7)}">
+<noscript>
+<style>
+  .info-section h2 { font-family: 'Manrope', sans-serif; font-weight: 600; font-size: clamp(2rem, 4vw, 2.5rem); color: #FFFFFF; text-align: center; margin-bottom: 48px; }
+  .expectations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+  @media (max-width: 768px) { .expectations-grid { grid-template-columns: 1fr; gap: 24px; } }
+  .expectation-item { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 32px; text-align: center; transition: all 0.3s ease; }
+  .expectation-item:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2); transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); }
+  .expectation-item .expectation-icon { font-size: 3rem; margin-bottom: 16px; }
+  .expectation-item h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1.25rem; color: #FFFFFF; margin-bottom: 12px; }
+  .expectation-item p { font-family: 'Inter', sans-serif; font-size: 0.975rem; line-height: 1.6; color: rgba(255, 255, 255, 0.7); }
+</style>
+</noscript>

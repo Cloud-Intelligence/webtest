@@ -1,5 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
+  "include": ["src"],
+  "exclude": ["src/components/stencil"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

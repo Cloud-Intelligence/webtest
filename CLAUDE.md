@@ -172,3 +172,7 @@ if (isFeatureEnabled('CHAT_WIDGET')) {
 - Accepted values: 'true', 'false', '1', '0'
 - Flag names are case-sensitive
 - Environment variable format: `FEATURE_<FLAG_NAME>`
+
+## Best Practices
+
+- Always use '@' sign for dynamic imports of files. never use relative imports.
